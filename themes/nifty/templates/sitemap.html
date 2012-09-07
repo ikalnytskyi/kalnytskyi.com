@@ -1,0 +1,51 @@
+{#-
+ # Copyright 2012 Igor Kalnitsky <igor@kalnitsky.org>
+ #
+ # This file is part of Nifty Pelican Theme.
+ #
+ # Nifty Pelican Theme is free software: you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation, either version 3 of the License, or
+ # (at your option) any later version.
+ #
+ # Nifty Pelican Theme is distributed in the hope that it will be useful,
+ # but WITHOUT ANY WARRANTY; without even the implied warranty of
+ # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ # GNU General Public License for more details.
+ #
+ # You should have received a copy of the GNU General Public License
+ # along with Nifty Pelican Theme.  If not, see <http://www.gnu.org/licenses/>.
+-#}
+
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+{% for article in articles %}
+  <url>
+    <loc>{{ SITEURL }}/{{ article.url }}</loc>
+    <priority>0.8</priority>
+  </url>
+
+  {% for translation in article.translations %}
+  <url>
+    <loc>{{ SITEURL }}/{{ translation.url }}</loc>
+    <priority>0.8</priority>
+  </url>
+  {% endfor %}
+{% endfor %}
+
+{% for page in pages %}
+  <url>
+    <loc>{{ SITEURL }}/{{ page.url }}</loc>
+    <priority>1.0</priority>
+  </url>
+
+  {% for translation in page.translations %}
+  <url>
+    <loc>{{ SITEURL }}/{{ translation.url }}</loc>
+    <priority>1.0</priority>
+  </url>
+  {% endfor %}
+{% endfor %}
+
+</urlset>

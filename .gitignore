@@ -1,0 +1,4 @@
+_build/
+_src/
+*.pyc
+.localhost

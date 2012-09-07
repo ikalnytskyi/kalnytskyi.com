@@ -1,0 +1,45 @@
+{#-
+ # Copyright 2012 Igor Kalnitsky <igor@kalnitsky.org>
+ #
+ # This file is part of Nifty Pelican Theme.
+ #
+ # Nifty Pelican Theme is free software: you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation, either version 3 of the License, or
+ # (at your option) any later version.
+ #
+ # Nifty Pelican Theme is distributed in the hope that it will be useful,
+ # but WITHOUT ANY WARRANTY; without even the implied warranty of
+ # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ # GNU General Public License for more details.
+ #
+ # You should have received a copy of the GNU General Public License
+ # along with Nifty Pelican Theme.  If not, see <http://www.gnu.org/licenses/>.
+-#}
+
+{% extends "base.html" %}
+
+{% block content %}
+  {% block content_title -%}
+  {%- endblock %}
+
+  {%- for article in articles_page.object_list -%}
+    {% if loop.first %}
+      <article>
+        <header>
+          <time datetime="{{ article.date.isoformat() }}">{{ article.locale_date }}</time>
+          <h1><a rel="bookmark" href="/{{ article.url }}">{{ article.title }}</a></h1>
+        </header>
+
+        {{ article.summary }}
+      </article>
+    {% else -%}
+      <section class="article-title">
+        <time datetime="{{ article.date.isoformat() }}">{{ article.locale_date }}</time>
+        <h1><a rel="bookmark" href="/{{ article.url }}">{{ article.title }}</a></h1>
+      </section>
+    {%- endif %}
+  {%- endfor %}
+
+  {% include 'pagination.html' %}
+{% endblock content %}

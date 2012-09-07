@@ -1,0 +1,392 @@
+//
+// Copyright 2012 Igor Kalnitsky <igor@kalnitsky.org>
+//
+// This file is part of Nifty Pelican Theme.
+//
+// Nifty Pelican Theme is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Nifty Pelican Theme is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Nifty Pelican Theme.  If not, see <http://www.gnu.org/licenses/>.
+//
+
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//   THEME SETTINGS
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+// dimensions
+header_height   = 55px
+content_width   = 740px
+
+// fontconfig
+font_sans  = 'Open Sans', 'Droid Sans', sans-serif
+font_serif = 'Times New Roman', Times, serif
+font_mono  = 'DejaVu Sans Mono', 'Ubuntu Mono', Monaco, monospace
+
+font_size  = 14px
+font_line  = 1.9em
+
+// colorscheme
+color_background = #f3f3f3
+color_header     = #efefef
+color_content    = #f5f5f5
+color_text       = #484848
+color_link       = #aa1111
+
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//   FONTS
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+//@font-face:
+//  font-family: 'Open Sans'
+//  font-style: italic
+//  font-weight: 600
+//  src: `local('Open Sans Semibold Italic'), local('OpenSans-SemiboldItalic'), url(http://themes.googleusercontent.com/static/fonts/opensans/v6/PRmiXeptR36kaC0GEAetxl1DIE4XHZKVVbKkAUmpPQQ.woff) format('woff')`
+
+@font-face:
+  font-family: 'Open Sans'
+  font-style: normal
+  font-weight: 600
+  src: `local('Open Sans Semibold'), local('OpenSans-Semibold'), url(http://themes.googleusercontent.com/static/fonts/opensans/v6/MTP_ySUJH_bn48VBG8sNSoraN7vELC11_xip9Rz-hMs.woff) format('woff')`
+
+@font-face:
+  font-family: 'Open Sans'
+  font-style: italic
+  font-weight: 400
+  src: `local('Open Sans Italic'), local('OpenSans-Italic'), url(http://themes.googleusercontent.com/static/fonts/opensans/v6/xjAJXh38I15wypJXxuGMBmOb2gHztoQeulij-1lvl-8.woff) format('woff')`
+
+@font-face:
+  font-family: 'Open Sans'
+  font-style: normal
+  font-weight: 400
+  src: `local('Open Sans'), local('OpenSans'), url(http://themes.googleusercontent.com/static/fonts/opensans/v6/RjgO7rYTmqiVp7vzi-Q5UT8E0i7KZn-EPnyo3HZu7kw.woff) format('woff')`
+
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//   HACKS & PREDEFINED STYLES
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+// mixin for fixing floating
+// -------------------------
+def clearfix:
+    content: ""
+    display: block
+    clear: both
+    visibility: hidden
+    line-height: 0
+    height: 0
+
+
+// positioning hacks
+// -----------------
+.align-left:
+    float: left
+    margin: 12px 10px 10px 0px
+
+.align-right:
+    float: right
+    margin: 12px 0px 10px 10px
+
+.align-center:
+    display: block
+    margin: 5px auto
+
+
+// text formatting hacks
+// ---------------------
+.strike:
+    color: #515151
+    text-decoration: line-through
+
+.underline:
+    text-decoration: underline
+
+
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//   GENERAL
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*:
+    margin: 0
+    padding: 0
+
+
+html, body:
+    background-color: $color_background
+    background-image: url('images/noise.png')
+    color: $color_text
+    font-family: $font_sans
+    font-size: $font_size
+    line-height: $font_line
+
+
+a:
+    color: $color_link
+    text-decoration: none
+    &:hover:
+        text-decoration: underline
+
+
+#header, #footer, #content:
+    width: $content_width
+    margin: 0px auto
+
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//   HEADER SECTION
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.header-wrapper:
+    box-sizing: border-box
+    height: $header_height
+    background-color: $color_header
+    background-image: url('images/noise.png')
+    border-top: 3px solid $color_header.darken(90)
+    border-bottom: 2px solid $color_header.darken(2)
+
+
+#header:
+    &:after:
+        $clearfix
+
+    line-height: $header_height
+    font-family: $font_serif
+    text-transform: uppercase
+    letter-spacing: 1px
+
+    img.logo:
+        float: left
+        height: $header_height * 0.6
+        margin-top: $header_height * 0.15
+        margin-right: 0.7em
+
+    h1:
+        float: left
+        letter-spacing: 1px
+        font-size: 1.2em
+        font-weight: normal
+        a:
+            color: #444444
+    nav:
+        float: right
+        font-size: 0.9em
+        a:
+            color: #686868
+            margin-left: 15px
+
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//   FOOTER SECTION
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#footer:
+    color: #777
+    padding: 20px 0px
+    letter-spacing: 1px
+    line-height: 1.2em
+    text-align: center
+
+    p:
+        padding: 5px 0px
+
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//   CONTENT SECTION
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#content:
+    background-color: $color_content
+    background-image: url('images/noise.png')
+    font-size: 15px
+    text-align: justify
+    padding: 20px 20px 10px
+    border: 1px solid $color_content.darken(7)
+    border-top: none
+    box-sizing: border-box
+    box-shadow: rgba(0, 0, 0, 0.06) 0px 0px 5px 0px
+
+    time:
+        color: #839496
+        margin-left: 2px
+        text-transform: uppercase;
+        font-family: $font_serif
+        font-size: 0.9em
+
+    h1, h2, h3, h4, h5, h6:
+        margin-bottom: 10px
+        font-family: $font_serif
+        font-weight: normal
+        color: #202020
+        a:
+            color: #202020
+
+    h2, h3, h4, h5, h6:
+        margin-top: 20px;
+        &:before:
+            content: `"#\0020"`
+
+    img:
+        border: 1px solid #ccc
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 5px 0px
+
+    p:
+        padding: 8px 0px
+
+    ul:
+        list-style: square;
+
+    ul, ol:
+        margin-left: 2em;
+        p:
+            padding: 3px 0px;
+
+    pre, code, .literal:
+        font-family: $font_mono
+
+    p .literal, ul .literal, ol .literal, tt .literal, td .literal:
+        font-size: $font_size   // content-literl compensation
+        padding: 1px 5px;
+        border: 1px solid #e0e0e0;
+        border-radius: 3px;
+        background: #fbfbfb url('images/noise.png');
+        box-shadow: rgba(0, 0, 0, 0.06) 0px 0px 10px 0px;
+
+    pre.code:
+        background-image: url('images/noise.png');
+        margin: 7px 0px;
+        padding: 5px;
+        font-size: 0.9em;
+        line-height: 1.5em;
+        border: 1px solid #e0e0e0;
+        border-radius: 5px;
+        box-shadow: rgba(0, 0, 0, 0.06) 0px 0px 5px 0px;
+
+    dt:
+        margin-top: 5px;
+
+    dd:
+        padding: 5px;
+        margin-left: 25px;
+        .first:
+            margin-top: 0px;
+
+
+    // a block which contain translation links
+    .translations:
+        color: #657B83
+        letter-spacing: 1px
+        font-family: $font_serif
+        text-align: right
+        a:
+            color: #268BD2
+            &:hover:
+                border-bottom: 1px dashed #268BD2
+                text-decoration: none
+
+    // a tagcloud block
+    .tagcloud:
+        font-size: 18px
+        list-style: none
+        li:
+            float: left
+            margin-left: 20px
+
+
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//   ARTICLE SECTION
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+article:
+    margin-bottom: 40px;
+
+    header:
+        h1:
+            font-size: 1.8em
+
+        time:before:
+            content: `"\231A\0020"` // clock and space
+
+    footer:
+        color: #839496
+        font-family: $font_serif
+        font-style: italic
+        text-align: right
+        margin-top: 25px
+        letter-spacing: 1px
+
+
+section.article-title:
+    line-height: 1.2em
+    font-size: 1.0em
+
+    h1:
+        font-size: inherit
+        margin-left: 150px
+        display: block
+        text-transform: uppercase
+        a:
+            color: $color_text.darken(10) !important
+
+    time:
+        font-size: inherit
+        float: left;
+        width: 143px;
+        text-align: right;
+        &:after:
+            content: `"\0020\231A"` // space and clock
+
+
+
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//   ADDITIONAL STYLES USED BY RESTRUCTURED TEXT
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+article:
+
+    blockquote, .note, .hint, .tip, .warning, .error, .attention, .caution, .danger, .important, .admonition:
+        font-size: 0.85em
+        line-height: 1.7em
+        padding: 0px 20px 0px 10px
+        margin: 0px 2px 0px 12px
+        min-height: 42px
+        padding-left: 48px
+        color: $color_link
+
+        .admonition-title:
+            display: none;
+
+        p:
+            padding-top: 5px;
+            padding-bottom: 2px;
+        p.last:
+            padding-bottom: 0px;
+
+        a:
+            text-decoration: underline;
+
+    // icons
+    blockquote:
+        background: url('images/blockquote.png') no-repeat
+    .note:
+        background: url('images/note.png') no-repeat
+    .tip, .hint:
+        background: url('images/tip.png') no-repeat
+    .attention, .caution, .warning:
+        background: url('images/warning.png') no-repeat
+    .danger, .error:
+        background: url('images/error.png') no-repeat
+
+
+// vim: ft=clevercss

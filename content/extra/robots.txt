@@ -1,0 +1,26 @@
+User-agent: Yandex
+Disallow: /author/
+Disallow: /categories/
+Disallow: /tags/
+Disallow: /drafts/
+Disallow: /static/
+Disallow: /download/
+Disallow: /*index*.html
+Disallow: /theme/
+Disallow: /*?*
+
+Host: www.kalnitsky.org
+
+
+User-agent: *
+Disallow: /author/
+Disallow: /categories/
+Disallow: /tags/
+Disallow: /drafts/
+Disallow: /static/
+Disallow: /download/
+Disallow: /theme/
+Disallow: /*index*.html
+Disallow: /*?*
+
+Sitemap: http://www.kalnitsky.org/sitemap.xml
