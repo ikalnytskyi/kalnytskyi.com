@@ -37,7 +37,6 @@ FILES_TO_COPY = (
     ('extra/ikalnitsky-pub.asc', 'ikalnitsky-pub.asc'),
 )
 
-
 SITEMAP = {
     'generate': ['articles', 'pages'],
     'format': 'xml',
@@ -50,6 +49,10 @@ SITEMAP = {
         'pages': None,
     }
 }
+
+NAVIGATION_BAR = (
+    ('Projects', '/projects/'),
+)
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
