@@ -27,12 +27,12 @@ header_height   = 55px
 content_width   = 740px
 
 // fontconfig
-font_sans  = Verdana, Geneve, sans-serif
+font_sans  = 'Trebuchet MS', Tahoma, sans-serif;
 font_serif = 'Times New Roman', Times, serif
-font_mono  = 'DejaVu Sans Mono', 'Ubuntu Mono', Monaco, monospace
+font_mono  = 'DejaVu Sans Mono', Monaco, monospace
 
-font_size  = 14px
-font_line  = 1.75em
+font_size  = 16px
+font_line  = 1.5
 
 // colorscheme
 color_background = #f3f3f3
@@ -40,6 +40,35 @@ color_header     = #efefef
 color_content    = #f5f5f5
 color_text       = #484848
 color_link       = #aa1111
+
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//   HACKS & PREDEFINED STYLES
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+@font-face:
+  font-family: 'Droid Serif'
+  font-style: normal
+  font-weight: 400
+  src: `url(fonts/DroidSerif-Regular.woff) format('woff')`
+
+@font-face:
+  font-family: 'Roboto'
+  font-style: italic
+  font-weight: 400
+  src: `url(fonts/Roboto-LightItalic.woff) format('woff')`
+
+@font-face:
+  font-family: 'Roboto'
+  font-style: normal
+  font-weight: 400
+  src: `url(fonts/Roboto-Regular.woff) format('woff')`
+
+@font-face:
+  font-family: 'Roboto'
+  font-style: normal
+  font-weight: 700
+  src: `url(fonts/Roboto-Medium.woff) format('woff')`
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -179,7 +208,7 @@ a:
 #content:
     background-color: $color_content
     background-image: url('images/noise.png')
-    text-align: justify
+    //text-align: justify
     padding: 20px 20px 10px
     border: 1px solid $color_content.darken(7)
     border-top: none
@@ -225,21 +254,17 @@ a:
         font-family: $font_mono
 
     p .literal, ul .literal, ol .literal, tt .literal, td .literal:
-        padding: 1px 5px;
-        border: 1px solid #e0e0e0;
-        border-radius: 3px;
-        background: #fbfbfb url('images/noise.png');
-        box-shadow: rgba(0, 0, 0, 0.06) 0px 0px 10px 0px;
+        color: $color_text + #000044
 
     pre.code:
-        background-image: url('images/noise.png');
-        margin: 7px 0px;
-        padding: 5px;
-        font-size: 0.9em;
-        line-height: 1.5em;
-        border: 1px solid #e0e0e0;
-        border-radius: 5px;
-        box-shadow: rgba(0, 0, 0, 0.06) 0px 0px 5px 0px;
+        background-image: url('images/noise.png')
+        margin: 7px 0px
+        padding: 5px
+        font-size: 0.9em
+        line-height: 1.5em
+        border: 1px solid #e0e0e0
+        border-radius: 5px
+        box-shadow: rgba(0, 0, 0, 0.06) 0px 0px 5px 0px
 
     dt:
         margin-top: 5px;
@@ -295,6 +320,8 @@ article:
         margin-top: 25px
         letter-spacing: 1px
 
+    a:hover:
+        color: $color_link.brighten(10)
 
 section.article-title:
     line-height: 1.2em
