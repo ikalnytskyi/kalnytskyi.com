@@ -23,6 +23,7 @@
 
 pre.code:
     background-color: #fbfbfb
+    color: #333333
 
     .c:
         color: #999988

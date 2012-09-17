@@ -35,8 +35,8 @@
 .. _Vim: http://www.vim.org/
 .. _igor@kalnitsky.org: mailto:igor@kalnitsky.org
 
-.. _GitHub: https://github.com/ikalnitsky/
+.. _GitHub:  https://github.com/ikalnitsky/
 .. _Twitter: http://twitter.com/ikalnitsky/
-.. _Google+: https://plus.google.com/105228895772494136400/?rel=author
+.. _Google+: https://plus.google.com/101589805347389541627?rel=author
 
 .. _здесь: http://www.kalnitsky.org/ikalnitsky-pub.asc
