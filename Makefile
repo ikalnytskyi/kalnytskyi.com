@@ -12,6 +12,8 @@ INPUTDIR=$(BASEDIR)/content
 OUTPUTDIR=$(BASEDIR)/_build
 SETTINGSFILE=$(BASEDIR)/settings.py
 
+REMOTE_HOST=igor@kalnitsky.org
+
 
 install_dependencies:
 	pip install pelican webassets
@@ -29,6 +31,12 @@ serve:
 	@echo Starting up site serving...
 	#pkill -f "python -m SimpleHTTPServer" & > /dev/null
 	cd $(OUTPUTDIR) && python -m SimpleHTTPServer
+
+deploy:
+	@echo Starting deploying...
+	git push origin
+	ssh $(REMOTE_HOST) 'cd kalnitsky.org; ./deploy.sh'
+	@echo Done
 
 clean:
 	@echo Cleaning up...
@@ -48,4 +56,4 @@ help:
 	@echo '   make help                        show this tip                      '
 	@echo '                                                                       '
 
-.PHONY: html help clean serve
+.PHONY: html help clean serve deploy

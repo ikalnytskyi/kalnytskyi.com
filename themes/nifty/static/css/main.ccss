@@ -27,9 +27,9 @@ header_height   = 55px
 content_width   = 740px
 
 // fontconfig
-font_sans  = 'Droid Sans', 'Lucida Sans', sans-serif
-font_serif = 'Droid Serif', Times, serif
-font_mono  = 'Droid Sans Mono', monospace
+font_sans  = 'Trebuchet MS', Tahoma, sans-serif
+font_serif = 'Times New Roman', Times, serif
+font_mono  = 'DejaVu Sans Mono', monospace
 
 font_size  = 16px
 font_line  = 1.5
@@ -40,35 +40,6 @@ color_header     = #efefef
 color_content    = #f5f5f5
 color_text       = #404040
 color_link       = #aa1111
-
-
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-//   FONTS
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-@font-face:
-  font-family: 'Droid Serif'
-  font-style: normal
-  font-weight: 400
-  src: `local('Droid Serif'), local('DroidSerif'), url(fonts/DroidSerif.woff) format('woff')`
-
-@font-face:
-  font-family: 'Droid Sans'
-  font-style: normal
-  font-weight: 400
-  src: `local('Droid Sans'), local('DroidSans'), url(fonts/DroidSans.woff) format('woff')`
-
-@font-face:
-  font-family: 'Droid Sans'
-  font-style: normal
-  font-weight: 700
-  src: `local('Droid Sans Bold'), local('DroidSans-Bold'), url(fonts/DroidSans-Bold.woff) format('woff')`
-
-@font-face:
-  font-family: 'Droid Sans Mono'
-  font-style: normal
-  font-weight: 400
-  src: `local('Droid Sans Mono'), local('DroidSansMono'), url(fonts/DroidSansMono.woff) format('woff')`
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -249,10 +220,8 @@ a:
         p:
             padding: 3px 0px;
 
-    pre, code, .literal:
+    code:
         font-family: $font_mono
-
-    p .literal, ul .literal, ol .literal, tt .literal, td .literal:
         padding: 0px 3px
         background-color: #f8f8f8
         border: 1px dashed #d8d8d8
