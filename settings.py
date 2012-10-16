@@ -61,8 +61,7 @@ NAVIGATION_BAR = (
 
 def is_localhost():
     '''
-    NOTE: The ``.localhost`` file should be
-          exists in a localhost machine.
+    NOTE: The ``.localhost`` file should exist on a localhost machine.
     '''
     import os
     import inspect

@@ -2,7 +2,7 @@
 # DESCRIPTION: Makefile for managing Pelican based blog.
 #      AUTHOR: Igor Kalnitsky <igor@kalnitsky.org>
 #
-#   Based o Zoresvit's makefile.
+#   Based on Zoresvit's makefile.
 
 PELICAN=pelican
 PELICANOPTS=-v
@@ -52,6 +52,7 @@ help:
 	@echo '   make html                        (re)generate the web site          '
 	@echo '   make regenerate                  auto regeneration on files update  '
 	@echo '   make serve                       (re)start developing server        '
+	@echo '   make deploy                      push to github and deploy web site '
 	@echo '   make clean                       remove generated files             '
 	@echo '   make help                        show this tip                      '
 	@echo '                                                                       '
