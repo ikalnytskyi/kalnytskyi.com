@@ -2,7 +2,7 @@
 # DESCRIPTION: Makefile for managing Pelican based blog.
 #      AUTHOR: Igor Kalnitsky <igor@kalnitsky.org>
 #
-#   Based o Zoresvit's makefile.
+#   Based on Zoresvit's makefile.
 
 PELICAN=pelican
 PELICANOPTS=-v
