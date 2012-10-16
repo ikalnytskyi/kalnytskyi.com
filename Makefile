@@ -52,6 +52,7 @@ help:
 	@echo '   make html                        (re)generate the web site          '
 	@echo '   make regenerate                  auto regeneration on files update  '
 	@echo '   make serve                       (re)start developing server        '
+	@echo '   make deploy                      push to github and deploy web site '
 	@echo '   make clean                       remove generated files             '
 	@echo '   make help                        show this tip                      '
 	@echo '                                                                       '
