@@ -1,0 +1,49 @@
+Projects
+========
+
+Over last years I took part in development process of various projects. Some
+of them were mine, some - not. Here an incomplete list of projects I've been
+involved, more mine stuff you can found on [my GitHub].
+
+The list doesn't mention small patches/improvements in another projects.
+
+Some projects are marked with signs and here the key for understanding:
+
+* **#** - author or co-author
+* **@** - open source project
+
+[my GitHub]: https://github.com/ikalnitsky
+
+
+Applications
+------------
+
+* [XSnippet] - a web-service to share code snippets on the Internet (2012 - ..., #, @)
+* [Holocron] - a lightweight static blog generator (2013 - ..., #, @)
+* [Fuel] - a deployment and management tool for for OpenStack (2014 - ..., @)
+
+[XSnippet]:   http://xsnippet.org
+[Holocron]:   https://github.com/ikalnitsky/holocron
+[Fuel]:       https://wiki.openstack.org/wiki/Fuel
+
+
+Libraries
+---------
+
+* [Listbox.js] - a jQuery plugin that creates a Listbox element (2012 - ..., #, @)
+* [Dooku] - a set of libraries for the Python programming language (2014 - ..., #, @)
+
+[Listbox.js]: https://github.com/ikalnitsky/listbox.js
+[Dooku]:      http://dooku.readthedocs.org/
+
+
+Mobile Games
+------------
+
+* [Real Football 2013] - a football simulator (2012 - 2013)
+* [Fantasy Town] - a farm game with magic potions and mysterious lands (2013)
+* [Blitz Brigade] - an online multiplayer first-person shooter (2013 - 2014)
+
+[Real Football 2013]: https://itunes.apple.com/in/app/real-football-2013/id533391318
+[Fantasy Town]: https://itunes.apple.com/us/app/fantasy-town-enter-magic-village!/id465621206
+[Blitz Brigade]: https://itunes.apple.com/in/app/blitz-brigade-online-multiplayer/id580175049

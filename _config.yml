@@ -1,0 +1,17 @@
+#
+# HOLOCRON CONFIGURATION FILE.
+#
+
+sitename:    kalnitsky's way
+siteurl:     http://kalnitsky.org
+author:      Igor Kalnitsky
+
+
+theme:
+   navigation: !!pairs
+      - about:      /about/
+      - projects:   /projects/
+      - feed:       /feed.xml
+
+   counters:
+      google_analytics: UA-56182606-1

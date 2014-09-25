@@ -1,0 +1,34 @@
+About
+=====
+
+My name is Igor Kalnitsky and I'm software engineer. I have various areas
+of interest and here are some of them:
+
+* *cloud technologies* - virtualization, containerization and networking;
+* *databases* - SQL, NoSQL, internals and usage areas;
+* *system programming* - system and performance optimizations;
+* *web-services* - backend architecture and high availability.
+
+I'm currently located in Kharkiv (Ukraine) and working for [Mirantis, Inc] -
+a pure-play [OpenStack] company. As for today I prefer to use C++ and
+Python on daily basis, but know some other languages too.
+
+[Mirantis, Inc]: http://mirantis.com/
+[OpenStack]: http://www.openstack.org/
+
+
+Contacts
+--------
+
+The best way to contact me is by sending email to [igor@kalnitsky.org].
+Usually I answer all the mail though it can be a bit slow at times.
+Additional information about me you can found in some social services:
+
+* [Twitter]
+* [Facebook]
+* [GitHub]
+
+[igor@kalnitsky.org]: mailto:igor@kalnitsky.org
+[Twitter]: https://twitter.com/ikalnitsky
+[Facebook]: https://www.facebook.com/ikalnitsky
+[GitHub]: https://github.com/ikalnitsky/
