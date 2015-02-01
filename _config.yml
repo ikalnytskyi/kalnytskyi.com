@@ -15,3 +15,7 @@ theme:
 
    counters:
       google_analytics: UA-56182606-1
+
+
+generators:
+   enabled: [sitemap, index, feed]
