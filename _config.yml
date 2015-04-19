@@ -7,6 +7,12 @@ siteurl:     http://kalnitsky.org
 author:      Igor Kalnitsky
 
 
+paths:
+   content: {here}
+   output:  {here}/_build
+   theme:   {here}/_theme
+
+
 theme:
    navigation: !!pairs
       - about:      /about/
