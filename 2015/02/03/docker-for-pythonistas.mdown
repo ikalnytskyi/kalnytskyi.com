@@ -57,8 +57,8 @@ pre-configuration is required, but pull the image. The whole workflow could
 look like:
 
 ```bash
-$ [sudo] docker pull ikalnitsky/pythonista
-$ [sudo] docker run -v /path/to/src/:/src -w /src ikalnitsky/pythonista tox
+$ docker pull ikalnitsky/pythonista
+$ docker run -v /path/to/src/:/src -w /src ikalnitsky/pythonista tox
 ```
 
 For those who aren't familiar with Docker, the first command retrieves the

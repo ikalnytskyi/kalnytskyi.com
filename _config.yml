@@ -2,9 +2,10 @@
 # HOLOCRON CONFIGURATION FILE.
 #
 
-sitename:    kalnitsky's way
-siteurl:     http://kalnitsky.org
-author:      Igor Kalnitsky
+site:
+   title:    kalnitsky's way
+   author:   Igor Kalnitsky
+   url:      http://kalnitsky.org
 
 
 paths:
@@ -19,9 +20,16 @@ theme:
       - projects:   /projects/
       - feed:       /feed.xml
 
+   ribbon:
+      text:     Star On GitHub
+      link:     https://github.com/ikalnitsky/kalnitsky.org
+
+   copyright: >
+      Content is licensed under a
+         <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+            Creative Commons Attribution 4.0 International License</a>
+
+      <br>&copy; 2014, Igor Kalnitsky
+
    counters:
       google_analytics: UA-56182606-1
-
-
-generators:
-   enabled: [sitemap, index, feed]
