@@ -3,33 +3,36 @@
 #
 
 site:
-   title:    kalnitsky's way
-   author:   Igor Kalnitsky
-   url:      http://kalnitsky.org
+  title:    kalnitsky's way
+  author:   Igor Kalnitsky
+  url:      http://kalnitsky.org
 
 
 paths:
-   content: {here}
-   output:  {here}/_build
-   theme:   {here}/_theme
+  content: {here}
+  output:  {here}/_build
+  theme:   {here}/_theme
 
 
 theme:
-   navigation: !!pairs
-      - about:      /about/
-      - projects:   /projects/
-      - feed:       /feed.xml
+  navigation: !!pairs
+    - about:      /about/
+    - projects:   /projects/
+    - feed:       /feed.xml
 
-   ribbon:
-      text:     Star On GitHub
-      link:     https://github.com/ikalnitsky/kalnitsky.org
+  ribbon:
+    text:     Star On GitHub
+    link:     https://github.com/ikalnitsky/kalnitsky.org
 
-   copyright: >
-      Content is licensed under a
-         <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
-            Creative Commons Attribution 4.0 International License</a>
+  copyright: >
+    Content is licensed under a
+      <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+        Creative Commons Attribution 4.0 International License</a>
 
-      <br>&copy; 2014, Igor Kalnitsky
+    <br>&copy; 2014, Igor Kalnitsky
 
-   counters:
-      google_analytics: UA-56182606-1
+  counters:
+    google_analytics: UA-56182606-1
+
+  twitter_cards:
+     username: ikalnitsky
