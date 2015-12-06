@@ -1,5 +1,8 @@
 ---
 tags: [python, map, design]
+summary: >
+  A short essay about map() function design in Python, why it's horrible
+  and non-obvious at the first glance.
 ---
 
 Mad Map: Python Road
