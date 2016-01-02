@@ -11,7 +11,6 @@ site:
 paths:
   content: {here}
   output:  {here}/_build
-  theme:   {here}/_theme
 
 
 theme:
