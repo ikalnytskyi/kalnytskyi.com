@@ -1,0 +1,15 @@
+Talks
+=====
+
+2016
+----
+
+- **Concurrency and parallelism in Python**
+  ~ [#deck](/talks/py-concurrency/)
+    [#video](https://youtu.be/nW3nN7mbdG0?t=5166)
+  @ PyCon UA 2016
+
+- **Concurrency and parallelism in Python**
+  ~ [#deck](/talks/py-concurrency-kharkivpy/)
+    [#video](https://youtu.be/IYBgrlK2k0Q)
+  @ KharkivPy #13

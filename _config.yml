@@ -17,6 +17,7 @@ theme:
   navigation: !!pairs
     - about:      /about/
     - projects:   /projects/
+    - talks:      /talks/
     - feed:       /feed.xml
 
   ribbon:
