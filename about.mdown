@@ -1,34 +1,36 @@
-About
-=====
+About Me
+========
 
-My name is Igor Kalnitsky and I'm software engineer. I have various areas
-of interest and here are some of them:
+<img src="/me.jpg" style="width:250px; float:right; margin-left: 2em;">
 
-* *cloud technologies* - virtualization, containerization and networking;
-* *databases* - SQL, NoSQL, internals and usage areas;
-* *system programming* - system and performance optimizations;
-* *web-services* - backend architecture and high availability.
+Hey! My name is __Igor Kalnitsky__ and I'm a software engineer working
+for [Mirantis](https://www.mirantis.com). I have various areas of
+interest, here's some of them:
 
-I'm currently located in Kharkiv (Ukraine) and working for [Mirantis, Inc] -
-a pure-play [OpenStack] company. As for today I prefer to use C++ and
-Python on daily basis, but know some other languages too.
+* _containers and their ecosystem_
+* _cloud computing and networking_
+* _distributed systems' design_
+* and _system programming_
 
-[Mirantis, Inc]: http://mirantis.com/
-[OpenStack]: http://www.openstack.org/
+You can get in touch with me by dropping a line at <igor@kalnitsky.org>,
+and prove my identity using [8910 196E](/ikalnitsky.asc) key.
 
 
-Contacts
---------
+Elsewhere
+---------
 
-The best way to contact me is by sending email to [igor@kalnitsky.org].
-Usually I answer all the mail though it can be a bit slow at times.
-Additional information about me you can found in some social services:
+I'm __@ikalnitsky__ almost everywhere around the Internet, including:
 
-* [Twitter]
-* [Facebook]
-* [GitHub]
+* [github.com/ikalnitsky](https://github.com/ikalnitsky)
+* [keybase.io/ikalnitsky](https://keybase.io/ikalnitsky)
+* [twitter.com/ikalnitsky](https://twitter.com/ikalnitsky)
 
-[igor@kalnitsky.org]: mailto:igor@kalnitsky.org
-[Twitter]: https://twitter.com/ikalnitsky
-[Facebook]: https://www.facebook.com/ikalnitsky
-[GitHub]: https://github.com/ikalnitsky/
+
+License
+-------
+
+The content is licensed under the
+[Creative Commons Attribution 4.0 International License][License]
+unless stated otherwise.
+
+[License]: http://creativecommons.org/licenses/by/4.0/

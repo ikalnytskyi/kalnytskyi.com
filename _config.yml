@@ -24,11 +24,8 @@ theme:
     link:     https://github.com/ikalnitsky/kalnitsky.org
 
   copyright: >
-    Content is licensed under a
-      <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
-        Creative Commons Attribution 4.0 International License</a>
-
-    <br>&copy; 2014, Igor Kalnitsky
+    &copy; 2014,
+    <a rel="me" href="/about/">Igor Kalnitsky</a><br>
 
   counters:
     google_analytics: UA-56182606-1
