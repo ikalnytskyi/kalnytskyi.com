@@ -3,7 +3,7 @@ About Me
 
 <img src="/me.jpg" style="width:250px; float:right; margin-left: 2em;">
 
-Hey! My name is __Igor Kalnitsky__ and I'm a software engineer working
+Hey! My name is __Ihor Kalnytskyi__ and I'm a software engineer working
 for [Mirantis](https://www.mirantis.com). I have various areas of
 interest, here's some of them:
 
@@ -12,18 +12,17 @@ interest, here's some of them:
 * _distributed systems' design_
 * and _system programming_
 
-You can get in touch with me by dropping a line at <igor@kalnitsky.org>,
+You can get in touch with me by dropping a line at <ihor@kalnytskyi.com>,
 and prove my identity using [8910 196E](/ikalnitsky.asc) key.
 
 
 Elsewhere
 ---------
 
-I'm __@ikalnitsky__ almost everywhere around the Internet, including:
+I'm __@ikalnytskyi__ almost everywhere around the Internet, including:
 
-* [github.com/ikalnitsky](https://github.com/ikalnitsky)
-* [keybase.io/ikalnitsky](https://keybase.io/ikalnitsky)
-* [twitter.com/ikalnitsky](https://twitter.com/ikalnitsky)
+* [github.com/ikalnytskyi](https://github.com/ikalnytskyi)
+* [twitter.com/ikalnytskyi](https://twitter.com/ikalnytskyi)
 
 
 License

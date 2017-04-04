@@ -4,7 +4,7 @@ Talks
 2017
 ----
 
-- **Bytes, strings, wrath and Python
+- **Bytes, strings, wrath and Python**
   ~ [#deck](/talks/bytes-strings-wrath-python/)
   @ KharkivPy #15
 

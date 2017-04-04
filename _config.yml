@@ -3,9 +3,9 @@
 #
 
 site:
-  title:    kalnitsky's way
-  author:   Igor Kalnitsky
-  url:      http://kalnitsky.org
+  title:    kalnytskyi's way
+  author:   Ihor Kalnytskyi
+  url:      https://kalnytskyi.com
 
 
 paths:
@@ -22,14 +22,14 @@ theme:
 
   ribbon:
     text:     Star On GitHub
-    link:     https://github.com/ikalnitsky/kalnitsky.org
+    link:     https://github.com/ikalnytskyi/kalnitsky.org
 
   copyright: >
     &copy; 2014,
-    <a rel="me" href="/about/">Igor Kalnitsky</a><br>
+    <a rel="me" href="/about/">Ihor Kalnytskyi</a><br>
 
   counters:
-    google_analytics: UA-56182606-1
+    google_analytics: UA-91466040-1
 
   twitter_cards:
-     username: ikalnitsky
+     username: ikalnytskyi
