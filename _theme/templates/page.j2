@@ -1,0 +1,40 @@
+{% extends '_base.j2' %}
+
+{% if document.summary %}
+  {% set summary = document.summary.replace('\n', ' ').strip() %}
+{% endif %}
+
+{% block head %}
+  {{ super() }}
+
+  {% if document.author %}
+    <meta name="author" content="{{ document.author }}">
+  {% endif %}
+
+  {% if document.summary %}
+    <meta name="description" content="{{ summary }}">
+  {% endif %}
+
+  {% if 'twitter_cards.username' in theme and document.summary %}
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@{{ theme['twitter_cards.username'] }}">
+    <meta name="twitter:title" content="{{ document.title }}">
+    <meta name="twitter:description" content="{{ summary }}">
+  {% endif %}
+{% endblock %}
+
+{% block title %}
+  {{ document.title }}
+{% endblock %}
+
+{% block content %}
+  <article>
+    <header>
+      {% block article_header %}
+        <h1>{{ self.title() }}</h1>
+      {% endblock %}
+    </header>
+
+    {{ document.content }}
+  </article>
+{% endblock %}

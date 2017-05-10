@@ -3,33 +3,38 @@
 #
 
 site:
-  title:    kalnytskyi's way
+  title:    Ihor Kalnytskyi
   author:   Ihor Kalnytskyi
   url:      https://kalnytskyi.com
-
 
 paths:
   content: {here}
   output:  {here}/_build
 
-
 theme:
+  sidebar:
+    photo: /me.jpg
+    about: |
+      <a href="/about" rel="me">Ihor Kalnytshyi</a>'s thoughts & writings
+
   navigation: !!pairs
-    - about:      /about/
-    - projects:   /projects/
-    - talks:      /talks/
-    - feed:       /feed.xml
+    - Archive:   /
+    - Projects:  /projects/
+    - Talks:     /talks/
+    - Feed:      /feed.xml
 
-  ribbon:
-    text:     Star On GitHub
-    link:     https://github.com/ikalnytskyi/kalnitsky.org
-
-  copyright: >
-    &copy; 2014,
-    <a rel="me" href="/about/">Ihor Kalnytskyi</a><br>
+  copyright: <a rel="me" href="/about/">Ihor Kalnytskyi</a>
 
   counters:
     google_analytics: UA-91466040-1
 
   twitter_cards:
      username: ikalnytskyi
+
+ext:
+  enabled:
+    - markdown
+    - index
+    - feed
+    - sitemap
+    - user-theme

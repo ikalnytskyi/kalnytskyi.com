@@ -1,0 +1,9 @@
+{% extends 'page.j2' %}
+
+{% block article_header %}
+  <time datetime="{{ document.published.isoformat() }}">
+    {{ document.published.strftime('%B %d, %Y') }}
+  </time>
+
+  {{ super() }}
+{% endblock %}
