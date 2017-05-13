@@ -4,8 +4,8 @@ summary: >
   A short story about C legacy in C++, and why it's bad to have it.
 ---
 
-C Legacy Is Evil
-================
+C Legacy Is 😈 Evil
+===================
 
 When people ask me «What is the first thing I don't like in C++?», I
 always answer that's a C legacy. I know a lot of C++ bottlenecks, but I
@@ -71,14 +71,14 @@ structs, not C++ ones which might be filled properly by means of
 constructors. But the `tm_struct` is a C struct, thus it knows nothing
 about constructors and we have to clear it manually.
 
-Actually, the idea is *not to clear*, but *to initialize* all members.
+Actually, the idea is not *to clear*, but *to initialize* all members.
 It seems like we do initialize all `tm`'s members, but we are actually
 not. Unfortunately, the `tm_struct` has one more field - `tm_isdst` -
 which is still filled with garbage and leads to mistaken result.
 
 Ok, so why then it works on iOS most of the time and always fails on
 Android? I don't know, it just happened and that's all. I think it's
-happened because of compiler that may add some *clearing* code for us
+happened because of compiler that may add some clearing code for us
 automatically, but I may be wrong.
 
 Why is it so dangerous? Why is there a huge pitfall for C++ in my

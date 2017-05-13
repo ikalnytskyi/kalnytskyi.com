@@ -6,18 +6,17 @@ summary: >
 Farewell, 2015!
 ===============
 
-I'm a little late to sum up, but better now than never. :)
+I'm a little late to sum up, but better now than never. :) Well, 2015 was a
+year of travels. I've never visited before so many places in one year, just
+look at the record:
 
-Well, 2015 was a year of travels. I've never visited before so many places
-in one year, just look at the record:
-
-* Istanbul, Turkey
-* Minsk, Belarus
-* Zürich, Switzerland
-* Barcelona, Spain
-* Toronto, Canada
-* Niagara Falls, Canada
-* Silicon Valley, USA
+ * Istanbul, Turkey
+ * Minsk, Belarus
+ * Zürich, Switzerland
+ * Barcelona, Spain
+ * Toronto, Canada
+ * Niagara Falls, Canada
+ * Silicon Valley, USA
 
 I'm so excited about them, and looking forward to have even more in 2016!
 
@@ -25,8 +24,8 @@ As for my programming life, nothing special has happened except, perhaps,
 that I started doing less coding that I'd want to. You see, in the end of
 fall two events took place:
 
-* I've been elected for Fuel-Python component lead position.
-* [Fuel] has joined OpenStack Big Tent umbrella.
+ * I've been elected for Fuel-Python component lead position.
+ * [Fuel] has joined OpenStack Big Tent umbrella.
 
 So now my main focus is to make design decisions and choose direction to go.
 I barely have time for code review, but I hope it'll be resolved soon.

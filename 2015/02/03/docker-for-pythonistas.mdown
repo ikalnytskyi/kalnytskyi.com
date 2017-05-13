@@ -27,8 +27,8 @@ be useful for Pythonistas in general.
 I’ll try to be straight to the point, but before we go further let's answer
 the following questions:
 
-* What is the most common "action" for programmers?
-* What is the second most common "action" for programmers?
+ * What is the most common "action" for programmers?
+ * What is the second most common "action" for programmers?
 
 Well, obviously, an answer to the first question is *to write code*.
 Programmers are supposed to write code, they're doing it almost every day
@@ -68,11 +68,11 @@ For those who aren't familiar with Docker, the first command retrieves the
 image from the Docker registry and the second one runs a container created
 from it. The arguments are
 
-* `-v /path/to/src:/src` - mounts `/path/to/src` from your host machine
-  into `/src` inside your container
-* `-w /src` - change current working directory inside container to `/src`
-* `ikalnitsky/pythonista` - obviously, use this image for container
-* `tox` - run tox (a test runner tool)
+ * `-v /path/to/src:/src` - mounts `/path/to/src` from your host machine
+   into `/src` inside your container
+ * `-w /src` - change current working directory inside container to `/src`
+ * `ikalnitsky/pythonista` - obviously, use this image for container
+ * `tox` - run tox (a test runner tool)
 
 So why Docker? What does it bring to you? It saves your time and nerves
 because you don't need to compile missed Python interpreters on every

@@ -9,11 +9,10 @@ Mad Map: Python Road
 ====================
 
 I use Python for several years and I used to think there was nothing in
-the language that can surprise me. It was so until recently...
-
-The story I want to tell is about how even so simple and well-known thing
-like `map()` function can surprise you after years of using, and why I
-believe it has a bad design.
+the language that can surprise me. It was so until recently. The story
+I want to tell is about how even so simple and well-known thing like `map()`
+function can surprise you after years of using, and why I believe it has
+a bad design.
 
 So, what's wrong with `map()`? We use it everyday and everywhere, and it
 seems OK, and none of us met any problems. Yes, indeed, `map()` works
@@ -33,8 +32,8 @@ x = map(None, ['a', 'b', 'c'], [1, 2])
 Can you tell now what is `x`, ha? I always thought that `map()` function
 receives precisely two arguments:
 
-* a function to apply;
-* a sequence to be processed.
+ * a function to apply;
+ * a sequence to be processed.
 
 Can you imagine how I was surprised when it turned out that I was wrong?
 But the most interesting part was further.
@@ -115,17 +114,17 @@ any benefits, but may cause a lot of pain for those who porting some
 software to Python. Why? You see, if two iterables are equal in size
 the behavior is still the same -
 
-| language / expression | `map(lambda x: x, ['a', 'b'], [1, 2])` |
-| --------------------- | -------------------------------------- |
-| Python 2              | `[('a', 1), ('b', 2)]`                 |
-| Python 3              | `[('a', 1), ('b', 2)]`                 |
+ | language / expression | `map(lambda x: x, ['a', 'b'], [1, 2])` |
+ | --------------------- | -------------------------------------- |
+ | Python 2              | `[('a', 1), ('b', 2)]`                 |
+ | Python 3              | `[('a', 1), ('b', 2)]`                 |
 
 if not, it's different -
 
-| language / expression | `map(lambda x: x, ['a', 'b', 'c'], [1, 2])` |
-| --------------------- | ------------------------------------------- |
-| Python 2              | `[('a', 1), ('b', 2), ('c', None)]`         |
-| Python 3              | `[('a', 1), ('b', 2)]`                      |
+ | language / expression | `map(lambda x: x, ['a', 'b', 'c'], [1, 2])` |
+ | --------------------- | ------------------------------------------- |
+ | Python 2              | `[('a', 1), ('b', 2), ('c', None)]`         |
+ | Python 3              | `[('a', 1), ('b', 2)]`                      |
 
 I'm really really sad about such a mad `map()` and I wish I never knew
 about that. I don't know why it was designed so, but I hope none of
