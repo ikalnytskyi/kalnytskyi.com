@@ -1,1 +1,1 @@
-holocron
+git+https://github.com/ikalnytskyi/holocron.git
