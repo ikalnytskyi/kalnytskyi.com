@@ -1,19 +1,16 @@
 About Me
 ========
 
-<img src="/me.jpg" style="width:250px; float:right; margin-left: 2em;">
+My name is __Ihor Kalnytskyi__ and I'm a software engineer working for
+[Mirantis](https://www.mirantis.com). I have various areas of interest,
+here's some of them:
 
-Hey! My name is __Ihor Kalnytskyi__ and I'm a software engineer working
-for [Mirantis](https://www.mirantis.com). I have various areas of
-interest, here's some of them:
+ * _cloud computing_,
+ * _distributed systems' design_,
+ * and _system programming_.
 
-* _containers and their ecosystem_
-* _cloud computing and networking_
-* _distributed systems' design_
-* and _system programming_
-
-You can get in touch with me by dropping a line at <ihor@kalnytskyi.com>,
-and prove my identity using [8910 196E](/ikalnitsky.asc) key.
+You can get in touch with by sending a message to <ihor@kalnytskyi.com>,
+and prove my identity using [ECE7 D40B 49A5 F831](/ikalnytskyi.asc) GPG key.
 
 
 Elsewhere
@@ -21,15 +18,18 @@ Elsewhere
 
 I'm __@ikalnytskyi__ almost everywhere around the Internet, including:
 
-* [github.com/ikalnytskyi](https://github.com/ikalnytskyi)
-* [twitter.com/ikalnytskyi](https://twitter.com/ikalnytskyi)
+* [GitHub](https://github.com/ikalnytskyi)
+* [Telegram](https://t.me/ikalnytskyi)
 
 
-License
+Website
 -------
 
-The content is licensed under the
-[Creative Commons Attribution 4.0 International License][License]
-unless stated otherwise.
+The website is powered by [Holocron][1], and is [open sourced][2] on GitHub.
+Its content is licensed under a
+[Creative Commons Attribution 4.0 International License][3] unless stated
+otherwise.
 
-[License]: http://creativecommons.org/licenses/by/4.0/
+[1]: http://holocron.readthedocs.io/
+[2]: https://github.com/ikalnytskyi/kalnytskyi.com
+[3]: https://creativecommons.org/licenses/by/4.0/
