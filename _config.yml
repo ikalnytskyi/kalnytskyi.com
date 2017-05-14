@@ -19,7 +19,6 @@ theme:
 
   navigation: !!pairs
     - Archive:   /
-    - Projects:  /projects/
     - Talks:     /talks/
     - Feed:      /feed.xml
 
