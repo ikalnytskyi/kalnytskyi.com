@@ -1,0 +1,81 @@
+/**
+ * hovercraft.css
+ * ~~~~~~~~~~~~~~
+ *
+ * Hovercraft is a convenient tool to generate impress.js based presentations
+ * from reStructuredText sources. hovercraft.css is my own stylesheen
+ * for such presentations that defines fonts, colors and other awesome
+ * stuff.
+ *
+ * @copyright (c) 2016, Igor Kalnitsky
+ * @license MIT
+ */
+
+@import url(https://fonts.googleapis.com/css?family=Philosopher:400,400italic,700&subset=latin,cyrillic);
+
+
+body {
+  font: 180%/1.4 'Philosopher', sans-serif;
+  color: #212121;
+  text-align: center;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+}
+
+
+ul, ol {
+  list-style: square;
+  text-align: left;
+}
+
+table {
+  font-size: 0.7em;
+  line-height: 1em;
+  margin: 0 auto;
+  border-collapse: collapse;
+}
+
+table td, table th {
+  padding: 0em 1em;
+  border: 1px dashed #212121;
+}
+
+
+pre {
+  text-align: left;
+  padding: 0.65em;
+  border-top: 1px dashed #AFAFAF;
+  border-bottom: 1px dashed #AFAFAF;
+}
+
+a {
+  color: #0B739c;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #2f5a8b;
+  text-decoration: underline;
+}
+
+
+/* experimental, wasn't tested */
+blockquote {
+  font-style: italic;
+  position: relative;
+  color: #607D8B;
+  text-align: justify;
+}
+
+blockquote:before {
+  display: block;
+  content: "\201C";
+  font-size: 80px;
+  position: absolute;
+  left: -0.5em;
+  top: -0.5em;
+  color: #607D8B;
+}
