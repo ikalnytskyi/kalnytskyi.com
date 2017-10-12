@@ -2,7 +2,7 @@ About Me
 ========
 
 My name is __Ihor Kalnytskyi__ and I'm a software engineer working for
-[Mirantis](https://www.mirantis.com). I have various areas of interest,
+[DataRobot](https://www.datarobot.com). I have various areas of interest,
 here's some of them:
 
  * _cloud computing_,
