@@ -9,11 +9,11 @@ site:
 
 paths:
   content: {here}
-  output:  {here}/_build
+  output:  {here}/_site
 
 theme:
   sidebar:
-    photo: /me.jpg
+    photo: /about/me.jpg
     about: |
       <a href="/about" rel="me">Ihor Kalnytshyi</a>'s thoughts & writings
 
@@ -30,10 +30,71 @@ theme:
   twitter_cards:
      username: ikalnytskyi
 
+processors:
+  - name: source
+    when:
+      - operator: match
+        attribute: source
+        pattern: '[^_.].*$'
+
+  - name: metadata
+    metadata:
+      template: page.j2
+    when:
+      - operator: match
+        attribute: source
+        pattern: '.*\.(md|markdown)$'
+
+      - operator: match
+        attribute: source
+        pattern: '^(?!talks\/[^\/]+\/.*)'
+
+  - name: frontmatter
+    when:
+      - operator: match
+        attribute: source
+        pattern: '.*\.(md|markdown)$'
+
+      - operator: match
+        attribute: source
+        pattern: '^(?!talks\/[^\/]+\/.*)'
+
+  - name: markdown
+    when:
+      - operator: match
+        attribute: source
+        pattern: '.*\.(md|markdown)$'
+
+      - operator: match
+        attribute: source
+        pattern: '^(?!talks\/[^\/]+\/.*)'
+
+  - name: atom
+    save_as: feed.xml
+    when:
+      - operator: match
+        attribute: source
+        pattern: '\d{{2,4}}/\d{{1,2}}/\d{{1,2}}.*\.(md|markdown)$'
+
+  - name: index
+    when:
+      - operator: match
+        attribute: source
+        pattern: '\d{{2,4}}/\d{{1,2}}/\d{{1,2}}.*\.(md|markdown)$'
+
+  - name: sitemap
+    when:
+      - operator: match
+        attribute: source
+        pattern: '.*\.(md|markdown)$'
+
+      - operator: match
+        attribute: source
+        pattern: '^(?!talks\/[^\/]+\/.*)'
+
+  - name: commit
+    path: _site
+
 ext:
   enabled:
-    - markdown
-    - index
-    - feed
-    - sitemap
     - user-theme

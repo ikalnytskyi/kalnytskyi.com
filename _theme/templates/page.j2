@@ -30,9 +30,13 @@
 {% block content %}
   <article>
     <header>
-      {% block article_header %}
+      {% if document.published is defined %}
+        <time datetime="{{ document.published.isoformat() }}">
+          {{ document.published.strftime('%B %d, %Y') }}
+        </time>
+       {% endif %}
+
         <h1>{{ self.title() }}</h1>
-      {% endblock %}
     </header>
 
     {{ document.content }}

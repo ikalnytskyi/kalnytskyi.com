@@ -10,7 +10,7 @@ here's some of them:
  * and _system programming_.
 
 You can get in touch with by sending a message to <ihor@kalnytskyi.com>,
-and prove my identity using [ECE7 D40B 49A5 F831](/ikalnytskyi.asc) GPG key.
+and prove my identity using [ECE7 D40B 49A5 F831](ikalnytskyi.asc) GPG key.
 
 
 Elsewhere
