@@ -4,10 +4,12 @@
 
 | Title                                 | Conference    | Deck      | Video        |
 | ------------------------------------- |:-------------:|:---------:|:------------:|
+| Dependency injection Pythonic way     | KharkivPy #17 | [HTML][9] | N/A          |
 | Bytes, strings, wrath and Python      | KharkivPy #15 | [HTML][7] | [YouTube][8] |
 
 [7]: /talks/bytes-strings-wrath-python/
 [8]: https://youtu.be/oFLVWUUPSd0
+[9]: /talks/dependency-injection-python-way/
 
 ## 2016
 
