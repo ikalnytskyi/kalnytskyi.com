@@ -19,6 +19,7 @@ theme:
 
   navigation: !!pairs
     - Archive:   /
+    - How To:    /howto/
     - Talks:     /talks/
     - Feed:      /feed.xml
 
