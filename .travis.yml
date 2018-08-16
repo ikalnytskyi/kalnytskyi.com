@@ -1,0 +1,14 @@
+language: python
+python: "3.6"
+
+install: pip install git+https://github.com/ikalnytskyi/holocron.git
+script: holocron build
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local_dir: _site
+  fqdn: kalnytskyi.com
+  on:
+    branch: master
