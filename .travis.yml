@@ -1,8 +1,8 @@
 language: python
 python: "3.6"
 
-install: pip install git+https://github.com/ikalnytskyi/holocron.git
-script: holocron build
+install: pip install git+https://github.com/ikalnytskyi/holocron.git@e80a25d
+script: holocron run compile
 
 deploy:
   provider: pages

@@ -3,7 +3,7 @@
 {% block content %}
   <h1 class="section">Archive</h1>
 
-  {% for post in posts|sort(attribute='published', reverse=True) %}
+  {% for post in item['items']|sort(attribute='published', reverse=True) %}
     <div class="index-entry">
       <time datetime="{{ post.published.isoformat() }}">
         {{ post.published.strftime('%Y-%m-%d') }}

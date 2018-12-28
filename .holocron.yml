@@ -1,0 +1,117 @@
+#
+# HOLOCRON CONFIGURATION FILE.
+#
+
+metadata:
+  title: Ihor Kalnytskyi
+  author: Ihor Kalnytskyi
+  url: https://kalnytskyi.com
+
+  theme:
+    sidebar:
+      photo: /about/me.jpg
+      about: |
+        <a href="/about/" rel="me">Ihor Kalnytshyi</a>'s thoughts & writings
+
+    navigation: !!pairs
+      - Archive: /
+      - How To: /howto/
+      - Talks: /talks/
+      - Feed: /feed.xml
+
+    copyright: |
+      <a rel="me" href="/about/">Ihor Kalnytskyi</a>
+
+    twitter_cards:
+      username: ikalnytskyi
+
+pipes:
+  compile:
+    - name: source
+      pattern: '[^_.].*$'
+
+    - name: when
+      processor:
+        name: pipe
+        pipe:
+          - name: frontmatter
+
+          - name: commonmark
+            pygmentize: true
+
+          - name: todatetime
+            todatetime: ['source', 'published']
+            parsearea: '^\d{4}.\d{2}.\d{2}'
+
+          - name: when
+            processor:
+              name: archive
+            when:
+              - '"published" in item'
+
+      when:
+        - item.source.match("*.markdown")
+        - item.source.parts[0] != "talks" or item.source.parts[1] == "index.markdown"
+
+    - name: when
+      processor:
+        name: pipe
+        pipe:
+          - name: sitemap
+
+          # Feed processor configuration is too overcomplicated now. Yet, it's
+          # something we need anyway because its options reflect RSS/Atom
+          # options. However, some sane defaults and references to metadata are
+          # required and it's something Holocron will incorporate one day.
+          - name: when
+            processor:
+              name: feed
+              save_as: feed.xml
+              feed:
+                id:
+                  $ref: metadata://#/url
+                title:
+                  $ref: metadata://#/title
+                description: Ihor Kalnytshyi's thoughts & writings
+                link:
+                  - href: https://kalnytskyi.com/feed.xml
+                    rel: self
+                    type: application/atom+xml
+                  - href:
+                      $ref: metadata://#/url
+                    rel: alternate
+                    type: text/html
+              item:
+                id:
+                  $ref: item://#/absurl
+                title:
+                  $ref: item://#/title
+                content:
+                  $ref: item://#/content
+                link:
+                  href:
+                    $ref: item://#/absurl
+                author:
+                  name:
+                    $ref: metadata://#/author
+                published:
+                  $ref: item://#/published
+            when:
+              - '"published" in item'
+      when:
+        - item.source.match("*.markdown")
+        - item.source.parts[0] != "talks" or item.source.parts[1] == "index.markdown"
+
+    - name: when
+      processor:
+        name: jinja2
+        themes: ["_theme"]
+      when:
+        - |
+          "template" in item or (
+            item.source.match("*.markdown") and
+            item.source.parts[0] != "talks" or item.source.parts[1] == "index.markdown"
+          )
+
+    - name: save
+      to: _site/
