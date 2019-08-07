@@ -1,7 +1,3 @@
-#
-# HOLOCRON CONFIGURATION FILE.
-#
-
 metadata:
   title: Ihor Kalnytskyi
   author: Ihor Kalnytskyi
@@ -18,9 +14,6 @@ metadata:
       - How To: /howto/
       - Talks: /talks/
       - Feed: /feed.xml
-
-    copyright: |
-      <a rel="me" href="/about/">Ihor Kalnytskyi</a>
 
     twitter_cards:
       username: ikalnytskyi
