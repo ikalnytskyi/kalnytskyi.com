@@ -16,16 +16,16 @@
 <body>
   <aside>
     <div class="container">
-      {% if metadata.theme.sidebar.photo %}
-        <img class="photo" src="{{ metadata.theme.sidebar.photo }}">
+      {% if theme.sidebar.photo %}
+        <img class="photo" src="{{ theme.sidebar.photo }}">
       {% endif %}
 
-      {% if metadata.theme.sidebar.about %}
-        <span class="about">{{ metadata.theme.sidebar.about }}</span>
+      {% if theme.sidebar.about %}
+        <span class="about">{{ theme.sidebar.about }}</span>
       {% endif %}
 
       <nav>
-        {% for name, url in metadata.theme.get('navigation', []) %}
+        {% for name, url in theme.get('navigation', []) %}
           <span><a href="{{ url }}">{{ name }}</a></span>
         {% endfor %}
       </nav>

@@ -1,7 +1,7 @@
 language: python
 python: "3.6"
 
-install: pip install git+https://github.com/ikalnytskyi/holocron.git@e80a25d
+install: pip install git+https://github.com/ikalnytskyi/holocron.git@e58d246
 script: holocron run compile
 
 deploy:

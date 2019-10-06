@@ -3,21 +3,6 @@ metadata:
   author: Ihor Kalnytskyi
   url: https://kalnytskyi.com
 
-  theme:
-    sidebar:
-      photo: /about/me.jpg
-      about: |
-        <a href="/about/" rel="me">Ihor Kalnytshyi</a>'s thoughts & writings
-
-    navigation: !!pairs
-      - Archive: /
-      - How To: /howto/
-      - Talks: /talks/
-      - Feed: /feed.xml
-
-    twitter_cards:
-      username: ikalnytskyi
-
 pipes:
   compile:
     - name: source
@@ -99,6 +84,21 @@ pipes:
       processor:
         name: jinja2
         themes: ["_theme"]
+        context:
+          theme:
+            sidebar:
+              photo: /about/me.jpg
+              about: |
+                <a href="/about/" rel="me">Ihor Kalnytshyi</a>'s thoughts & writings
+
+            navigation: !!pairs
+              - Archive: /
+              - How To: /howto/
+              - Talks: /talks/
+              - Feed: /feed.xml
+
+            twitter_cards:
+              username: ikalnytskyi
       when:
         - |
           "template" in item or (
