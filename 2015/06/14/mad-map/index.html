@@ -1,0 +1,197 @@
+<!doctype html>
+<head>
+
+  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="/static/style.css">
+
+  
+
+  <title>
+  Mad Map: Python Road
+</title>
+
+
+  
+
+  
+    <meta name="description" content="A short essay about map() function design in Python, why it's horrible and non-obvious at the first glance.">
+  
+
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ikalnytskyi">
+    <meta name="twitter:title" content="Mad Map: Python Road">
+    <meta name="twitter:description" content="A short essay about map() function design in Python, why it's horrible and non-obvious at the first glance.">
+  
+
+
+<body>
+  <aside>
+    <div class="container">
+      
+        <img class="photo" src="/about/me.jpg">
+      
+
+      
+        <span class="about"><a href="/about/" rel="me">Ihor Kalnytskyi</a>'s thoughts & writings
+</span>
+      
+
+      <nav>
+        
+          <span><a href="/">Archive</a></span>
+        
+          <span><a href="/howto/">How To</a></span>
+        
+          <span><a href="/talks/">Talks</a></span>
+        
+          <span><a href="/feed.xml">Feed</a></span>
+        
+      </nav>
+    </div>
+  </aside>
+
+  <main>
+    
+  <article>
+    <header>
+      
+        <time datetime="2015-06-14T00:00:00+00:00">
+          June 14, 2015
+        </time>
+       
+
+        <h1>
+  Mad Map: Python Road
+</h1>
+    </header>
+
+    <p>I use Python for several years and I used to think there was nothing in
+the language that can surprise me. It was so until recently. The story
+I want to tell is about how even so simple and well-known thing like <code>map()</code>
+function can surprise you after years of using, and why I believe it has
+a bad design.</p>
+<p>So, what's wrong with <code>map()</code>? We use it everyday and everywhere, and it
+seems OK, and none of us met any problems. Yes, indeed, <code>map()</code> works
+just fine if you use it how it's intended to be used. For instance, if
+you use <code>map()</code> to multiply each element of some sequence by 2 -</p>
+<div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">a</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+</pre></div>
+
+<p>Just keep going, everything's ok. But let me show another usage example -</p>
+<div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+</pre></div>
+
+<p>Can you tell now what is <code>x</code>, ha? I always thought that <code>map()</code> function
+receives precisely two arguments:</p>
+<ul>
+<li>a function to apply;</li>
+<li>a sequence to be processed.</li>
+</ul>
+<p>Can you imagine how I was surprised when it turned out that I was wrong?
+But the most interesting part was further.</p>
+<p>I started guessing how <code>map()</code> should behave in this case. What <code>None</code> may
+mean? I recall that if we pass <code>None</code> as a function argument to <code>filter()</code>
+then it will return only those elements which are equal to <code>True</code> in
+boolean context. Hm, Perhaps <code>map()</code> behaves similar to <code>filter()</code>, and
+will return a list of booleans? Let's check.</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="nb">map</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+</pre></div>
+
+<p>No, it's not :( So I went to the documentation and learned that if a function
+argument is <code>None</code>, the identity function is assumed. In other words it's
+equal to the following call -</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">a</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+</pre></div>
+
+<p>Wait a minute. <code>None</code> means identity?! Does it make sense? Perhaps if we're
+talking about default behaviour, but it makes no sense from user point of
+view. You know, it looks like &quot;pass <code>None</code> if you want to get identity
+function behaviour&quot;. But let's go on.</p>
+<p>I continued guessing about how <code>map()</code> should deal with two iterables? It
+was obvious to me that <code>map()</code> should chain them: when first is over,
+the second will be used.</p>
+<p>Let's back to the original code and original question.</p>
+<div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+</pre></div>
+
+<p>What is <code>x</code>? Taking into account that was written above I was expecting
+<code>x</code> to be -</p>
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+</pre></div>
+
+<p>Boom! I missed again, because <code>x</code> was -</p>
+<div class="highlight"><pre><span></span><span class="p">[(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)]</span>
+</pre></div>
+
+<p>And I stunned because that means these two iterables were zipped, not
+chained. Why zipped? I never asked for this! Is this really Python?
+I always liked this language because of good design and good intentions.
+And when I didn't know something it always fitted my expectations, but
+this is something really weird.</p>
+<p>I agree that someone may expect iterables to be zipped, but I'm upset
+about opportunity itself to meet such unobvious construction. I wish
+<code>map()</code> to be plain and simple: receive one function and one iterable,
+and leave zipping or chaining up to programmers. Moreover, I wish a
+function argument to be always a function, no way to fallback to default
+behaviour. If someone wants identity behaviour let's pass it explicitly,
+no way to do it through <code>None</code>.</p>
+<p>The most frustrating thing is that it wasn't removed in Python 3, but
+changed! First, you can't use <code>None</code> as identity function anymore
+(alleluia). If you try to do that you'll fall with <code>TypeError</code> exception:</p>
+<div class="highlight"><pre><span></span>TypeError: <span class="s1">&#39;NoneType&#39;</span> object is not callable
+</pre></div>
+
+<p>Second, iterables are zipped by <code>zip()</code>, not <code>zip_longest()</code>. If the
+first change seems rational, the second one is mad. It doesn't provide
+any benefits, but may cause a lot of pain for those who porting some
+software to Python. Why? You see, if two iterables are equal in size
+the behavior is still the same -</p>
+<table>
+<thead>
+<tr>
+<th align="left">language / expression</th>
+<th align="left"><code>map(lambda x: x, [&#x27;a&#x27;, &#x27;b&#x27;], [1, 2])</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Python 2</td>
+<td align="left"><code>[(&#x27;a&#x27;, 1), (&#x27;b&#x27;, 2)]</code></td>
+</tr>
+<tr>
+<td align="left">Python 3</td>
+<td align="left"><code>[(&#x27;a&#x27;, 1), (&#x27;b&#x27;, 2)]</code></td>
+</tr>
+</tbody>
+</table>
+<p>if not, it's different -</p>
+<table>
+<thead>
+<tr>
+<th align="left">language / expression</th>
+<th align="left"><code>map(lambda x: x, [&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;], [1, 2])</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Python 2</td>
+<td align="left"><code>[(&#x27;a&#x27;, 1), (&#x27;b&#x27;, 2), (&#x27;c&#x27;, None)]</code></td>
+</tr>
+<tr>
+<td align="left">Python 3</td>
+<td align="left"><code>[(&#x27;a&#x27;, 1), (&#x27;b&#x27;, 2)]</code></td>
+</tr>
+</tbody>
+</table>
+<p>I'm really really sad about such a mad <code>map()</code> and I wish I never knew
+about that. I don't know why it was designed so, but I hope none of
+pythonistas will use it and one day it will be removed from the language.</p>
+  </article>
+
+  </main>

@@ -1,0 +1,340 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>https://kalnytskyi.com</id>
+  <title>Ihor Kalnytskyi</title>
+  <updated>2021-10-24T18:58:55.839471+00:00</updated>
+  <link href="https://kalnytskyi.com/feed.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://kalnytskyi.com" rel="alternate" type="text/html"/>
+  <generator uri="https://holocron.readthedocs.io" version="0.4.0">Holocron/v0.4.0</generator>
+  <subtitle>Ihor Kalnytskyi's thoughts &amp; writings</subtitle>
+  <entry>
+    <id>https://kalnytskyi.com/2016/01/02/farewell-2015/</id>
+    <title>Farewell, 2015!</title>
+    <updated>2021-10-24T18:58:55.840670+00:00</updated>
+    <author>
+      <name>Ihor Kalnytskyi</name>
+    </author>
+    <content type="html">&lt;p&gt;I'm a little late to sum up, but better now than never. :) Well, 2015 was a
+year of travels. I've never visited before so many places in one year, just
+look at the record:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Istanbul, Turkey&lt;/li&gt;
+&lt;li&gt;Minsk, Belarus&lt;/li&gt;
+&lt;li&gt;Zürich, Switzerland&lt;/li&gt;
+&lt;li&gt;Barcelona, Spain&lt;/li&gt;
+&lt;li&gt;Toronto, Canada&lt;/li&gt;
+&lt;li&gt;Niagara Falls, Canada&lt;/li&gt;
+&lt;li&gt;Silicon Valley, USA&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I'm so excited about them, and looking forward to have even more in 2016!&lt;/p&gt;
+&lt;p&gt;As for my programming life, nothing special has happened except, perhaps,
+that I started doing less coding that I'd want to. You see, in the end of
+fall two events took place:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;I've been elected for Fuel-Python component lead position.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://wiki.openstack.org/wiki/Fuel"&gt;Fuel&lt;/a&gt; has joined OpenStack Big Tent umbrella.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;So now my main focus is to make design decisions and choose direction to go.
+I barely have time for code review, but I hope it'll be resolved soon.&lt;/p&gt;
+&lt;p&gt;Besides that, &lt;a href="https://holocron.readthedocs.org"&gt;Holocron&lt;/a&gt; - an extendable static site generator behind this
+blog - was finally released. Thanks a lot to my friend &lt;a href="https://www.facebook.com/andrii.gamaiunov"&gt;Andrii Gamaiunov&lt;/a&gt;
+for putting effort to make this happen. I'm glad to see how it's going despite
+lack of time, though there're few major things to be done before I can say
+&lt;em&gt;«It's 1.0 release»&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Summarizing: 2015 was a good year, and I expect 2016 to be at least as good
+as 2015 was, but hope it will be even better!&lt;/p&gt;
+&lt;p&gt;Happy Holidays!&lt;/p&gt;</content>
+    <link href="https://kalnytskyi.com/2016/01/02/farewell-2015/" rel="alternate"/>
+    <published>2016-01-02T00:00:00+00:00</published>
+  </entry>
+  <entry>
+    <id>https://kalnytskyi.com/2015/06/14/mad-map/</id>
+    <title>Mad Map: Python Road</title>
+    <updated>2021-10-24T18:58:55.841014+00:00</updated>
+    <author>
+      <name>Ihor Kalnytskyi</name>
+    </author>
+    <content type="html">&lt;p&gt;I use Python for several years and I used to think there was nothing in
+the language that can surprise me. It was so until recently. The story
+I want to tell is about how even so simple and well-known thing like &lt;code&gt;map()&lt;/code&gt;
+function can surprise you after years of using, and why I believe it has
+a bad design.&lt;/p&gt;
+&lt;p&gt;So, what's wrong with &lt;code&gt;map()&lt;/code&gt;? We use it everyday and everywhere, and it
+seems OK, and none of us met any problems. Yes, indeed, &lt;code&gt;map()&lt;/code&gt; works
+just fine if you use it how it's intended to be used. For instance, if
+you use &lt;code&gt;map()&lt;/code&gt; to multiply each element of some sequence by 2 -&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Just keep going, everything's ok. But let me show another usage example -&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;b&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;c&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Can you tell now what is &lt;code&gt;x&lt;/code&gt;, ha? I always thought that &lt;code&gt;map()&lt;/code&gt; function
+receives precisely two arguments:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;a function to apply;&lt;/li&gt;
+&lt;li&gt;a sequence to be processed.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Can you imagine how I was surprised when it turned out that I was wrong?
+But the most interesting part was further.&lt;/p&gt;
+&lt;p&gt;I started guessing how &lt;code&gt;map()&lt;/code&gt; should behave in this case. What &lt;code&gt;None&lt;/code&gt; may
+mean? I recall that if we pass &lt;code&gt;None&lt;/code&gt; as a function argument to &lt;code&gt;filter()&lt;/code&gt;
+then it will return only those elements which are equal to &lt;code&gt;True&lt;/code&gt; in
+boolean context. Hm, Perhaps &lt;code&gt;map()&lt;/code&gt; behaves similar to &lt;code&gt;filter()&lt;/code&gt;, and
+will return a list of booleans? Let's check.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;No, it's not :( So I went to the documentation and learned that if a function
+argument is &lt;code&gt;None&lt;/code&gt;, the identity function is assumed. In other words it's
+equal to the following call -&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Wait a minute. &lt;code&gt;None&lt;/code&gt; means identity?! Does it make sense? Perhaps if we're
+talking about default behaviour, but it makes no sense from user point of
+view. You know, it looks like &amp;quot;pass &lt;code&gt;None&lt;/code&gt; if you want to get identity
+function behaviour&amp;quot;. But let's go on.&lt;/p&gt;
+&lt;p&gt;I continued guessing about how &lt;code&gt;map()&lt;/code&gt; should deal with two iterables? It
+was obvious to me that &lt;code&gt;map()&lt;/code&gt; should chain them: when first is over,
+the second will be used.&lt;/p&gt;
+&lt;p&gt;Let's back to the original code and original question.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;b&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;c&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;What is &lt;code&gt;x&lt;/code&gt;? Taking into account that was written above I was expecting
+&lt;code&gt;x&lt;/code&gt; to be -&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;b&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;c&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Boom! I missed again, because &lt;code&gt;x&lt;/code&gt; was -&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;b&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;c&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And I stunned because that means these two iterables were zipped, not
+chained. Why zipped? I never asked for this! Is this really Python?
+I always liked this language because of good design and good intentions.
+And when I didn't know something it always fitted my expectations, but
+this is something really weird.&lt;/p&gt;
+&lt;p&gt;I agree that someone may expect iterables to be zipped, but I'm upset
+about opportunity itself to meet such unobvious construction. I wish
+&lt;code&gt;map()&lt;/code&gt; to be plain and simple: receive one function and one iterable,
+and leave zipping or chaining up to programmers. Moreover, I wish a
+function argument to be always a function, no way to fallback to default
+behaviour. If someone wants identity behaviour let's pass it explicitly,
+no way to do it through &lt;code&gt;None&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The most frustrating thing is that it wasn't removed in Python 3, but
+changed! First, you can't use &lt;code&gt;None&lt;/code&gt; as identity function anymore
+(alleluia). If you try to do that you'll fall with &lt;code&gt;TypeError&lt;/code&gt; exception:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;TypeError: &lt;span class="s1"&gt;&amp;#39;NoneType&amp;#39;&lt;/span&gt; object is not callable
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Second, iterables are zipped by &lt;code&gt;zip()&lt;/code&gt;, not &lt;code&gt;zip_longest()&lt;/code&gt;. If the
+first change seems rational, the second one is mad. It doesn't provide
+any benefits, but may cause a lot of pain for those who porting some
+software to Python. Why? You see, if two iterables are equal in size
+the behavior is still the same -&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align="left"&gt;language / expression&lt;/th&gt;
+&lt;th align="left"&gt;&lt;code&gt;map(lambda x: x, [&amp;#x27;a&amp;#x27;, &amp;#x27;b&amp;#x27;], [1, 2])&lt;/code&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align="left"&gt;Python 2&lt;/td&gt;
+&lt;td align="left"&gt;&lt;code&gt;[(&amp;#x27;a&amp;#x27;, 1), (&amp;#x27;b&amp;#x27;, 2)]&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="left"&gt;Python 3&lt;/td&gt;
+&lt;td align="left"&gt;&lt;code&gt;[(&amp;#x27;a&amp;#x27;, 1), (&amp;#x27;b&amp;#x27;, 2)]&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;if not, it's different -&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align="left"&gt;language / expression&lt;/th&gt;
+&lt;th align="left"&gt;&lt;code&gt;map(lambda x: x, [&amp;#x27;a&amp;#x27;, &amp;#x27;b&amp;#x27;, &amp;#x27;c&amp;#x27;], [1, 2])&lt;/code&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align="left"&gt;Python 2&lt;/td&gt;
+&lt;td align="left"&gt;&lt;code&gt;[(&amp;#x27;a&amp;#x27;, 1), (&amp;#x27;b&amp;#x27;, 2), (&amp;#x27;c&amp;#x27;, None)]&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="left"&gt;Python 3&lt;/td&gt;
+&lt;td align="left"&gt;&lt;code&gt;[(&amp;#x27;a&amp;#x27;, 1), (&amp;#x27;b&amp;#x27;, 2)]&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;I'm really really sad about such a mad &lt;code&gt;map()&lt;/code&gt; and I wish I never knew
+about that. I don't know why it was designed so, but I hope none of
+pythonistas will use it and one day it will be removed from the language.&lt;/p&gt;</content>
+    <link href="https://kalnytskyi.com/2015/06/14/mad-map/" rel="alternate"/>
+    <published>2015-06-14T00:00:00+00:00</published>
+  </entry>
+  <entry>
+    <id>https://kalnytskyi.com/2015/02/03/docker-for-pythonistas/</id>
+    <title>Docker For Pythonistas</title>
+    <updated>2021-10-24T18:58:55.841227+00:00</updated>
+    <author>
+      <name>Ihor Kalnytskyi</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;a href="https://www.docker.com"&gt;Docker&lt;/a&gt;'s popularity is growing day by day and every last man wrote about
+it. Well, I'm a slowpoke... so sorry if I wrote something you already know.
+Anyway, if you're already familiar with Docker I'm not sure if that makes
+sense for you to waste time and read this post; otherwise - you're welcome.&lt;/p&gt;
+&lt;p&gt;My acquaintance with Docker began almost a year ago, when we decided to use
+it as an upgrade mechanism in &lt;a href="https://wiki.openstack.org/wiki/Fuel"&gt;Fuel for OpenStack&lt;/a&gt;. For sure I learned a lot
+about Docker since that time: I know about its limitations, pitfalls and
+bugs; I even know how to run the latest version (v1.4.1) on CentOS 6.5 with
+old Linux kernel.&lt;/p&gt;
+&lt;p&gt;In this post I'm not going to tell you about all possible use cases for
+Docker or about its internals and limitations. Instead, I'll try to focus on
+the daily usage flow and why I found it useful for myself and why it might
+be useful for Pythonistas in general.&lt;/p&gt;
+&lt;p&gt;I’ll try to be straight to the point, but before we go further let's answer
+the following questions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;What is the most common &amp;quot;action&amp;quot; for programmers?&lt;/li&gt;
+&lt;li&gt;What is the second most common &amp;quot;action&amp;quot; for programmers?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Well, obviously, an answer to the first question is &lt;em&gt;to write code&lt;/em&gt;.
+Programmers are supposed to write code, they're doing it almost every day
+and it takes a lot of their time.&lt;/p&gt;
+&lt;p&gt;And what about the second question? The answer is &lt;em&gt;to run tests&lt;/em&gt; in order to
+be sure that nothing is broken. Unfortunately, it may not be as easy as it
+seems. You know, a lot of Python software is supposed to be run on various
+Python interpreters: it may be a set of Py2 interpreters or even both Py2
+and Py3 interpreters. So for proper testing the tests should be run against
+a certain set of Python interpreters, but what to do if some of them are
+unavailable for your Linux distributive?&lt;/p&gt;
+&lt;p&gt;This is where Docker is going to help us.&lt;/p&gt;
+&lt;p&gt;Docker is a platform for building, shipping and running containers. In other
+words it allows you to prepare an image with some software, push it to
+docker registry (sort of repository) and pull it wherever you want to run.&lt;/p&gt;
+&lt;p&gt;I came to it when I needed to run tests against Python 2.6 and this
+interpreter wasn't available for Debian Jessie. So I spent some time and
+built a &lt;a href="https://github.com/ikalnitsky/pythonista"&gt;pythonista docker image&lt;/a&gt; that contained the most popular Python
+interpreters. It's very convenient since anyone can pull this image and use
+it to run tests. If you aren't satisfied by my image, you can always build
+your own - it's not a challenge.&lt;/p&gt;
+&lt;p&gt;Tests could be run in the container with just a single command, no
+pre-configuration is required, but pull the image. The whole workflow could
+look like:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ docker pull ikalnitsky/pythonista
+$ docker run -v /path/to/src/:/src -w /src ikalnitsky/pythonista tox
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;For those who aren't familiar with Docker, the first command retrieves the
+image from the Docker registry and the second one runs a container created
+from it. The arguments are&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-v /path/to/src:/src&lt;/code&gt; - mounts &lt;code&gt;/path/to/src&lt;/code&gt; from your host machine
+into &lt;code&gt;/src&lt;/code&gt; inside your container&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-w /src&lt;/code&gt; - change current working directory inside container to &lt;code&gt;/src&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ikalnitsky/pythonista&lt;/code&gt; - obviously, use this image for container&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;tox&lt;/code&gt; - run tox (a test runner tool)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;So why Docker? What does it bring to you? It saves your time and nerves
+because you don't need to compile missed Python interpreters on every
+machine you're working on. Still, this is one of possible Docker use cases,
+so don't hesitate to find your own.&lt;/p&gt;</content>
+    <link href="https://kalnytskyi.com/2015/02/03/docker-for-pythonistas/" rel="alternate"/>
+    <published>2015-02-03T00:00:00+00:00</published>
+  </entry>
+  <entry>
+    <id>https://kalnytskyi.com/2014/10/25/c-legacy-is-evil/</id>
+    <title>C Legacy Is 😈 Evil</title>
+    <updated>2021-10-24T18:58:55.841431+00:00</updated>
+    <author>
+      <name>Ihor Kalnytskyi</name>
+    </author>
+    <content type="html">&lt;p&gt;When people ask me «What is the first thing I don't like in C++?», I
+always answer that's a C legacy. I know a lot of C++ bottlenecks, but I
+believe that the worst of them is the C legacy.  What do I mean by the
+«C legacy»? I mean all this stuff that doesn't fit into C++ ideology and
+kept in the language for compatibility reason. It was a great advantage
+years ago, and it's a worst drawback today.&lt;/p&gt;
+&lt;p&gt;I have a story as a good example of what I'm talking about. When I was
+working at &lt;a href="http://www.gameloft.com/"&gt;Gameloft&lt;/a&gt;, I was involved in &lt;a href="https://itunes.apple.com/us/app/blitz-brigade-online-multiplayer/id580175049?mt=8"&gt;Blitz Brigade&lt;/a&gt; project. In the
+very late 2013, the HQ decided to revive Android port and I was chosen
+to help Android guys to run both server and client sides of the game.&lt;/p&gt;
+&lt;p&gt;One day an Android guy asked me for help with debugging. His client
+application was rejected by the server and he couldn't figure out why
+it's happened. Diving in the code, I have found a typical mistake often
+occurring in the C world. The interesting thing was that the mistake was
+widespread and should have affected both iOS and Android versions.
+However, there was 100% reproduce rate for Android version, while for
+iOS it haven't been found yet.&lt;/p&gt;
+&lt;p&gt;Well, let's look at this typical C code that converts a datetime to Unix
+timestamp:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;// year, month, day, hour, min and sec are retrieved from&lt;/span&gt;
+&lt;span class="c1"&gt;// network and have valid values&lt;/span&gt;
+
+&lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="nc"&gt;tm&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;tm_struct&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+&lt;span class="n"&gt;tm_struct&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tm_year&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;year&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1900&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;tm_struct&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tm_mon&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;month&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;tm_struct&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tm_mday&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;day&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+&lt;span class="n"&gt;tm_struct&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tm_hour&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;hour&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;tm_struct&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tm_min&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;tm_struct&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tm_sec&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;sec&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+&lt;span class="n"&gt;tm_struct&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tm_wday&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;tm_struct&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tm_yday&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+&lt;span class="kt"&gt;time_t&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;mktime&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;tm_struct&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;So what's wrong with this code? In first look - nothing is wrong, but for
+some reason the resulting &lt;code&gt;time&lt;/code&gt; variable was &lt;code&gt;0&lt;/code&gt; on Android and a valid
+timestamp on iOS. If you come from C world you probable suspect that the
+issue is that the &lt;code&gt;tm_struct&lt;/code&gt; variable isn't cleared before usage. In C
+world we have an unspoken rule:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Always use &lt;code&gt;memset&lt;/code&gt; onto struct variable before usage, because by
+default it's filled with garbage.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Example:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="nc"&gt;tm&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;tm_struct&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;memset&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;tm_struct&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;sizeof&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tm_struct&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The same rule is also applied in C++ world if we're talking about C
+structs, not C++ ones which might be filled properly by means of
+constructors. But the &lt;code&gt;tm_struct&lt;/code&gt; is a C struct, thus it knows nothing
+about constructors and we have to clear it manually.&lt;/p&gt;
+&lt;p&gt;Actually, the idea is not &lt;em&gt;to clear&lt;/em&gt;, but &lt;em&gt;to initialize&lt;/em&gt; all members.
+It seems like we do initialize all &lt;code&gt;tm&lt;/code&gt;'s members, but we are actually
+not. Unfortunately, the &lt;code&gt;tm_struct&lt;/code&gt; has one more field - &lt;code&gt;tm_isdst&lt;/code&gt; -
+which is still filled with garbage and leads to mistaken result.&lt;/p&gt;
+&lt;p&gt;Ok, so why then it works on iOS most of the time and always fails on
+Android? I don't know, it just happened and that's all. I think it's
+happened because of compiler that may add some clearing code for us
+automatically, but I may be wrong.&lt;/p&gt;
+&lt;p&gt;Why is it so dangerous? Why is there a huge pitfall for C++ in my
+opinion?&lt;/p&gt;
+&lt;p&gt;I believe that C and C++ are different languages with different
+ideologies, but with similar syntax. If you wrote your own struct in
+C++, you have to define constructor to initialize all members with some
+default values. Thus C++ developers don't expect &lt;code&gt;memset&lt;/code&gt; right after
+struct definition, they're relying on constructors which do that thing
+for them.&lt;/p&gt;
+&lt;p&gt;In real world applications built for different platforms using different
+compilers it may be a big challenge to debug because the bug may be
+floating, so you spent a lot of time to catch it.&lt;/p&gt;
+&lt;p&gt;So you should be mindful writing programs in C++, since you can fall
+into deep hole of C legacy.&lt;/p&gt;</content>
+    <link href="https://kalnytskyi.com/2014/10/25/c-legacy-is-evil/" rel="alternate"/>
+    <published>2014-10-25T00:00:00+00:00</published>
+  </entry>
+</feed>
