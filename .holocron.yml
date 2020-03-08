@@ -50,7 +50,7 @@ pipes:
                   $ref: metadata://#/url
                 title:
                   $ref: metadata://#/title
-                description: Ihor Kalnytshyi's thoughts & writings
+                description: Ihor Kalnytskyi's thoughts & writings
                 link:
                   - href: https://kalnytskyi.com/feed.xml
                     rel: self
@@ -89,7 +89,7 @@ pipes:
             sidebar:
               photo: /about/me.jpg
               about: |
-                <a href="/about/" rel="me">Ihor Kalnytshyi</a>'s thoughts & writings
+                <a href="/about/" rel="me">Ihor Kalnytskyi</a>'s thoughts & writings
 
             navigation: !!pairs
               - Archive: /
