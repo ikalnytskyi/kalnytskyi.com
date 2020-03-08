@@ -6,34 +6,32 @@ metadata:
 pipes:
   compile:
     - name: source
-      pattern: '[^_.].*$'
+      args:
+        pattern: '[^_.].*$'
 
-    - name: when
-      processor:
-        name: pipe
+    - name: pipe
+      args:
         pipe:
           - name: frontmatter
 
           - name: commonmark
-            pygmentize: true
+            args:
+              pygmentize: true
 
           - name: todatetime
-            todatetime: ['source', 'published']
-            parsearea: '^\d{4}.\d{2}.\d{2}'
+            args:
+              todatetime: ['source', 'published']
+              parsearea: '^\d{4}.\d{2}.\d{2}'
 
-          - name: when
-            processor:
-              name: archive
+          - name: archive
             when:
               - '"published" in item'
-
       when:
         - item.source.match("*.markdown")
         - item.source.parts[0] != "talks" or item.source.parts[1] == "index.markdown"
 
-    - name: when
-      processor:
-        name: pipe
+    - name: pipe
+      args:
         pipe:
           - name: sitemap
 
@@ -41,9 +39,8 @@ pipes:
           # something we need anyway because its options reflect RSS/Atom
           # options. However, some sane defaults and references to metadata are
           # required and it's something Holocron will incorporate one day.
-          - name: when
-            processor:
-              name: feed
+          - name: feed
+            args:
               save_as: feed.xml
               feed:
                 id:
@@ -80,9 +77,8 @@ pipes:
         - item.source.match("*.markdown")
         - item.source.parts[0] != "talks" or item.source.parts[1] == "index.markdown"
 
-    - name: when
-      processor:
-        name: jinja2
+    - name: jinja2
+      args:
         themes: ["_theme"]
         context:
           theme:
@@ -107,4 +103,5 @@ pipes:
           )
 
     - name: save
-      to: _site/
+      args:
+        to: _site/
