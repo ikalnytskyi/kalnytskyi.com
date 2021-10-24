@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://kalnytskyi.com</id>
   <title>Ihor Kalnytskyi</title>
-  <updated>2021-10-24T18:58:55.839471+00:00</updated>
+  <updated>2021-10-24T19:07:55.095230+00:00</updated>
   <link href="https://kalnytskyi.com/feed.xml" rel="self" type="application/atom+xml"/>
   <link href="https://kalnytskyi.com" rel="alternate" type="text/html"/>
   <generator uri="https://holocron.readthedocs.io" version="0.4.0">Holocron/v0.4.0</generator>
@@ -10,7 +10,7 @@
   <entry>
     <id>https://kalnytskyi.com/2016/01/02/farewell-2015/</id>
     <title>Farewell, 2015!</title>
-    <updated>2021-10-24T18:58:55.840670+00:00</updated>
+    <updated>2021-10-24T19:07:55.096564+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -50,7 +50,7 @@ as 2015 was, but hope it will be even better!&lt;/p&gt;
   <entry>
     <id>https://kalnytskyi.com/2015/06/14/mad-map/</id>
     <title>Mad Map: Python Road</title>
-    <updated>2021-10-24T18:58:55.841014+00:00</updated>
+    <updated>2021-10-24T19:07:55.096882+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -183,7 +183,7 @@ pythonistas will use it and one day it will be removed from the language.&lt;/p&
   <entry>
     <id>https://kalnytskyi.com/2015/02/03/docker-for-pythonistas/</id>
     <title>Docker For Pythonistas</title>
-    <updated>2021-10-24T18:58:55.841227+00:00</updated>
+    <updated>2021-10-24T19:07:55.097046+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -253,7 +253,7 @@ so don't hesitate to find your own.&lt;/p&gt;</content>
   <entry>
     <id>https://kalnytskyi.com/2014/10/25/c-legacy-is-evil/</id>
     <title>C Legacy Is 😈 Evil</title>
-    <updated>2021-10-24T18:58:55.841431+00:00</updated>
+    <updated>2021-10-24T19:07:55.097193+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
