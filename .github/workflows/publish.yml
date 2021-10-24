@@ -25,8 +25,7 @@ jobs:
       run: holocron run compile
 
     - name: Publish kalnytskyi.com
-      uses: peaceiris/actions-gh-pages@v2.10.1
-      env:
-        ACTIONS_DEPLOY_KEY: ${{ secrets.GH_PAGES_DEPLOY_KEY }}
-        PUBLISH_BRANCH: gh-pages
-        PUBLISH_DIR: ./_site
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./_site
