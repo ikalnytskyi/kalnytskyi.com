@@ -162,16 +162,16 @@ main code {
   padding: 0.1rem 0.3rem;
 }
 
-main pre.code,
-main .codehilite pre {
+main pre code {
   background-color: #fcfcfc;
-  border: 1px solid rgba(0, 0, 0, 0.14);
+  border-left: 1px solid rgba(0, 0, 0, 0.14);
   font-family: 'Roboto Mono', courier, monospace;
   font-size: 0.95rem;
   line-height: 1.3rem;
   margin: 0 0 0 1rem;
   overflow: auto;
   padding: 0.5rem 1rem;
+  display: block;
 }
 
 main blockquote {
