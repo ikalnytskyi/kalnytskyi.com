@@ -61,18 +61,18 @@
     <p>Once in a while every Pythonista faces a need to test that some string value
 matches a regex pattern. When it comes we have no option but to use <code>re</code> module
 directly.</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">re</span>
 
 <span class="k">def</span> <span class="nf">test_something_very_useful</span><span class="p">():</span>
     <span class="n">value</span> <span class="o">=</span> <span class="n">get_some_string</span><span class="p">()</span>
     <span class="k">assert</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;\d+&#39;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
 
 <p>While it works fine in case of lone string, it's not always convenient to do
 the same when a string is a part of more complex data structure (e.g. <code>dict</code>),
 because you need to extract the string, check it and only then get back to
 check rest attributes.</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">re</span>
 
 <span class="k">def</span> <span class="nf">test_something_even_more_useful</span><span class="p">():</span>
     <span class="n">mapping</span> <span class="o">=</span> <span class="n">get_some_structure</span><span class="p">()</span>
@@ -85,20 +85,20 @@ check rest attributes.</p>
     <span class="c1"># rest assertion</span>
     <span class="k">assert</span> <span class="n">mapping</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;foo&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
                       <span class="s1">&#39;bar&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
-</pre></div>
+</code></pre></div>
 
 <p>Fortunately, it's pretty easy to write convenient <code>pytest</code> helper that would
 check a pattern as a part of checking the whole data structure.</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_something_even_more_useful</span><span class="p">():</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">test_something_even_more_useful</span><span class="p">():</span>
     <span class="n">mapping</span> <span class="o">=</span> <span class="n">get_some_structure</span><span class="p">()</span>
     <span class="k">assert</span> <span class="n">mapping</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;foo&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
                       <span class="s1">&#39;bar&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
                       <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="n">pytest_regex</span><span class="p">(</span><span class="s1">&#39;\d+&#39;</span><span class="p">)}</span>
-</pre></div>
+</code></pre></div>
 
 <p>Looks better, huh? :) So the trick is done by the following few lines which
 we're successfully using in <a href="https://github.com/xsnippet/xsnippet-api">XSnippet API</a>.</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">re</span>
 
 <span class="k">class</span> <span class="nc">pytest_regex</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Assert that a given string meets some expectations.&quot;&quot;&quot;</span>
@@ -111,7 +111,7 @@ we're successfully using in <a href="https://github.com/xsnippet/xsnippet-api">X
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_regex</span><span class="o">.</span><span class="n">pattern</span>
-</pre></div>
+</code></pre></div>
 
 <p>Well, actually, it's not by any means tied to <code>pytest</code> and could be used even
 in non-test production code, though I found this rather queer.</p>

@@ -111,9 +111,9 @@ your own - it's not a challenge.</p>
 <p>Tests could be run in the container with just a single command, no
 pre-configuration is required, but pull the image. The whole workflow could
 look like:</p>
-<div class="highlight"><pre><span></span>$ docker pull ikalnitsky/pythonista
+<div class="highlight"><pre><span></span><code>$ docker pull ikalnitsky/pythonista
 $ docker run -v /path/to/src/:/src -w /src ikalnitsky/pythonista tox
-</pre></div>
+</code></pre></div>
 
 <p>For those who aren't familiar with Docker, the first command retrieves the
 image from the Docker registry and the second one runs a container created

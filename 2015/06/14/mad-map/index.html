@@ -78,12 +78,12 @@ a bad design.</p>
 seems OK, and none of us met any problems. Yes, indeed, <code>map()</code> works
 just fine if you use it how it's intended to be used. For instance, if
 you use <code>map()</code> to multiply each element of some sequence by 2 -</p>
-<div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">a</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">x</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">a</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+</code></pre></div>
 
 <p>Just keep going, everything's ok. But let me show another usage example -</p>
-<div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">x</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+</code></pre></div>
 
 <p>Can you tell now what is <code>x</code>, ha? I always thought that <code>map()</code> function
 receives precisely two arguments:</p>
@@ -98,16 +98,16 @@ mean? I recall that if we pass <code>None</code> as a function argument to <code
 then it will return only those elements which are equal to <code>True</code> in
 boolean context. Hm, Perhaps <code>map()</code> behaves similar to <code>filter()</code>, and
 will return a list of booleans? Let's check.</p>
-<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="nb">map</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">map</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
-</pre></div>
+</code></pre></div>
 
 <p>No, it's not :( So I went to the documentation and learned that if a function
 argument is <code>None</code>, the identity function is assumed. In other words it's
 equal to the following call -</p>
-<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">a</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">a</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
-</pre></div>
+</code></pre></div>
 
 <p>Wait a minute. <code>None</code> means identity?! Does it make sense? Perhaps if we're
 talking about default behaviour, but it makes no sense from user point of
@@ -117,17 +117,17 @@ function behaviour&quot;. But let's go on.</p>
 was obvious to me that <code>map()</code> should chain them: when first is over,
 the second will be used.</p>
 <p>Let's back to the original code and original question.</p>
-<div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">x</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+</code></pre></div>
 
 <p>What is <code>x</code>? Taking into account that was written above I was expecting
 <code>x</code> to be -</p>
-<div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+</code></pre></div>
 
 <p>Boom! I missed again, because <code>x</code> was -</p>
-<div class="highlight"><pre><span></span><span class="p">[(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)]</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)]</span>
+</code></pre></div>
 
 <p>And I stunned because that means these two iterables were zipped, not
 chained. Why zipped? I never asked for this! Is this really Python?
@@ -144,8 +144,8 @@ no way to do it through <code>None</code>.</p>
 <p>The most frustrating thing is that it wasn't removed in Python 3, but
 changed! First, you can't use <code>None</code> as identity function anymore
 (alleluia). If you try to do that you'll fall with <code>TypeError</code> exception:</p>
-<div class="highlight"><pre><span></span>TypeError: <span class="s1">&#39;NoneType&#39;</span> object is not callable
-</pre></div>
+<div class="highlight"><pre><span></span><code>TypeError: <span class="s1">&#39;NoneType&#39;</span> object is not callable
+</code></pre></div>
 
 <p>Second, iterables are zipped by <code>zip()</code>, not <code>zip_longest()</code>. If the
 first change seems rational, the second one is mad. It doesn't provide
