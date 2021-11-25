@@ -104,4 +104,4 @@ pipes:
 
     - name: save
       args:
-        to: _site/
+        to: "%(here)s/_site/"

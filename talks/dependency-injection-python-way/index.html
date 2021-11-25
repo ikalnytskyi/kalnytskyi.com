@@ -6,47 +6,36 @@
 
     <title>Dependency Injection, Pythonic Way</title>
 
-    <link rel="stylesheet" href="../revealjs/css/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.2.0/dist/reset.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.2.0/dist/reveal.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.3.1/styles/github.min.css">
     <link rel="stylesheet" href="mithrandir.css">
-
-    <!-- Theme used for syntax highlighting of code -->
-    <link rel="stylesheet" href="../revealjs/lib/css/github-gist.css">
-
-    <!-- Printing and PDF exports -->
-    <script>
-      var link = document.createElement( 'link' );
-      link.rel = 'stylesheet';
-      link.type = 'text/css';
-      link.href = window.location.search.match( /print-pdf/gi ) ? '../revealjs/css/print/pdf.css' : '../revealjs/css/print/paper.css';
-      document.getElementsByTagName( 'head' )[0].appendChild( link );
-    </script>
   </head>
   <body>
     <div class="reveal">
       <div class="slides">
         <section data-markdown="dependency-injection-python-way.markdown"
-             data-separator="^\n>>>\n"
-             data-separator-vertical="^\n---\n"
-             data-separator-notes="^!note:"
-             data-charset="utf-8">
+                 data-separator="^\n>>>\n"
+                 data-separator-vertical="^\n---\n"
+                 data-separator-notes="^!note:"
+                 data-charset="utf-8">
         </section>
       </div>
     </div>
 
-    <script src="../revealjs/lib/js/head.min.js"></script>
-    <script src="../revealjs/js/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.2.0/dist/reveal.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.2.0/plugin/notes/notes.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.2.0/plugin/markdown/markdown.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.2.0/plugin/highlight/highlight.min.js"></script>
 
     <script>
-      // More info about config & dependencies:
-      // - https://github.com/hakimel/reveal.js#configuration
-      // - https://github.com/hakimel/reveal.js#dependencies
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
       Reveal.initialize({
+        hash: true,
         history: true,
-        dependencies: [
-          { src: '../revealjs/plugin/markdown/marked.js' },
-          { src: '../revealjs/plugin/markdown/markdown.js' },
-          { src: '../revealjs/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-        ]
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
       });
     </script>
   </body>
