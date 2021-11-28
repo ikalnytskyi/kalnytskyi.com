@@ -88,7 +88,7 @@ pipes:
                 <a href="/about/" rel="me">Ihor Kalnytskyi</a>'s thoughts & writings
 
             navigation: !!pairs
-              - Archive: /
+              - Archives: /
               - How To: /howto/
               - Talks: /talks/
               - Feed: /feed.xml

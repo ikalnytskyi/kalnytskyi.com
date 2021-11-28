@@ -1,7 +1,7 @@
 {% extends '_base.j2' %}
 
 {% block content %}
-  <h1 class="section">Archive</h1>
+  <h1 class="section">Archives</h1>
 
   {% for post in item['items']|sort(attribute='published', reverse=True) %}
     <div class="index-entry">
