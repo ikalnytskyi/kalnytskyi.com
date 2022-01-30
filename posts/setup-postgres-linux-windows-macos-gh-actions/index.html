@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  
+  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    <link rel="stylesheet" href="/static/style.css">
+  
+    
+  
+    <title>
+  Setup PostgreSQL for Linux, Windows and macOS using GitHub Actions
+</title>
+  
+
+  
+
+  
+
+  
+
+</head>
+<body>
+  <aside>
+    <div class="container">
+      
+        <img class="photo" src="/about/me.jpg">
+      
+
+      
+        <span class="about"><a href="/about/" rel="me">Ihor Kalnytskyi</a>'s thoughts & writings
+</span>
+      
+
+      <nav>
+        
+          <span><a href="/">Archives</a></span>
+        
+          <span><a href="/talks/">Talks</a></span>
+        
+          <span><a href="/feed.xml">Feed</a></span>
+        
+      </nav>
+    </div>
+  </aside>
+
+  <main>
+    
+  <article>
+    <header>
+      
+        <time datetime="2021-11-24T00:00:00+00:00">
+          November 24, 2021
+        </time>
+       
+
+        <h1>
+  Setup PostgreSQL for Linux, Windows and macOS using GitHub Actions
+</h1>
+    </header>
+
+    <p>As of today (Nov 24, 2021), there's only <a href="https://github.com/marketplace/actions/setup-postgresql-for-linux-macos-windows">one action on the marketplace</a> to
+setup a PostgreSQL server for Linux, Windows and macOS runners. If you among
+those who want to test their software on all major platforms, you have no
+option but to use <a href="https://github.com/ikalnytskyi/action-setup-postgres">ikalnytskyi/action-setup-postgres</a>.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">steps</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Setup PostgreSQL</span><span class="w"></span>
+<span class="w">    </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ikalnytskyi/action-setup-postgres@v1</span><span class="w"></span>
+<span class="w">    </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres</span><span class="w"></span>
+
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Run tests</span><span class="w"></span>
+<span class="w">    </span><span class="nt">env</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">CONNECTION_URI</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ steps.postgres.outputs.connection-uri }}</span><span class="w"></span>
+<span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pytest -vv tests/</span><span class="w"></span>
+</code></pre></div>
+
+<p>Key features:</p>
+<ul>
+<li>Fast bootstrap (the action uses preinstalled binaries).</li>
+<li>Fast audit (<a href="https://github.com/ikalnytskyi/action-setup-postgres/blob/v1/action.yml">4 steps YAML</a>, no javascript/typescript).</li>
+</ul>
+  </article>
+
+  </main>
+</body>

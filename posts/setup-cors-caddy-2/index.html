@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  
+  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    <link rel="stylesheet" href="/static/style.css">
+  
+    
+  
+    <title>
+  Setup CORS in Caddy 2
+</title>
+  
+
+  
+
+  
+
+  
+
+</head>
+<body>
+  <aside>
+    <div class="container">
+      
+        <img class="photo" src="/about/me.jpg">
+      
+
+      
+        <span class="about"><a href="/about/" rel="me">Ihor Kalnytskyi</a>'s thoughts & writings
+</span>
+      
+
+      <nav>
+        
+          <span><a href="/">Archives</a></span>
+        
+          <span><a href="/talks/">Talks</a></span>
+        
+          <span><a href="/feed.xml">Feed</a></span>
+        
+      </nav>
+    </div>
+  </aside>
+
+  <main>
+    
+  <article>
+    <header>
+      
+        <time datetime="2022-01-12T00:00:00+00:00">
+          January 12, 2022
+        </time>
+       
+
+        <h1>
+  Setup CORS in Caddy 2
+</h1>
+    </header>
+
+    <p><a href="https://caddyserver.com/">Caddy 2</a> is an open source web server with automatic HTTPS. It's a wise choice
+for pet projects or self-hosted services, since you are free from managing TLS
+certs on your own and wiring things together can be super annoying.</p>
+<p>One missing feature in Caddy 2 is <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">CORS</a> support. For a &quot;batteries included&quot;
+web server, it's rather surprising. Fortunately, one can use the following
+<a href="https://caddyserver.com/docs/caddyfile/concepts#snippets">Caddy snippet</a> to augment any site with CORS headers without repeating oneself
+over and over again.</p>
+<p><strong>Please note</strong>, you might want to update the list of headers returned by
+<code>Access-Control-Allow-Headers</code> and <code>Access-Control-Expose-Headers</code> HTTP headers
+according to your application needs. Please refer to the CORS documentation to
+learn more what they mean.</p>
+<pre><code>(cors) {
+  @cors_preflight method OPTIONS
+  @cors header Origin {args.0}
+
+  handle @cors_preflight {
+    header Access-Control-Allow-Origin &quot;{args.0}&quot;
+    header Access-Control-Allow-Methods &quot;GET, POST, PUT, PATCH, DELETE&quot;
+    header Access-Control-Allow-Headers &quot;Content-Type&quot;
+    header Access-Control-Max-Age &quot;3600&quot;
+    respond &quot;&quot; 204
+  }
+
+  handle @cors {
+    header Access-Control-Allow-Origin &quot;{args.0}&quot;
+    header Access-Control-Expose-Headers &quot;Link&quot;
+  }
+}
+
+example.com {
+  import cors https://example.com
+  reverse_proxy localhost:8080
+}
+</code></pre>
+<p>The nice part of this snippet is that CORS headers are only returned for the
+requests with <code>Origin</code> HTTP request header. That header is normally used only
+by browsers, which means your regular <code>curl</code> requests or requests made via your
+programming-language-of-choice won't see them.</p>
+<p>I've been successfully using this snippet for quite a while now <a href="https://github.com/xsnippet/xsnippet-infra/blob/1d583a6868597cb71bb2ae08f60bc42ac4364e91/roles/xsnippet_api/templates/caddy.j2#L1-L17">to protect</a>
+<a href="https://github.com/xsnippet/xsnippet-api">xsnippet-api</a> served at <a href="https://api.xsnippet.org">api.xsnippet.org</a>, so it can be used by
+<a href="https://github.com/xsnippet/xsnippet-web">xsnippet-web</a> served at <a href="https://xsnippet.org">xsnippet.org</a>.</p>
+  </article>
+
+  </main>
+</body>

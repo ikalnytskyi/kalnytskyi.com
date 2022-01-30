@@ -1,76 +1,13 @@
-<!doctype html>
-<head>
-
-  
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <link rel="stylesheet" href="/static/style.css">
-
-  
-
-  <title>
-  Enable CSD in GNOME Terminal
-</title>
-
-
-  
-
-  
-
-  
-
-
-<body>
-  <aside>
-    <div class="container">
-      
-        <img class="photo" src="/about/me.jpg">
-      
-
-      
-        <span class="about"><a href="/about/" rel="me">Ihor Kalnytskyi</a>'s thoughts & writings
-</span>
-      
-
-      <nav>
-        
-          <span><a href="/">Archives</a></span>
-        
-          <span><a href="/howto/">How To</a></span>
-        
-          <span><a href="/talks/">Talks</a></span>
-        
-          <span><a href="/feed.xml">Feed</a></span>
-        
-      </nav>
-    </div>
-  </aside>
-
-  <main>
-    
-  <article>
-    <header>
-      
-
-        <h1>
-  Enable CSD in GNOME Terminal
-</h1>
-    </header>
-
-    <p>If you aren't using GNOME but for some reason want to use GNOME Terminal in
-other desktop environments (e.g. Sway or XFCE), you just might want to embrace
-client-side decoration (<a href="https://wiki.gnome.org/Initiatives/CSD">CSD</a>), so it looks like this:</p>
-<p><img src="headerbar.png" alt="gnome-terminal with csd" /></p>
-<p>Unfortunately, CSD is not used by GNOME Terminal if you launch it outside of
-GNOME. Fortunately, there's a configuration option you can use to explicitly
-enable it. In order to do that just run the following command in your terminal:</p>
-<pre><code>$ gsettings set org.gnome.Terminal.Legacy.Settings headerbar true
-</code></pre>
-<p>Please note, the setting won't be applied as long as there's a running copy
-of <code>gnome-terminal-server</code> process. You have to terminate it and restart the
-terminal. The configuration option is tested with <code>gnome-terminal 3.40</code>. It
-might or might not work with other versions.</p>
-  </article>
-
-  </main>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex">
+    <meta http-equiv="refresh" content="0; url=/posts/gnome-terminal-csd/"/>
+    <title>Enable CSD in GNOME Terminal</title>
+    <link rel="canonical" href="https://kalnytskyi.com/posts/gnome-terminal-csd/"/>
+  </head>
+  <body>
+    The document has been permanently moved to <a href="https://kalnytskyi.com/posts/gnome-terminal-csd/">https://kalnytskyi.com/posts/gnome-terminal-csd/</a>.
+  </body>
+</html>

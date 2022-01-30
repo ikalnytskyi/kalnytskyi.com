@@ -2,15 +2,186 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://kalnytskyi.com</id>
   <title>Ihor Kalnytskyi</title>
-  <updated>2022-01-11T22:48:02.075705+00:00</updated>
+  <updated>2022-01-30T17:19:13.178904+00:00</updated>
   <link href="https://kalnytskyi.com/feed.xml" rel="self" type="application/atom+xml"/>
   <link href="https://kalnytskyi.com" rel="alternate" type="text/html"/>
-  <generator uri="https://holocron.readthedocs.io" version="0.4.0">Holocron/v0.4.0</generator>
+  <generator uri="https://github.com/ikalnytskyi/holocron" version="0.4.0">Holocron/v0.4.0</generator>
   <subtitle>Ihor Kalnytskyi's thoughts &amp; writings</subtitle>
   <entry>
-    <id>https://kalnytskyi.com/2016/01/02/farewell-2015/</id>
+    <id>https://kalnytskyi.com/posts/setup-cors-caddy-2/</id>
+    <title>Setup CORS in Caddy 2</title>
+    <updated>2022-01-30T17:19:13.179755+00:00</updated>
+    <author>
+      <name>Ihor Kalnytskyi</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;a href="https://caddyserver.com/"&gt;Caddy 2&lt;/a&gt; is an open source web server with automatic HTTPS. It's a wise choice
+for pet projects or self-hosted services, since you are free from managing TLS
+certs on your own and wiring things together can be super annoying.&lt;/p&gt;
+&lt;p&gt;One missing feature in Caddy 2 is &lt;a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS"&gt;CORS&lt;/a&gt; support. For a &amp;quot;batteries included&amp;quot;
+web server, it's rather surprising. Fortunately, one can use the following
+&lt;a href="https://caddyserver.com/docs/caddyfile/concepts#snippets"&gt;Caddy snippet&lt;/a&gt; to augment any site with CORS headers without repeating oneself
+over and over again.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Please note&lt;/strong&gt;, you might want to update the list of headers returned by
+&lt;code&gt;Access-Control-Allow-Headers&lt;/code&gt; and &lt;code&gt;Access-Control-Expose-Headers&lt;/code&gt; HTTP headers
+according to your application needs. Please refer to the CORS documentation to
+learn more what they mean.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;(cors) {
+  @cors_preflight method OPTIONS
+  @cors header Origin {args.0}
+
+  handle @cors_preflight {
+    header Access-Control-Allow-Origin &amp;quot;{args.0}&amp;quot;
+    header Access-Control-Allow-Methods &amp;quot;GET, POST, PUT, PATCH, DELETE&amp;quot;
+    header Access-Control-Allow-Headers &amp;quot;Content-Type&amp;quot;
+    header Access-Control-Max-Age &amp;quot;3600&amp;quot;
+    respond &amp;quot;&amp;quot; 204
+  }
+
+  handle @cors {
+    header Access-Control-Allow-Origin &amp;quot;{args.0}&amp;quot;
+    header Access-Control-Expose-Headers &amp;quot;Link&amp;quot;
+  }
+}
+
+example.com {
+  import cors https://example.com
+  reverse_proxy localhost:8080
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The nice part of this snippet is that CORS headers are only returned for the
+requests with &lt;code&gt;Origin&lt;/code&gt; HTTP request header. That header is normally used only
+by browsers, which means your regular &lt;code&gt;curl&lt;/code&gt; requests or requests made via your
+programming-language-of-choice won't see them.&lt;/p&gt;
+&lt;p&gt;I've been successfully using this snippet for quite a while now &lt;a href="https://github.com/xsnippet/xsnippet-infra/blob/1d583a6868597cb71bb2ae08f60bc42ac4364e91/roles/xsnippet_api/templates/caddy.j2#L1-L17"&gt;to protect&lt;/a&gt;
+&lt;a href="https://github.com/xsnippet/xsnippet-api"&gt;xsnippet-api&lt;/a&gt; served at &lt;a href="https://api.xsnippet.org"&gt;api.xsnippet.org&lt;/a&gt;, so it can be used by
+&lt;a href="https://github.com/xsnippet/xsnippet-web"&gt;xsnippet-web&lt;/a&gt; served at &lt;a href="https://xsnippet.org"&gt;xsnippet.org&lt;/a&gt;.&lt;/p&gt;</content>
+    <link href="https://kalnytskyi.com/posts/setup-cors-caddy-2/" rel="alternate"/>
+    <published>2022-01-12T00:00:00+00:00</published>
+  </entry>
+  <entry>
+    <id>https://kalnytskyi.com/posts/setup-postgres-linux-windows-macos-gh-actions/</id>
+    <title>Setup PostgreSQL for Linux, Windows and macOS using GitHub Actions</title>
+    <updated>2022-01-30T17:19:13.180060+00:00</updated>
+    <author>
+      <name>Ihor Kalnytskyi</name>
+    </author>
+    <content type="html">&lt;p&gt;As of today (Nov 24, 2021), there's only &lt;a href="https://github.com/marketplace/actions/setup-postgresql-for-linux-macos-windows"&gt;one action on the marketplace&lt;/a&gt; to
+setup a PostgreSQL server for Linux, Windows and macOS runners. If you among
+those who want to test their software on all major platforms, you have no
+option but to use &lt;a href="https://github.com/ikalnytskyi/action-setup-postgres"&gt;ikalnytskyi/action-setup-postgres&lt;/a&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nt"&gt;steps&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;Setup PostgreSQL&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;uses&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;ikalnytskyi/action-setup-postgres@v1&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;id&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;postgres&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;Run tests&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;env&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="nt"&gt;CONNECTION_URI&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;${{ steps.postgres.outputs.connection-uri }}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;run&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;pytest -vv tests/&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Key features:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Fast bootstrap (the action uses preinstalled binaries).&lt;/li&gt;
+&lt;li&gt;Fast audit (&lt;a href="https://github.com/ikalnytskyi/action-setup-postgres/blob/v1/action.yml"&gt;4 steps YAML&lt;/a&gt;, no javascript/typescript).&lt;/li&gt;
+&lt;/ul&gt;</content>
+    <link href="https://kalnytskyi.com/posts/setup-postgres-linux-windows-macos-gh-actions/" rel="alternate"/>
+    <published>2021-11-24T00:00:00+00:00</published>
+  </entry>
+  <entry>
+    <id>https://kalnytskyi.com/posts/gnome-terminal-csd/</id>
+    <title>Enable CSD in GNOME Terminal</title>
+    <updated>2022-01-30T17:19:13.180219+00:00</updated>
+    <author>
+      <name>Ihor Kalnytskyi</name>
+    </author>
+    <content type="html">&lt;p&gt;If you aren't using GNOME but for some reason want to use GNOME Terminal in
+other desktop environments (e.g. Sway or XFCE), you just might want to embrace
+client-side decoration (&lt;a href="https://wiki.gnome.org/Initiatives/CSD"&gt;CSD&lt;/a&gt;), so it looks like this:&lt;/p&gt;
+&lt;p&gt;&lt;img src="headerbar.png" alt="gnome-terminal with csd" /&gt;&lt;/p&gt;
+&lt;p&gt;Unfortunately, CSD is not used by GNOME Terminal if you launch it outside of
+GNOME. Fortunately, there's a configuration option you can use to explicitly
+enable it. In order to do that just run the following command in your terminal:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ gsettings set org.gnome.Terminal.Legacy.Settings headerbar true
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Please note, the setting won't be applied as long as there's a running copy
+of &lt;code&gt;gnome-terminal-server&lt;/code&gt; process. You have to terminate it and restart the
+terminal. The configuration option is tested with &lt;code&gt;gnome-terminal 3.40&lt;/code&gt;. It
+might or might not work with other versions.&lt;/p&gt;</content>
+    <link href="https://kalnytskyi.com/posts/gnome-terminal-csd/" rel="alternate"/>
+    <published>2021-10-24T00:00:00+00:00</published>
+  </entry>
+  <entry>
+    <id>https://kalnytskyi.com/posts/assert-str-matches-regex-in-pytest/</id>
+    <title>Assert that str matches regex in pytest</title>
+    <updated>2022-01-30T17:19:13.180367+00:00</updated>
+    <author>
+      <name>Ihor Kalnytskyi</name>
+    </author>
+    <content type="html">&lt;p&gt;Once in a while every Pythonista faces a need to test that some string value
+matches a regex pattern. When it comes we have no option but to use &lt;code&gt;re&lt;/code&gt; module
+directly.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;re&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_something_very_useful&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_some_string&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;re&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;match&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;\d+&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;While it works fine in case of lone string, it's not always convenient to do
+the same when a string is a part of more complex data structure (e.g. &lt;code&gt;dict&lt;/code&gt;),
+because you need to extract the string, check it and only then get back to
+check rest attributes.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;re&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_something_even_more_useful&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="n"&gt;mapping&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_some_structure&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# inconvenient and boring! :(&lt;/span&gt;
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;value&amp;#39;&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;mapping&lt;/span&gt;
+    &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;mapping&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pop&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;value&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;re&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;match&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;\d+&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# rest assertion&lt;/span&gt;
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;mapping&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;foo&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                      &lt;span class="s1"&gt;&amp;#39;bar&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Fortunately, it's pretty easy to write convenient &lt;code&gt;pytest&lt;/code&gt; helper that would
+check a pattern as a part of checking the whole data structure.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_something_even_more_useful&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="n"&gt;mapping&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_some_structure&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;mapping&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;foo&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                      &lt;span class="s1"&gt;&amp;#39;bar&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                      &lt;span class="s1"&gt;&amp;#39;value&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;pytest_regex&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;\d+&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Looks better, huh? :) So the trick is done by the following few lines which
+we're successfully using in &lt;a href="https://github.com/xsnippet/xsnippet-api"&gt;XSnippet API&lt;/a&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;re&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;pytest_regex&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Assert that a given string meets some expectations.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;pattern&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;flags&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_regex&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;re&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;compile&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pattern&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;flags&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__eq__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;actual&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;bool&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_regex&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;match&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;actual&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__repr__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_regex&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pattern&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Well, actually, it's not by any means tied to &lt;code&gt;pytest&lt;/code&gt; and could be used even
+in non-test production code, though I found this rather queer.&lt;/p&gt;</content>
+    <link href="https://kalnytskyi.com/posts/assert-str-matches-regex-in-pytest/" rel="alternate"/>
+    <published>2018-04-30T00:00:00+00:00</published>
+  </entry>
+  <entry>
+    <id>https://kalnytskyi.com/posts/farewell-2015/</id>
     <title>Farewell, 2015!</title>
-    <updated>2022-01-11T22:48:02.076351+00:00</updated>
+    <updated>2022-01-30T17:19:13.180549+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -44,13 +215,13 @@ lack of time, though there're few major things to be done before I can say
 &lt;p&gt;Summarizing: 2015 was a good year, and I expect 2016 to be at least as good
 as 2015 was, but hope it will be even better!&lt;/p&gt;
 &lt;p&gt;Happy Holidays!&lt;/p&gt;</content>
-    <link href="https://kalnytskyi.com/2016/01/02/farewell-2015/" rel="alternate"/>
+    <link href="https://kalnytskyi.com/posts/farewell-2015/" rel="alternate"/>
     <published>2016-01-02T00:00:00+00:00</published>
   </entry>
   <entry>
-    <id>https://kalnytskyi.com/2015/06/14/mad-map/</id>
+    <id>https://kalnytskyi.com/posts/mad-map/</id>
     <title>Mad Map: Python Road</title>
-    <updated>2022-01-11T22:48:02.076651+00:00</updated>
+    <updated>2022-01-30T17:19:13.180704+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -177,13 +348,13 @@ the behavior is still the same -&lt;/p&gt;
 &lt;p&gt;I'm really really sad about such a mad &lt;code&gt;map()&lt;/code&gt; and I wish I never knew
 about that. I don't know why it was designed so, but I hope none of
 pythonistas will use it and one day it will be removed from the language.&lt;/p&gt;</content>
-    <link href="https://kalnytskyi.com/2015/06/14/mad-map/" rel="alternate"/>
+    <link href="https://kalnytskyi.com/posts/mad-map/" rel="alternate"/>
     <published>2015-06-14T00:00:00+00:00</published>
   </entry>
   <entry>
-    <id>https://kalnytskyi.com/2015/02/03/docker-for-pythonistas/</id>
+    <id>https://kalnytskyi.com/posts/docker-for-pythonistas/</id>
     <title>Docker For Pythonistas</title>
-    <updated>2022-01-11T22:48:02.076818+00:00</updated>
+    <updated>2022-01-30T17:19:13.180854+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -247,13 +418,13 @@ into &lt;code&gt;/src&lt;/code&gt; inside your container&lt;/li&gt;
 because you don't need to compile missed Python interpreters on every
 machine you're working on. Still, this is one of possible Docker use cases,
 so don't hesitate to find your own.&lt;/p&gt;</content>
-    <link href="https://kalnytskyi.com/2015/02/03/docker-for-pythonistas/" rel="alternate"/>
+    <link href="https://kalnytskyi.com/posts/docker-for-pythonistas/" rel="alternate"/>
     <published>2015-02-03T00:00:00+00:00</published>
   </entry>
   <entry>
-    <id>https://kalnytskyi.com/2014/10/25/c-legacy-is-evil/</id>
+    <id>https://kalnytskyi.com/posts/c-legacy-is-evil/</id>
     <title>C Legacy Is 😈 Evil</title>
-    <updated>2022-01-11T22:48:02.076970+00:00</updated>
+    <updated>2022-01-30T17:19:13.181003+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -334,7 +505,7 @@ compilers it may be a big challenge to debug because the bug may be
 floating, so you spent a lot of time to catch it.&lt;/p&gt;
 &lt;p&gt;So you should be mindful writing programs in C++, since you can fall
 into deep hole of C legacy.&lt;/p&gt;</content>
-    <link href="https://kalnytskyi.com/2014/10/25/c-legacy-is-evil/" rel="alternate"/>
+    <link href="https://kalnytskyi.com/posts/c-legacy-is-evil/" rel="alternate"/>
     <published>2014-10-25T00:00:00+00:00</published>
   </entry>
 </feed>
