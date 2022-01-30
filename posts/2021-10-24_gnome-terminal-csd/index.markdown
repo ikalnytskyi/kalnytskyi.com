@@ -1,3 +1,7 @@
+---
+aliases: /howto/gnome-terminal-csd/
+---
+
 Enable CSD in GNOME Terminal
 ============================
 

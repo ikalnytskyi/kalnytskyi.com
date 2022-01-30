@@ -1,6 +1,7 @@
 ---
 summary: >
   My summary of year 2015
+aliases: /2016/01/02/farewell-2015/
 ---
 
 Farewell, 2015!

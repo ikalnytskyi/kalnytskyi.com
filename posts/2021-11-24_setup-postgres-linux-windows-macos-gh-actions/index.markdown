@@ -1,3 +1,7 @@
+---
+aliases: /howto/setup-postgres-linux-windows-macos-gh-actions/
+---
+
 Setup PostgreSQL for Linux, Windows and macOS using GitHub Actions
 ==================================================================
 
