@@ -1,3 +1,7 @@
+---
+aliases: /howto/assert-str-matches-regex-in-pytest/
+---
+
 Assert that str matches regex in pytest
 =======================================
 

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="{{ encoding | default("UTF-8") }}">
+    <meta name="robots" content="noindex">
+    <meta http-equiv="refresh" content="0; url={{ item.original.url }}"/>
+    <title>{{ item.original.title }}</title>
+    <link rel="canonical" href="{{ item.original.absurl }}"/>
+  </head>
+  <body>
+    The document has been permanently moved to <a href="{{ item.original.absurl }}">{{ item.original.absurl }}</a>.
+  </body>
+</html>

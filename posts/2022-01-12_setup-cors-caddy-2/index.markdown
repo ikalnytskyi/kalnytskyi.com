@@ -1,3 +1,7 @@
+---
+aliases: /howto/setup-cors-caddy-2/
+---
+
 Setup CORS in Caddy 2
 =====================
 

@@ -5,9 +5,20 @@ metadata:
 
 pipes:
   compile:
+    - name: import-processors
+      args:
+        imports:
+          - guess-published-from-source = guess_published:process
+          - alias = alias:process
+        from_: _processors
+
     - name: source
       args:
         pattern: '[^_.].*$'
+
+    - name: guess-published-from-source
+      args:
+        pattern: '(?P<trim>/(?P<parse>\d{4}-\d{2}-\d{2})_)'
 
     - name: pipe
       args:
@@ -17,11 +28,6 @@ pipes:
           - name: commonmark
             args:
               pygmentize: true
-
-          - name: todatetime
-            args:
-              todatetime: ['source', 'published']
-              parsearea: '^\d{4}.\d{2}.\d{2}'
 
           - name: archive
             when:
@@ -77,6 +83,8 @@ pipes:
         - item.source.match("*.markdown")
         - item.source.parts[0] != "talks" or item.source.parts[1] == "index.markdown"
 
+    - name: alias
+
     - name: jinja2
       args:
         themes: ["_theme"]
@@ -89,7 +97,6 @@ pipes:
 
             navigation: !!pairs
               - Archives: /
-              - How To: /howto/
               - Talks: /talks/
               - Feed: /feed.xml
 
