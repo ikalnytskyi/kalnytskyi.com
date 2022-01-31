@@ -16,22 +16,20 @@
 </head>
 <body>
   <aside>
-    <div class="container">
-      {% if theme.sidebar.photo %}
-        <img class="photo" src="{{ theme.sidebar.photo }}">
-      {% endif %}
+    {% if theme.sidebar.photo %}
+      <img class="photo" src="{{ theme.sidebar.photo }}">
+    {% endif %}
 
-      {% if theme.sidebar.about %}
-        <span class="about">{{ theme.sidebar.about }}</span>
-      {% endif %}
+    {% if theme.sidebar.about %}
+      <span class="about">{{ theme.sidebar.about }}</span>
+    {% endif %}
 
-      <div class="nav-wrapper">
-        <nav>
-          {% for name, url in theme.get('navigation', []) %}
-            <span><a href="{{ url }}">{{ name }}</a></span>
-          {% endfor %}
-        </nav>
-      </div>
+    <div class="nav-wrapper">
+    <nav>
+      {% for name, url in theme.get('navigation', []) %}
+        <span><a href="{{ url }}">{{ name }}</a></span>
+      {% endfor %}
+    </nav>
     </div>
   </aside>
 
