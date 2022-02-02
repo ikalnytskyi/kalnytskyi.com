@@ -2,42 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://kalnytskyi.com/about/</loc>
-    <lastmod>2022-02-02T23:34:35.303885+00:00</lastmod>
+    <lastmod>2022-02-02T23:51:14.862421+00:00</lastmod>
   </url>
   <url>
     <loc>https://kalnytskyi.com/talks/</loc>
-    <lastmod>2022-02-02T23:34:35.311885+00:00</lastmod>
+    <lastmod>2022-02-02T23:51:14.874421+00:00</lastmod>
   </url>
   <url>
     <loc>https://kalnytskyi.com/posts/gnome-terminal-csd/</loc>
-    <lastmod>2022-02-02T23:34:35.307885+00:00</lastmod>
+    <lastmod>2022-02-02T23:51:14.866421+00:00</lastmod>
   </url>
   <url>
     <loc>https://kalnytskyi.com/posts/docker-for-pythonistas/</loc>
-    <lastmod>2022-02-02T23:34:35.307885+00:00</lastmod>
+    <lastmod>2022-02-02T23:51:14.866421+00:00</lastmod>
   </url>
   <url>
     <loc>https://kalnytskyi.com/posts/assert-str-matches-regex-in-pytest/</loc>
-    <lastmod>2022-02-02T23:34:35.307885+00:00</lastmod>
+    <lastmod>2022-02-02T23:51:14.866421+00:00</lastmod>
   </url>
   <url>
     <loc>https://kalnytskyi.com/posts/farewell-2015/</loc>
-    <lastmod>2022-02-02T23:34:35.307885+00:00</lastmod>
+    <lastmod>2022-02-02T23:51:14.866421+00:00</lastmod>
   </url>
   <url>
     <loc>https://kalnytskyi.com/posts/c-legacy-is-evil/</loc>
-    <lastmod>2022-02-02T23:34:35.307885+00:00</lastmod>
+    <lastmod>2022-02-02T23:51:14.866421+00:00</lastmod>
   </url>
   <url>
     <loc>https://kalnytskyi.com/posts/mad-map/</loc>
-    <lastmod>2022-02-02T23:34:35.307885+00:00</lastmod>
+    <lastmod>2022-02-02T23:51:14.866421+00:00</lastmod>
   </url>
   <url>
     <loc>https://kalnytskyi.com/posts/setup-postgres-linux-windows-macos-gh-actions/</loc>
-    <lastmod>2022-02-02T23:34:35.307885+00:00</lastmod>
+    <lastmod>2022-02-02T23:51:14.866421+00:00</lastmod>
   </url>
   <url>
     <loc>https://kalnytskyi.com/posts/setup-cors-caddy-2/</loc>
-    <lastmod>2022-02-02T23:34:35.307885+00:00</lastmod>
+    <lastmod>2022-02-02T23:51:14.866421+00:00</lastmod>
   </url>
 </urlset>
