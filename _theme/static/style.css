@@ -240,7 +240,7 @@ main .index-entry time {
   aside {
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    justify-self: center;
   }
 
   aside > *::before {
