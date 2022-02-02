@@ -1,4 +1,7 @@
 ---
+summary: |
+  A tiny note on how to enable client side decoration for GNOME terminal if
+  you're using a non-GNOME desktop environment.
 aliases: /howto/gnome-terminal-csd/
 ---
 

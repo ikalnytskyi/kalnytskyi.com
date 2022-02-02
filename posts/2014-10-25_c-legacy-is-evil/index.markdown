@@ -1,7 +1,7 @@
 ---
 tags: [c, cpp, thoughts]
 summary: >
-  A short story about C legacy in C++, and why it's bad to have it.
+  A short story about C legacy in C++, and why it's a bad thing to have.
 aliases: /2014/10/25/c-legacy-is-evil/
 ---
 

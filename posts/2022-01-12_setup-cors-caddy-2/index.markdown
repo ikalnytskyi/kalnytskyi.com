@@ -1,4 +1,6 @@
 ---
+summary: |
+  A short note on how to setup CORS in Caddy 2.
 aliases: /howto/setup-cors-caddy-2/
 ---
 
@@ -44,10 +46,10 @@ example.com {
 }
 ```
 
-The nice part of this snippet is that CORS headers are only returned for the
-requests with `Origin` HTTP request header. That header is normally used only
-by browsers, which means your regular `curl` requests or requests made via your
-programming-language-of-choice won't see them.
+The nice part about this snippet is that CORS headers are only returned for the
+requests with `Origin` HTTP header. That header is normally used by browsers
+only, which means you won't see CORS headers in the responses for the requests
+sent by `curl` or your-programming-language-of-choice.
 
 I've been successfully using this snippet for quite a while now [to protect]
 [xsnippet-api] served at [api.xsnippet.org], so it can be used by
