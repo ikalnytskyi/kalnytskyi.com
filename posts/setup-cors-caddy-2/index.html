@@ -20,7 +20,14 @@
   
 
   
+    <meta name="description" content="A short note on how to setup CORS in Caddy 2.">
+  
 
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ikalnytskyi">
+    <meta name="twitter:title" content="Setup CORS in Caddy 2">
+    <meta name="twitter:description" content="A short note on how to setup CORS in Caddy 2.">
   
 
 </head>
@@ -97,10 +104,10 @@ example.com {
   reverse_proxy localhost:8080
 }
 </code></pre>
-<p>The nice part of this snippet is that CORS headers are only returned for the
-requests with <code>Origin</code> HTTP request header. That header is normally used only
-by browsers, which means your regular <code>curl</code> requests or requests made via your
-programming-language-of-choice won't see them.</p>
+<p>The nice part about this snippet is that CORS headers are only returned for the
+requests with <code>Origin</code> HTTP header. That header is normally used by browsers
+only, which means you won't see CORS headers in the responses for the requests
+sent by <code>curl</code> or your-programming-language-of-choice.</p>
 <p>I've been successfully using this snippet for quite a while now <a href="https://github.com/xsnippet/xsnippet-infra/blob/1d583a6868597cb71bb2ae08f60bc42ac4364e91/roles/xsnippet_api/templates/caddy.j2#L1-L17">to protect</a>
 <a href="https://github.com/xsnippet/xsnippet-api">xsnippet-api</a> served at <a href="https://api.xsnippet.org">api.xsnippet.org</a>, so it can be used by
 <a href="https://github.com/xsnippet/xsnippet-web">xsnippet-web</a> served at <a href="https://xsnippet.org">xsnippet.org</a>.</p>

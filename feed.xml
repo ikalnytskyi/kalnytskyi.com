@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://kalnytskyi.com</id>
   <title>Ihor Kalnytskyi</title>
-  <updated>2022-02-02T23:04:10.863222+00:00</updated>
+  <updated>2022-02-02T23:34:52.316853+00:00</updated>
   <link href="https://kalnytskyi.com/feed.xml" rel="self" type="application/atom+xml"/>
   <link href="https://kalnytskyi.com" rel="alternate" type="text/html"/>
   <generator uri="https://github.com/ikalnytskyi/holocron" version="0.4.0">Holocron/v0.4.0</generator>
@@ -10,7 +10,7 @@
   <entry>
     <id>https://kalnytskyi.com/posts/setup-cors-caddy-2/</id>
     <title>Setup CORS in Caddy 2</title>
-    <updated>2022-02-02T23:04:10.864097+00:00</updated>
+    <updated>2022-02-02T23:34:52.317794+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -48,10 +48,10 @@ example.com {
   reverse_proxy localhost:8080
 }
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The nice part of this snippet is that CORS headers are only returned for the
-requests with &lt;code&gt;Origin&lt;/code&gt; HTTP request header. That header is normally used only
-by browsers, which means your regular &lt;code&gt;curl&lt;/code&gt; requests or requests made via your
-programming-language-of-choice won't see them.&lt;/p&gt;
+&lt;p&gt;The nice part about this snippet is that CORS headers are only returned for the
+requests with &lt;code&gt;Origin&lt;/code&gt; HTTP header. That header is normally used by browsers
+only, which means you won't see CORS headers in the responses for the requests
+sent by &lt;code&gt;curl&lt;/code&gt; or your-programming-language-of-choice.&lt;/p&gt;
 &lt;p&gt;I've been successfully using this snippet for quite a while now &lt;a href="https://github.com/xsnippet/xsnippet-infra/blob/1d583a6868597cb71bb2ae08f60bc42ac4364e91/roles/xsnippet_api/templates/caddy.j2#L1-L17"&gt;to protect&lt;/a&gt;
 &lt;a href="https://github.com/xsnippet/xsnippet-api"&gt;xsnippet-api&lt;/a&gt; served at &lt;a href="https://api.xsnippet.org"&gt;api.xsnippet.org&lt;/a&gt;, so it can be used by
 &lt;a href="https://github.com/xsnippet/xsnippet-web"&gt;xsnippet-web&lt;/a&gt; served at &lt;a href="https://xsnippet.org"&gt;xsnippet.org&lt;/a&gt;.&lt;/p&gt;</content>
@@ -61,7 +61,7 @@ programming-language-of-choice won't see them.&lt;/p&gt;
   <entry>
     <id>https://kalnytskyi.com/posts/setup-postgres-linux-windows-macos-gh-actions/</id>
     <title>Setup PostgreSQL for Linux, Windows and macOS using GitHub Actions</title>
-    <updated>2022-02-02T23:04:10.864403+00:00</updated>
+    <updated>2022-02-02T23:34:52.318135+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -91,7 +91,7 @@ option but to use &lt;a href="https://github.com/ikalnytskyi/action-setup-postgr
   <entry>
     <id>https://kalnytskyi.com/posts/gnome-terminal-csd/</id>
     <title>Enable CSD in GNOME Terminal</title>
-    <updated>2022-02-02T23:04:10.864562+00:00</updated>
+    <updated>2022-02-02T23:34:52.318320+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -114,7 +114,7 @@ might or might not work with other versions.&lt;/p&gt;</content>
   <entry>
     <id>https://kalnytskyi.com/posts/assert-str-matches-regex-in-pytest/</id>
     <title>Assert that str matches regex in pytest</title>
-    <updated>2022-02-02T23:04:10.864713+00:00</updated>
+    <updated>2022-02-02T23:34:52.318496+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -181,7 +181,7 @@ in non-test production code, though I found this rather queer.&lt;/p&gt;</conten
   <entry>
     <id>https://kalnytskyi.com/posts/farewell-2015/</id>
     <title>Farewell, 2015!</title>
-    <updated>2022-02-02T23:04:10.864870+00:00</updated>
+    <updated>2022-02-02T23:34:52.318675+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -221,7 +221,7 @@ as 2015 was, but hope it will be even better!&lt;/p&gt;
   <entry>
     <id>https://kalnytskyi.com/posts/mad-map/</id>
     <title>Mad Map: Python Road</title>
-    <updated>2022-02-02T23:04:10.865021+00:00</updated>
+    <updated>2022-02-02T23:34:52.318852+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -354,7 +354,7 @@ pythonistas will use it and one day it will be removed from the language.&lt;/p&
   <entry>
     <id>https://kalnytskyi.com/posts/docker-for-pythonistas/</id>
     <title>Docker For Pythonistas</title>
-    <updated>2022-02-02T23:04:10.865170+00:00</updated>
+    <updated>2022-02-02T23:34:52.319028+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -424,7 +424,7 @@ so don't hesitate to find your own.&lt;/p&gt;</content>
   <entry>
     <id>https://kalnytskyi.com/posts/c-legacy-is-evil/</id>
     <title>C Legacy Is 😈 Evil</title>
-    <updated>2022-02-02T23:04:10.865338+00:00</updated>
+    <updated>2022-02-02T23:34:52.321048+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
