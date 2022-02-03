@@ -5,42 +5,36 @@
 {% endif %}
 
 {% block head %}
-  {{ super() }}
+    <link rel="canonical" href="{{ item.absurl }}" />
 
-  <link rel="canonical" href="{{ item.absurl }}"/>
-
-  {% if item.author %}
-    <meta name="author" content="{{ item.author }}">
-  {% endif %}
+  {% if item.author or metadata.author %}
+    <meta name="author" content="{{ item.author or metadata.author }}" />
+  {% endif -%}
 
   {% if item.summary %}
-    <meta name="description" content="{{ summary }}">
-  {% endif %}
+    <meta name="description" content="{{ summary }}" />
+  {% endif -%}
 
   {% if theme.twitter_cards.username and item.summary %}
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="@{{ theme.twitter_cards.username }}">
-    <meta name="twitter:title" content="{{ item.title }}">
-    <meta name="twitter:description" content="{{ summary }}">
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@{{ theme.twitter_cards.username }}" />
+    <meta name="twitter:title" content="{{ item.title }}" />
+    <meta name="twitter:description" content="{{ summary }}" />
   {% endif %}
 {% endblock %}
 
-{% block title %}
-  {{ item.title }}
-{% endblock %}
+{% block title %}{{ item.title }}{% endblock %}
 
 {% block content %}
-  <article>
-    <header>
+    <article>
+      <header>
       {% if item.published is defined %}
-        <time datetime="{{ item.published.isoformat() }}">
-          {{ item.published.strftime('%B %d, %Y') }}
-        </time>
-       {% endif %}
+        <time datetime="{{ item.published.isoformat() }}">{{ item.published.strftime('%B %d, %Y') }}</time>
+      {% endif %}
 
         <h1>{{ self.title() }}</h1>
-    </header>
+      </header>
 
-    {{ item.content }}
-  </article>
+      {{ item.content }}
+    </article>
 {% endblock %}

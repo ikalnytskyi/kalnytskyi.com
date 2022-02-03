@@ -2,6 +2,7 @@ metadata:
   title: Ihor Kalnytskyi
   author: Ihor Kalnytskyi
   url: https://kalnytskyi.com
+  feedurl: /feed.xml
 
 pipes:
   compile:
@@ -92,7 +93,7 @@ pipes:
           theme:
             sidebar:
               photo: /about/me.jpg
-              about: |
+              about: |-
                 <a href="/about/" rel="me">Ihor Kalnytskyi</a>'s thoughts & writings
 
             navigation: !!pairs
