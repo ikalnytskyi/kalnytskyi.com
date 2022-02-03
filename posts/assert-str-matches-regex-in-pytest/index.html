@@ -1,76 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-  
-  
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-    <link rel="stylesheet" href="/static/style.css">
-  
-    
-  
-    <title>
-  Assert that str matches regex in pytest
-</title>
-  
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <link rel="canonical" href="https://kalnytskyi.com/posts/assert-str-matches-regex-in-pytest/"/>
+    <link rel="stylesheet" href="/static/style.css" />
+    <link rel="stylesheet" href="/static/pygments.css" />
 
-  
+    <link rel="alternate" type="application/atom+xml" href="/feed.xml" title="Ihor Kalnytskyi" />
 
-  
-    <meta name="description" content="A simple trick on how to check that strings matches certain pattern using pytest.">
-  
+    <link rel="canonical" href="https://kalnytskyi.com/posts/assert-str-matches-regex-in-pytest/" />
 
-  
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="@ikalnytskyi">
-    <meta name="twitter:title" content="Assert that str matches regex in pytest">
-    <meta name="twitter:description" content="A simple trick on how to check that strings matches certain pattern using pytest.">
-  
+    <meta name="author" content="Ihor Kalnytskyi" />
+    <meta name="description" content="A simple trick on how to check that strings matches certain pattern using pytest." />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@ikalnytskyi" />
+    <meta name="twitter:title" content="Assert that str matches regex in pytest" />
+    <meta name="twitter:description" content="A simple trick on how to check that strings matches certain pattern using pytest." />
 
+    <title>Assert that str matches regex in pytest</title>
 </head>
 <body>
   <aside>
-    
-      <img class="photo" src="/about/me.jpg">
-    
-
-    
-      <span class="about"><a href="/about/" rel="me">Ihor Kalnytskyi</a>'s thoughts & writings
-</span>
-    
+    <img class="about-pic" src="/about/me.jpg" alt="Ihor's photo" />
+    <span class="about-txt"><a href="/about/" rel="me">Ihor Kalnytskyi</a>'s thoughts & writings</span>
 
     <div class="nav-wrapper">
     <nav>
-      
-        <span><a href="/">Archives</a></span>
-      
-        <span><a href="/talks/">Talks</a></span>
-      
-        <span><a href="/feed.xml">Feed</a></span>
-      
+      <span><a href="/">Archives</a></span>
+      <span><a href="/talks/">Talks</a></span>
+      <span><a href="/feed.xml">Feed</a></span>
     </nav>
     </div>
   </aside>
 
   <main>
-    
-  <article>
-    <header>
-      
-        <time datetime="2018-04-30T00:00:00+00:00">
-          April 30, 2018
-        </time>
-       
+    <article>
+      <header>
+        <time datetime="2018-04-30T00:00:00+00:00">April 30, 2018</time>
 
-        <h1>
-  Assert that str matches regex in pytest
-</h1>
-    </header>
+        <h1>Assert that str matches regex in pytest</h1>
+      </header>
 
-    <p>Once in a while every Pythonista faces a need to test that some string value
+      <p>Once in a while every Pythonista faces a need to test that some string value
 matches a regex pattern. When it comes we have no option but to use <code>re</code> module
 directly.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">re</span>
@@ -127,7 +99,6 @@ we're successfully using in <a href="https://github.com/xsnippet/xsnippet-api">X
 
 <p>Well, actually, it's not by any means tied to <code>pytest</code> and could be used even
 in non-test production code, though I found this rather queer.</p>
-  </article>
-
+    </article>
   </main>
 </body>

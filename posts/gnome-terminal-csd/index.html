@@ -1,76 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-  
-  
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-    <link rel="stylesheet" href="/static/style.css">
-  
-    
-  
-    <title>
-  Enable CSD in GNOME Terminal
-</title>
-  
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <link rel="canonical" href="https://kalnytskyi.com/posts/gnome-terminal-csd/"/>
+    <link rel="stylesheet" href="/static/style.css" />
+    <link rel="stylesheet" href="/static/pygments.css" />
 
-  
+    <link rel="alternate" type="application/atom+xml" href="/feed.xml" title="Ihor Kalnytskyi" />
 
-  
-    <meta name="description" content="A tiny note on how to enable client side decoration for GNOME terminal if you're using a non-GNOME desktop environment.">
-  
+    <link rel="canonical" href="https://kalnytskyi.com/posts/gnome-terminal-csd/" />
 
-  
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="@ikalnytskyi">
-    <meta name="twitter:title" content="Enable CSD in GNOME Terminal">
-    <meta name="twitter:description" content="A tiny note on how to enable client side decoration for GNOME terminal if you're using a non-GNOME desktop environment.">
-  
+    <meta name="author" content="Ihor Kalnytskyi" />
+    <meta name="description" content="A tiny note on how to enable client side decoration for GNOME terminal if you're using a non-GNOME desktop environment." />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@ikalnytskyi" />
+    <meta name="twitter:title" content="Enable CSD in GNOME Terminal" />
+    <meta name="twitter:description" content="A tiny note on how to enable client side decoration for GNOME terminal if you're using a non-GNOME desktop environment." />
 
+    <title>Enable CSD in GNOME Terminal</title>
 </head>
 <body>
   <aside>
-    
-      <img class="photo" src="/about/me.jpg">
-    
-
-    
-      <span class="about"><a href="/about/" rel="me">Ihor Kalnytskyi</a>'s thoughts & writings
-</span>
-    
+    <img class="about-pic" src="/about/me.jpg" alt="Ihor's photo" />
+    <span class="about-txt"><a href="/about/" rel="me">Ihor Kalnytskyi</a>'s thoughts & writings</span>
 
     <div class="nav-wrapper">
     <nav>
-      
-        <span><a href="/">Archives</a></span>
-      
-        <span><a href="/talks/">Talks</a></span>
-      
-        <span><a href="/feed.xml">Feed</a></span>
-      
+      <span><a href="/">Archives</a></span>
+      <span><a href="/talks/">Talks</a></span>
+      <span><a href="/feed.xml">Feed</a></span>
     </nav>
     </div>
   </aside>
 
   <main>
-    
-  <article>
-    <header>
-      
-        <time datetime="2021-10-24T00:00:00+00:00">
-          October 24, 2021
-        </time>
-       
+    <article>
+      <header>
+        <time datetime="2021-10-24T00:00:00+00:00">October 24, 2021</time>
 
-        <h1>
-  Enable CSD in GNOME Terminal
-</h1>
-    </header>
+        <h1>Enable CSD in GNOME Terminal</h1>
+      </header>
 
-    <p>If you aren't using GNOME but for some reason want to use GNOME Terminal in
+      <p>If you aren't using GNOME but for some reason want to use GNOME Terminal in
 other desktop environments (e.g. Sway or XFCE), you just might want to embrace
 client-side decoration (<a href="https://wiki.gnome.org/Initiatives/CSD">CSD</a>), so it looks like this:</p>
 <p><img src="headerbar.png" alt="gnome-terminal with csd" /></p>
@@ -83,7 +55,6 @@ enable it. In order to do that just run the following command in your terminal:<
 of <code>gnome-terminal-server</code> process. You have to terminate it and restart the
 terminal. The configuration option is tested with <code>gnome-terminal 3.40</code>. It
 might or might not work with other versions.</p>
-  </article>
-
+    </article>
   </main>
 </body>

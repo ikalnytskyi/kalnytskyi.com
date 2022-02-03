@@ -1,76 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-  
-  
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-    <link rel="stylesheet" href="/static/style.css">
-  
-    
-  
-    <title>
-  Setup CORS in Caddy 2
-</title>
-  
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <link rel="canonical" href="https://kalnytskyi.com/posts/setup-cors-caddy-2/"/>
+    <link rel="stylesheet" href="/static/style.css" />
+    <link rel="stylesheet" href="/static/pygments.css" />
 
-  
+    <link rel="alternate" type="application/atom+xml" href="/feed.xml" title="Ihor Kalnytskyi" />
 
-  
-    <meta name="description" content="A short note on how to setup CORS in Caddy 2.">
-  
+    <link rel="canonical" href="https://kalnytskyi.com/posts/setup-cors-caddy-2/" />
 
-  
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="@ikalnytskyi">
-    <meta name="twitter:title" content="Setup CORS in Caddy 2">
-    <meta name="twitter:description" content="A short note on how to setup CORS in Caddy 2.">
-  
+    <meta name="author" content="Ihor Kalnytskyi" />
+    <meta name="description" content="A short note on how to setup CORS in Caddy 2." />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@ikalnytskyi" />
+    <meta name="twitter:title" content="Setup CORS in Caddy 2" />
+    <meta name="twitter:description" content="A short note on how to setup CORS in Caddy 2." />
 
+    <title>Setup CORS in Caddy 2</title>
 </head>
 <body>
   <aside>
-    
-      <img class="photo" src="/about/me.jpg">
-    
-
-    
-      <span class="about"><a href="/about/" rel="me">Ihor Kalnytskyi</a>'s thoughts & writings
-</span>
-    
+    <img class="about-pic" src="/about/me.jpg" alt="Ihor's photo" />
+    <span class="about-txt"><a href="/about/" rel="me">Ihor Kalnytskyi</a>'s thoughts & writings</span>
 
     <div class="nav-wrapper">
     <nav>
-      
-        <span><a href="/">Archives</a></span>
-      
-        <span><a href="/talks/">Talks</a></span>
-      
-        <span><a href="/feed.xml">Feed</a></span>
-      
+      <span><a href="/">Archives</a></span>
+      <span><a href="/talks/">Talks</a></span>
+      <span><a href="/feed.xml">Feed</a></span>
     </nav>
     </div>
   </aside>
 
   <main>
-    
-  <article>
-    <header>
-      
-        <time datetime="2022-01-12T00:00:00+00:00">
-          January 12, 2022
-        </time>
-       
+    <article>
+      <header>
+        <time datetime="2022-01-12T00:00:00+00:00">January 12, 2022</time>
 
-        <h1>
-  Setup CORS in Caddy 2
-</h1>
-    </header>
+        <h1>Setup CORS in Caddy 2</h1>
+      </header>
 
-    <p><a href="https://caddyserver.com/">Caddy 2</a> is an open source web server with automatic HTTPS. It's a wise choice
+      <p><a href="https://caddyserver.com/">Caddy 2</a> is an open source web server with automatic HTTPS. It's a wise choice
 for pet projects or self-hosted services, since you are free from managing TLS
 certs on your own and wiring things together can be super annoying.</p>
 <p>One missing feature in Caddy 2 is <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">CORS</a> support. For a &quot;batteries included&quot;
@@ -111,7 +83,6 @@ sent by <code>curl</code> or your-programming-language-of-choice.</p>
 <p>I've been successfully using this snippet for quite a while now <a href="https://github.com/xsnippet/xsnippet-infra/blob/1d583a6868597cb71bb2ae08f60bc42ac4364e91/roles/xsnippet_api/templates/caddy.j2#L1-L17">to protect</a>
 <a href="https://github.com/xsnippet/xsnippet-api">xsnippet-api</a> served at <a href="https://api.xsnippet.org">api.xsnippet.org</a>, so it can be used by
 <a href="https://github.com/xsnippet/xsnippet-web">xsnippet-web</a> served at <a href="https://xsnippet.org">xsnippet.org</a>.</p>
-  </article>
-
+    </article>
   </main>
 </body>

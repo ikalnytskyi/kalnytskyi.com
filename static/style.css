@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto+Slab:400,700");
 @import url("https://fonts.googleapis.com/css?family=Roboto+Mono:400,700");
-@import url("pygments.css");
 
 :root {
   --page-background-color: #FEFEFE;
@@ -71,18 +70,18 @@ aside a:hover {
   color: var(--side-hyperlink-hover-color);
 }
 
-aside .photo {
+aside .about-pic {
   border-radius: 50%;
   height: var(--side-width);
   width: var(--side-width);
 }
 
-aside .about {
+aside .about-txt {
   display: block;
   font-size: 0.8rem;
 }
 
-aside .about a {
+aside .about-txt a {
   font-weight: bold;
 }
 
@@ -247,7 +246,7 @@ main .index-entry time {
     margin: 0.7rem auto;
   }
 
-  aside .about {
+  aside .about-txt {
     width: 10rem;
   }
 
