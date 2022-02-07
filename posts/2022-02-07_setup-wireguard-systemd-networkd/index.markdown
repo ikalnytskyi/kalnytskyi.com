@@ -71,7 +71,7 @@ Next thing to do is to use a [systemd.network(5)][systemd.network] unit to
 setup a network. The purpose of the network is to assign a proper IP address on
 the network device, add proper routes, etc.
 
-This how some `cat /etc/systemd/network/wg0.network` could look like:
+This how some `/etc/systemd/network/wg0.network` could look like:
 
 ```ini
 [Match]
