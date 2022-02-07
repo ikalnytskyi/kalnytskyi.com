@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="/static/style.css" />
+    <link rel="stylesheet" href="/static/pygments.css" />
+
+    <link rel="alternate" type="application/atom+xml" href="/feed.xml" title="Ihor Kalnytskyi" />
+
+    <link rel="canonical" href="https://kalnytskyi.com/posts/setup-wireguard-systemd-networkd/" />
+
+    <meta name="author" content="Ihor Kalnytskyi" />
+
+    <title>Setup a WireGuard server using systemd-networkd</title>
+</head>
+<body>
+  <aside>
+    <img class="about-pic" src="/about/me.jpg" alt="Ihor's photo" />
+    <span class="about-txt"><a href="/about/" rel="me">Ihor Kalnytskyi</a>'s thoughts & writings</span>
+
+    <div class="nav-wrapper">
+    <nav>
+      <span><a href="/">Archives</a></span>
+      <span><a href="/talks/">Talks</a></span>
+      <span><a href="/feed.xml">Feed</a></span>
+    </nav>
+    </div>
+  </aside>
+
+  <main>
+    <article>
+      <header>
+        <time datetime="2022-02-07T00:00:00+00:00">February 07, 2022</time>
+
+        <h1>Setup a WireGuard server using systemd-networkd</h1>
+      </header>
+
+      <p>WireGuard is an extremely simple, fast and modern VPN that is built into Linux
+kernel 5.6 (released on Mar 29, 2020) and above. It mimics the model of SSH and
+requires VPN peers to know each others public keys. I highly recommend to read
+<a href="https://www.wireguard.com">https://www.wireguard.com</a> regardless of this post.</p>
+<p>When it comes to WireGuard, there's one interesting aspect: it has no notion of
+'server', it's distributed by design. This may surprise blockchain enthusiasts,
+but distributed software was invented long before the blockchain 😅. Each peer
+may communicate with other peers assuming they know each other (i.e. public
+key, IP) and there's a connectivity between them. The 'server' is rather a
+behaviour one may expect from a certain peer. There are 3 key points that are
+normally expected from a 'server' peer:</p>
+<ul>
+<li>The peer is publicly available, so other peers may connect to it even when
+behind SNAT.</li>
+<li>The peer can act as a proxy and connect other peers into a single network.</li>
+<li>The peer can act as a gateway to the Internet.</li>
+</ul>
+<p>There are number of ways to configure WireGuard on a Linux machine. My favorite
+one is to use <a href="https://man.archlinux.org/man/systemd-networkd.8.en">systemd-networkd</a>, a system service that manages both networks
+and network devices. It's distributed as part of systemd suite, so most likely
+you have it installed, and it supports WireGuard starting with v237. This is a
+good choice for a Linux server because it requires no extra software.</p>
+<p>For instance we want to setup the following VPN network:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Option</th>
+<th align="left">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Network</td>
+<td align="left"><code>10.0.0.0/24</code></td>
+</tr>
+<tr>
+<td align="left">Server</td>
+<td align="left"><code>10.0.0.1</code></td>
+</tr>
+<tr>
+<td align="left">Peer A</td>
+<td align="left"><code>10.0.0.20</code></td>
+</tr>
+<tr>
+<td align="left">Peer B</td>
+<td align="left"><code>10.0.0.30</code></td>
+</tr>
+</tbody>
+</table>
+<p>First thing to do is to set up a virtual network device for a WireGuard tunnel.
+This can be achieved by means of a <a href="https://man.archlinux.org/man/systemd.netdev.5">systemd.netdev(5)</a> unit
+that must be created in <code>/etc/systemd/network/</code> directory. The WireGuard
+network device must know about number of things:</p>
+<ul>
+<li>The port to accept new connections on.</li>
+<li>The private key of the server.</li>
+<li>The list of known peers and their public keys.</li>
+</ul>
+<p>This is how some <code>/etc/systemd/network/wg0.netdev</code> could look like:</p>
+<div class="highlight"><pre><span></span><code><span class="k">[NetDev]</span><span class="w"></span>
+<span class="na">Name</span><span class="o">=</span><span class="s">wg0</span><span class="w"></span>
+<span class="na">Kind</span><span class="o">=</span><span class="s">wireguard</span><span class="w"></span>
+<span class="na">Description</span><span class="o">=</span><span class="s">wg0 - wireguard tunnel</span><span class="w"></span>
+
+<span class="k">[WireGuard]</span><span class="w"></span>
+<span class="na">ListenPort</span><span class="o">=</span><span class="s">51820</span><span class="w"></span>
+<span class="na">PrivateKeyFile</span><span class="o">=</span><span class="s">/etc/systemd/network/wg0.key</span><span class="w"></span>
+
+<span class="k">[WireGuardPeer]</span><span class="w"></span>
+<span class="na">AllowedIPs</span><span class="o">=</span><span class="s">10.0.0.20/32</span><span class="w"></span>
+<span class="na">PublicKey</span><span class="o">=</span><span class="s">9vzzasvYciJLmhjrt9Aj9aQYe1gnUxI44ShVLQPrDQA=</span><span class="w"></span>
+
+<span class="k">[WireGuardPeer]</span><span class="w"></span>
+<span class="na">AllowedIPs</span><span class="o">=</span><span class="s">10.0.0.30/32</span><span class="w"></span>
+<span class="na">PublicKey</span><span class="o">=</span><span class="s">9vzzasvYciJLmhjrt9Aj9aQYe1gnUxI44ShVLQPrDQA=</span><span class="w"></span>
+</code></pre></div>
+
+<p>The content of <code>/etc/systemd/network/wg0.key</code> can be generated by invoking
+<code>$ wg genkey</code> command and must be readable by the <code>systemd-network</code> user.</p>
+<p>Next thing to do is to use a <a href="https://man.archlinux.org/man/systemd.network.5">systemd.network(5)</a> unit to
+setup a network. The purpose of the network is to assign a proper IP address on
+the network device, add proper routes, etc.</p>
+<p>This how some <code>cat /etc/systemd/network/wg0.network</code> could look like:</p>
+<div class="highlight"><pre><span></span><code><span class="k">[Match]</span><span class="w"></span>
+<span class="na">Name</span><span class="o">=</span><span class="s">wg0</span><span class="w"></span>
+
+<span class="k">[Network]</span><span class="w"></span>
+<span class="na">Address</span><span class="o">=</span><span class="s">10.0.0.1/24</span><span class="w"></span>
+<span class="na">IPForward</span><span class="o">=</span><span class="s">yes</span><span class="w"></span>
+<span class="na">IPMasquerade</span><span class="o">=</span><span class="s">yes</span><span class="w"></span>
+</code></pre></div>
+
+<p>There are couple of things to note:</p>
+<ul>
+<li>Since <code>/24</code> mask is used, systemd-networkd will automatically add a route
+for the whole network to be routed via the WireGuard tunnel.</li>
+<li>It goes without saying that both <code>IPForward</code> and <code>IPMasquerade</code> are only
+needed if the server is planned to be also used as a gateway to the
+Internet.</li>
+</ul>
+<p>When both the network device and the network are configured, the only remained
+step is to execute <code>$ networkctl reload</code> to pipe in and apply latest
+configuration.</p>
+    </article>
+  </main>
+</body>

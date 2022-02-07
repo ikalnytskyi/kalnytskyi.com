@@ -2,15 +2,128 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://kalnytskyi.com</id>
   <title>Ihor Kalnytskyi</title>
-  <updated>2022-02-03T11:02:04.361725+00:00</updated>
+  <updated>2022-02-07T20:12:36.928149+00:00</updated>
   <link href="https://kalnytskyi.com/feed.xml" rel="self" type="application/atom+xml"/>
   <link href="https://kalnytskyi.com" rel="alternate" type="text/html"/>
   <generator uri="https://github.com/ikalnytskyi/holocron" version="0.4.0">Holocron/v0.4.0</generator>
   <subtitle>Ihor Kalnytskyi's thoughts &amp; writings</subtitle>
   <entry>
+    <id>https://kalnytskyi.com/posts/setup-wireguard-systemd-networkd/</id>
+    <title>Setup a WireGuard server using systemd-networkd</title>
+    <updated>2022-02-07T20:12:36.929152+00:00</updated>
+    <author>
+      <name>Ihor Kalnytskyi</name>
+    </author>
+    <content type="html">&lt;p&gt;WireGuard is an extremely simple, fast and modern VPN that is built into Linux
+kernel 5.6 (released on Mar 29, 2020) and above. It mimics the model of SSH and
+requires VPN peers to know each others public keys. I highly recommend to read
+&lt;a href="https://www.wireguard.com"&gt;https://www.wireguard.com&lt;/a&gt; regardless of this post.&lt;/p&gt;
+&lt;p&gt;When it comes to WireGuard, there's one interesting aspect: it has no notion of
+'server', it's distributed by design. This may surprise blockchain enthusiasts,
+but distributed software was invented long before the blockchain 😅. Each peer
+may communicate with other peers assuming they know each other (i.e. public
+key, IP) and there's a connectivity between them. The 'server' is rather a
+behaviour one may expect from a certain peer. There are 3 key points that are
+normally expected from a 'server' peer:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The peer is publicly available, so other peers may connect to it even when
+behind SNAT.&lt;/li&gt;
+&lt;li&gt;The peer can act as a proxy and connect other peers into a single network.&lt;/li&gt;
+&lt;li&gt;The peer can act as a gateway to the Internet.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;There are number of ways to configure WireGuard on a Linux machine. My favorite
+one is to use &lt;a href="https://man.archlinux.org/man/systemd-networkd.8.en"&gt;systemd-networkd&lt;/a&gt;, a system service that manages both networks
+and network devices. It's distributed as part of systemd suite, so most likely
+you have it installed, and it supports WireGuard starting with v237. This is a
+good choice for a Linux server because it requires no extra software.&lt;/p&gt;
+&lt;p&gt;For instance we want to setup the following VPN network:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align="left"&gt;Option&lt;/th&gt;
+&lt;th align="left"&gt;Value&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align="left"&gt;Network&lt;/td&gt;
+&lt;td align="left"&gt;&lt;code&gt;10.0.0.0/24&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="left"&gt;Server&lt;/td&gt;
+&lt;td align="left"&gt;&lt;code&gt;10.0.0.1&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="left"&gt;Peer A&lt;/td&gt;
+&lt;td align="left"&gt;&lt;code&gt;10.0.0.20&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="left"&gt;Peer B&lt;/td&gt;
+&lt;td align="left"&gt;&lt;code&gt;10.0.0.30&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;First thing to do is to set up a virtual network device for a WireGuard tunnel.
+This can be achieved by means of a &lt;a href="https://man.archlinux.org/man/systemd.netdev.5"&gt;systemd.netdev(5)&lt;/a&gt; unit
+that must be created in &lt;code&gt;/etc/systemd/network/&lt;/code&gt; directory. The WireGuard
+network device must know about number of things:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The port to accept new connections on.&lt;/li&gt;
+&lt;li&gt;The private key of the server.&lt;/li&gt;
+&lt;li&gt;The list of known peers and their public keys.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This is how some &lt;code&gt;/etc/systemd/network/wg0.netdev&lt;/code&gt; could look like:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;[NetDev]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="na"&gt;Name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;wg0&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="na"&gt;Kind&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;wireguard&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="na"&gt;Description&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;wg0 - wireguard tunnel&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+&lt;span class="k"&gt;[WireGuard]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="na"&gt;ListenPort&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;51820&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="na"&gt;PrivateKeyFile&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;/etc/systemd/network/wg0.key&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+&lt;span class="k"&gt;[WireGuardPeer]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="na"&gt;AllowedIPs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;10.0.0.20/32&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="na"&gt;PublicKey&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;9vzzasvYciJLmhjrt9Aj9aQYe1gnUxI44ShVLQPrDQA=&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+&lt;span class="k"&gt;[WireGuardPeer]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="na"&gt;AllowedIPs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;10.0.0.30/32&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="na"&gt;PublicKey&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;9vzzasvYciJLmhjrt9Aj9aQYe1gnUxI44ShVLQPrDQA=&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The content of &lt;code&gt;/etc/systemd/network/wg0.key&lt;/code&gt; can be generated by invoking
+&lt;code&gt;$ wg genkey&lt;/code&gt; command and must be readable by the &lt;code&gt;systemd-network&lt;/code&gt; user.&lt;/p&gt;
+&lt;p&gt;Next thing to do is to use a &lt;a href="https://man.archlinux.org/man/systemd.network.5"&gt;systemd.network(5)&lt;/a&gt; unit to
+setup a network. The purpose of the network is to assign a proper IP address on
+the network device, add proper routes, etc.&lt;/p&gt;
+&lt;p&gt;This how some &lt;code&gt;cat /etc/systemd/network/wg0.network&lt;/code&gt; could look like:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;[Match]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="na"&gt;Name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;wg0&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+&lt;span class="k"&gt;[Network]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="na"&gt;Address&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;10.0.0.1/24&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="na"&gt;IPForward&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;yes&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="na"&gt;IPMasquerade&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;yes&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;There are couple of things to note:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Since &lt;code&gt;/24&lt;/code&gt; mask is used, systemd-networkd will automatically add a route
+for the whole network to be routed via the WireGuard tunnel.&lt;/li&gt;
+&lt;li&gt;It goes without saying that both &lt;code&gt;IPForward&lt;/code&gt; and &lt;code&gt;IPMasquerade&lt;/code&gt; are only
+needed if the server is planned to be also used as a gateway to the
+Internet.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;When both the network device and the network are configured, the only remained
+step is to execute &lt;code&gt;$ networkctl reload&lt;/code&gt; to pipe in and apply latest
+configuration.&lt;/p&gt;</content>
+    <link href="https://kalnytskyi.com/posts/setup-wireguard-systemd-networkd/" rel="alternate"/>
+    <published>2022-02-07T00:00:00+00:00</published>
+  </entry>
+  <entry>
     <id>https://kalnytskyi.com/posts/setup-cors-caddy-2/</id>
     <title>Setup CORS in Caddy 2</title>
-    <updated>2022-02-03T11:02:04.362645+00:00</updated>
+    <updated>2022-02-07T20:12:36.929504+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -61,7 +174,7 @@ sent by &lt;code&gt;curl&lt;/code&gt; or your-programming-language-of-choice.&lt
   <entry>
     <id>https://kalnytskyi.com/posts/setup-postgres-linux-windows-macos-gh-actions/</id>
     <title>Setup PostgreSQL for Linux, Windows and macOS using GitHub Actions</title>
-    <updated>2022-02-03T11:02:04.362959+00:00</updated>
+    <updated>2022-02-07T20:12:36.929746+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -91,7 +204,7 @@ option but to use &lt;a href="https://github.com/ikalnytskyi/action-setup-postgr
   <entry>
     <id>https://kalnytskyi.com/posts/gnome-terminal-csd/</id>
     <title>Enable CSD in GNOME Terminal</title>
-    <updated>2022-02-03T11:02:04.363118+00:00</updated>
+    <updated>2022-02-07T20:12:36.929968+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -114,7 +227,7 @@ might or might not work with other versions.&lt;/p&gt;</content>
   <entry>
     <id>https://kalnytskyi.com/posts/assert-str-matches-regex-in-pytest/</id>
     <title>Assert that str matches regex in pytest</title>
-    <updated>2022-02-03T11:02:04.363270+00:00</updated>
+    <updated>2022-02-07T20:12:36.930176+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -181,7 +294,7 @@ in non-test production code, though I found this rather queer.&lt;/p&gt;</conten
   <entry>
     <id>https://kalnytskyi.com/posts/farewell-2015/</id>
     <title>Farewell, 2015!</title>
-    <updated>2022-02-03T11:02:04.363425+00:00</updated>
+    <updated>2022-02-07T20:12:36.930549+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -221,7 +334,7 @@ as 2015 was, but hope it will be even better!&lt;/p&gt;
   <entry>
     <id>https://kalnytskyi.com/posts/mad-map/</id>
     <title>Mad Map: Python Road</title>
-    <updated>2022-02-03T11:02:04.363575+00:00</updated>
+    <updated>2022-02-07T20:12:36.930778+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -354,7 +467,7 @@ pythonistas will use it and one day it will be removed from the language.&lt;/p&
   <entry>
     <id>https://kalnytskyi.com/posts/docker-for-pythonistas/</id>
     <title>Docker For Pythonistas</title>
-    <updated>2022-02-03T11:02:04.363728+00:00</updated>
+    <updated>2022-02-07T20:12:36.931012+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -424,7 +537,7 @@ so don't hesitate to find your own.&lt;/p&gt;</content>
   <entry>
     <id>https://kalnytskyi.com/posts/c-legacy-is-evil/</id>
     <title>C Legacy Is 😈 Evil</title>
-    <updated>2022-02-03T11:02:04.363874+00:00</updated>
+    <updated>2022-02-07T20:12:36.931174+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
