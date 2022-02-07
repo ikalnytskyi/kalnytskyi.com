@@ -119,7 +119,7 @@ network device must know about number of things:</p>
 <p>Next thing to do is to use a <a href="https://man.archlinux.org/man/systemd.network.5">systemd.network(5)</a> unit to
 setup a network. The purpose of the network is to assign a proper IP address on
 the network device, add proper routes, etc.</p>
-<p>This how some <code>cat /etc/systemd/network/wg0.network</code> could look like:</p>
+<p>This how some <code>/etc/systemd/network/wg0.network</code> could look like:</p>
 <div class="highlight"><pre><span></span><code><span class="k">[Match]</span><span class="w"></span>
 <span class="na">Name</span><span class="o">=</span><span class="s">wg0</span><span class="w"></span>
 

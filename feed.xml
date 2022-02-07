@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://kalnytskyi.com</id>
   <title>Ihor Kalnytskyi</title>
-  <updated>2022-02-07T20:12:36.928149+00:00</updated>
+  <updated>2022-02-07T20:16:45.158390+00:00</updated>
   <link href="https://kalnytskyi.com/feed.xml" rel="self" type="application/atom+xml"/>
   <link href="https://kalnytskyi.com" rel="alternate" type="text/html"/>
   <generator uri="https://github.com/ikalnytskyi/holocron" version="0.4.0">Holocron/v0.4.0</generator>
@@ -10,7 +10,7 @@
   <entry>
     <id>https://kalnytskyi.com/posts/setup-wireguard-systemd-networkd/</id>
     <title>Setup a WireGuard server using systemd-networkd</title>
-    <updated>2022-02-07T20:12:36.929152+00:00</updated>
+    <updated>2022-02-07T20:16:45.159159+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -96,7 +96,7 @@ network device must know about number of things:&lt;/p&gt;
 &lt;p&gt;Next thing to do is to use a &lt;a href="https://man.archlinux.org/man/systemd.network.5"&gt;systemd.network(5)&lt;/a&gt; unit to
 setup a network. The purpose of the network is to assign a proper IP address on
 the network device, add proper routes, etc.&lt;/p&gt;
-&lt;p&gt;This how some &lt;code&gt;cat /etc/systemd/network/wg0.network&lt;/code&gt; could look like:&lt;/p&gt;
+&lt;p&gt;This how some &lt;code&gt;/etc/systemd/network/wg0.network&lt;/code&gt; could look like:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;[Match]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 &lt;span class="na"&gt;Name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;wg0&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
@@ -123,7 +123,7 @@ configuration.&lt;/p&gt;</content>
   <entry>
     <id>https://kalnytskyi.com/posts/setup-cors-caddy-2/</id>
     <title>Setup CORS in Caddy 2</title>
-    <updated>2022-02-07T20:12:36.929504+00:00</updated>
+    <updated>2022-02-07T20:16:45.159465+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -174,7 +174,7 @@ sent by &lt;code&gt;curl&lt;/code&gt; or your-programming-language-of-choice.&lt
   <entry>
     <id>https://kalnytskyi.com/posts/setup-postgres-linux-windows-macos-gh-actions/</id>
     <title>Setup PostgreSQL for Linux, Windows and macOS using GitHub Actions</title>
-    <updated>2022-02-07T20:12:36.929746+00:00</updated>
+    <updated>2022-02-07T20:16:45.159618+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -204,7 +204,7 @@ option but to use &lt;a href="https://github.com/ikalnytskyi/action-setup-postgr
   <entry>
     <id>https://kalnytskyi.com/posts/gnome-terminal-csd/</id>
     <title>Enable CSD in GNOME Terminal</title>
-    <updated>2022-02-07T20:12:36.929968+00:00</updated>
+    <updated>2022-02-07T20:16:45.159757+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -227,7 +227,7 @@ might or might not work with other versions.&lt;/p&gt;</content>
   <entry>
     <id>https://kalnytskyi.com/posts/assert-str-matches-regex-in-pytest/</id>
     <title>Assert that str matches regex in pytest</title>
-    <updated>2022-02-07T20:12:36.930176+00:00</updated>
+    <updated>2022-02-07T20:16:45.159894+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -294,7 +294,7 @@ in non-test production code, though I found this rather queer.&lt;/p&gt;</conten
   <entry>
     <id>https://kalnytskyi.com/posts/farewell-2015/</id>
     <title>Farewell, 2015!</title>
-    <updated>2022-02-07T20:12:36.930549+00:00</updated>
+    <updated>2022-02-07T20:16:45.160152+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -334,7 +334,7 @@ as 2015 was, but hope it will be even better!&lt;/p&gt;
   <entry>
     <id>https://kalnytskyi.com/posts/mad-map/</id>
     <title>Mad Map: Python Road</title>
-    <updated>2022-02-07T20:12:36.930778+00:00</updated>
+    <updated>2022-02-07T20:16:45.160290+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -467,7 +467,7 @@ pythonistas will use it and one day it will be removed from the language.&lt;/p&
   <entry>
     <id>https://kalnytskyi.com/posts/docker-for-pythonistas/</id>
     <title>Docker For Pythonistas</title>
-    <updated>2022-02-07T20:12:36.931012+00:00</updated>
+    <updated>2022-02-07T20:16:45.160429+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -537,7 +537,7 @@ so don't hesitate to find your own.&lt;/p&gt;</content>
   <entry>
     <id>https://kalnytskyi.com/posts/c-legacy-is-evil/</id>
     <title>C Legacy Is 😈 Evil</title>
-    <updated>2022-02-07T20:12:36.931174+00:00</updated>
+    <updated>2022-02-07T20:16:45.160559+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
