@@ -1,7 +1,7 @@
 ---
-summary: |
-  A simple trick on how to check that strings matches certain pattern using
-  pytest.
+summary: >-
+  A simple trick regarding how to check that strings matches certain pattern
+  using pytest in python tests.
 aliases: /howto/assert-str-matches-regex-in-pytest/
 ---
 

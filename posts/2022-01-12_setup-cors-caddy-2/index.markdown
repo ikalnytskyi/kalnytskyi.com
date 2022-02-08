@@ -1,6 +1,5 @@
 ---
-summary: |
-  A short note on how to setup CORS in Caddy 2.
+summary: A note about how to setup CORS in Caddy 2.
 aliases: /howto/setup-cors-caddy-2/
 ---
 

@@ -1,6 +1,5 @@
 ---
-summary: >
-  My summary of year 2015
+summary: My summary of year 2015
 aliases: /2016/01/02/farewell-2015/
 ---
 

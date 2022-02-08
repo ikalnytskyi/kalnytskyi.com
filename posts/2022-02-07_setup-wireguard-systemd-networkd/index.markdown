@@ -1,3 +1,9 @@
+---
+summary: >-
+  A short guide about how to setup a WireGuard VPN server using
+  systemd-networkd network manager.
+---
+
 Setup a WireGuard server using systemd-networkd
 ===============================================
 

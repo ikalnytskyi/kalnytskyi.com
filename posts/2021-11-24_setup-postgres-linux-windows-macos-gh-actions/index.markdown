@@ -1,6 +1,5 @@
 ---
-summary: |
-  A short self-promotion note on how to setup PostgreSQL server on GitHub CI.
+summary: A note about how to setup PostgreSQL server on GitHub CI.
 aliases: /howto/setup-postgres-linux-windows-macos-gh-actions/
 ---
 

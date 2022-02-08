@@ -1,8 +1,8 @@
 ---
 tags: [docker, python, thoughts]
-summary: >
-  Docker, Python and how to use them together in daily routine, like
-  running unit tests.
+summary: >-
+  Docker, Python and how to use them together in daily routine, like running
+  unit tests.
 aliases: /2015/02/03/docker-for-pythonistas/
 ---
 

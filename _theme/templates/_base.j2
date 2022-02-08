@@ -6,10 +6,8 @@
 
     <link rel="stylesheet" href="/static/style.css" />
     <link rel="stylesheet" href="/static/pygments.css" />
-
-    {% if metadata.feedurl %}
+    <link rel="canonical" href="{{ item.absurl }}" />
     <link rel="alternate" type="application/atom+xml" href="{{ metadata.feedurl }}" title="{{ metadata.title }}" />
-    {% endif %}
 
     {% block head %}{% endblock %}
 

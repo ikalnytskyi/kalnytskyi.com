@@ -4,22 +4,38 @@
   {% set summary = item.summary.replace('\n', ' ').strip() %}
 {% endif %}
 
+{% if item.author or metadata.author %}
+  {% set author = item.author or metadata.author %}
+{% endif %}
+
 {% block head %}
-    <link rel="canonical" href="{{ item.absurl }}" />
-
-  {% if item.author or metadata.author %}
-    <meta name="author" content="{{ item.author or metadata.author }}" />
-  {% endif -%}
-
-  {% if item.summary %}
+  {% if author is defined %}
+    <meta name="author" content="{{ author }}" />
+  {% endif %}
+  {% if summary is defined %}
     <meta name="description" content="{{ summary }}" />
-  {% endif -%}
+  {% endif %}
 
   {% if theme.twitter_cards.username and item.summary %}
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@{{ theme.twitter_cards.username }}" />
     <meta name="twitter:title" content="{{ item.title }}" />
     <meta name="twitter:description" content="{{ summary }}" />
+  {% endif %}
+
+    <meta property="og:title" content="{{ item.title }}" />
+  {% if summary is defined %}
+    <meta property="og:description" content="{{ summary }}" />
+  {% endif %}
+    <meta property="og:url" content="{{ item.absurl }}" />
+    <meta property="og:site_name" content="{{ metadata.title }}" />
+  {% if item.published is defined %}
+    <meta property="og:type" content="article" />
+    <meta property="article:published_time" content="{{ item.published.isoformat() }}" />
+    <meta property="article:modified_time" content="{{ item.updated.isoformat() }}" />
+    <meta property="article:author" content="{{ author }}" />
+  {% else %}
+    <meta property="og:type" content="website" />
   {% endif %}
 {% endblock %}
 
@@ -31,7 +47,6 @@
       {% if item.published is defined %}
         <time datetime="{{ item.published.isoformat() }}">{{ item.published.strftime('%B %d, %Y') }}</time>
       {% endif %}
-
         <h1>{{ self.title() }}</h1>
       </header>
 
