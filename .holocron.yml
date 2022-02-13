@@ -11,6 +11,7 @@ pipes:
         imports:
           - guess-published-from-source = guess_published:process
           - alias = alias:process
+          - shell = shell:process
         from_: _processors
 
     - name: source
@@ -113,3 +114,10 @@ pipes:
     - name: save
       args:
         to: "%(here)s/_site/"
+
+    - name: shell
+      args:
+        commands:
+          - inkscape -w 180 -h 180 %(here)s/_theme/static/favicon.svg -o %(here)s/_site/static/apple-touch-icon.png
+          - inkscape -w 192 -h 192 %(here)s/_theme/static/favicon.svg -o %(here)s/_site/static/icon-192.png
+          - inkscape -w 512 -h 512 %(here)s/_theme/static/favicon.svg -o %(here)s/_site/static/icon-512.png
