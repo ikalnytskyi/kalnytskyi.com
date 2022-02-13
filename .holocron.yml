@@ -95,7 +95,8 @@ pipes:
             sidebar:
               photo: /about/me.jpg
               about: |-
-                <a href="/about/" rel="me">Ihor Kalnytskyi</a>'s thoughts & writings
+                <a href="/about/" rel="me">Ihor Kalnytskyi</a>'s<br />
+                thoughts & writings
 
             navigation: !!pairs
               - Archives: /
