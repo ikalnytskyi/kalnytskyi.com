@@ -34,7 +34,7 @@ good choice for a Linux server because it requires no extra software.
 For instance we want to setup the following VPN network:
 
  | Option  | Value         |
- | ------- | ------------- |
+ |:------- |:------------- |
  | Network | `10.0.0.0/24` |
  | Server  | `10.0.0.1`    |
  | Peer A  | `10.0.0.20`   |

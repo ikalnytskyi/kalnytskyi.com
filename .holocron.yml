@@ -29,7 +29,13 @@ pipes:
 
           - name: commonmark
             args:
+              infer_title: true
               pygmentize: true
+              strikethrough: true
+              table: true
+              footnote: true
+              admonition: true
+              definition: true
 
           - name: archive
             when:

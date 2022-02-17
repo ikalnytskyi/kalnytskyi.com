@@ -176,6 +176,7 @@ main blockquote {
   color: var(--page-alt-foreground-color);
   font-size: 0.95rem;
   padding: 0.2rem 1rem;
+  margin: 0;
 }
 
 main table {
