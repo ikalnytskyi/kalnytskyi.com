@@ -1,6 +1,3 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto+Slab:400,700");
-@import url("https://fonts.googleapis.com/css?family=Roboto+Mono:400,700");
-
 :root {
   --page-background-color: #FEFEFE;
   --page-foreground-color: #2E3440;
@@ -13,10 +10,17 @@
   --side-separator-color: #333333;
   --side-hyperlink-color: #424242;
   --side-hyperlink-hover-color: #212121;
-  --side-width: 130px;
+  --side-about-pic-width: 120px;
   --main-width: 750px;
   --main-border-color: rgba(0, 0, 0, 0.14);
   --screen-padding: 2rem;
+  --page-font-family:
+      "DejaVu Serif",       /* linux */
+      "Georgia",            /* macos & windows */
+      serif;
+  --page-mono-font-family:
+      "DejaVu Sans Mono",   /* linux */
+      monospace;
 }
 
 body {
@@ -26,7 +30,7 @@ body {
   grid-template-columns: 2fr 5fr;
   grid-template-areas: "aside main";
   justify-items: stretch;
-  font: 1rem/1.7 'Roboto Slab', serif;
+  font: 1rem/1.7 var(--page-font-family);
   min-height: 100vh;
   margin: 0;
 }
@@ -45,7 +49,6 @@ a:hover {
 aside {
   color: var(--page-alt-foreground-color);
   padding: var(--screen-padding);
-  width: var(--side-width);
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -72,8 +75,9 @@ aside a:hover {
 
 aside .about-pic {
   border-radius: 50%;
-  height: var(--side-width);
-  width: var(--side-width);
+  max-height: var(--side-about-pic-width);
+  max-width: var(--side-about-pic-width);
+  align-self: center;
 }
 
 aside .about-txt {
@@ -151,14 +155,14 @@ main h6 {
 
 main code {
   background-color: var(--page-alt-background-color);
-  font-family: 'Roboto Mono', courier, monospace;
+  font-family: var(--page-mono-font-family);
   padding: 0.1rem 0.3rem;
 }
 
 main pre code {
   background-color: var(--page-alt-background-color);
   border-left: 1px solid var(--main-border-color);
-  font-family: 'Roboto Mono', courier, monospace;
+  font-family: var(--page-mono-font-family);
   font-size: 0.95rem;
   line-height: 1.3rem;
   overflow: auto;
@@ -172,6 +176,7 @@ main blockquote {
   color: var(--page-alt-foreground-color);
   font-size: 0.95rem;
   padding: 0.2rem 1rem;
+  margin: 0;
 }
 
 main table {

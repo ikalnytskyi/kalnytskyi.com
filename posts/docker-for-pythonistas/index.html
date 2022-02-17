@@ -26,7 +26,7 @@
     <meta property="og:site_name" content="Ihor Kalnytskyi" />
     <meta property="og:type" content="article" />
     <meta property="article:published_time" content="2015-02-03T00:00:00+00:00" />
-    <meta property="article:modified_time" content="2022-02-13T17:07:02.188732+00:00" />
+    <meta property="article:modified_time" content="2022-02-17T23:30:44.435518+00:00" />
     <meta property="article:author" content="Ihor Kalnytskyi" />
 
     <title>Docker For Pythonistas</title>
@@ -34,7 +34,8 @@
 <body>
   <aside>
     <img class="about-pic" src="/about/me.jpg" alt="Ihor's photo" />
-    <span class="about-txt"><a href="/about/" rel="me">Ihor Kalnytskyi</a>'s thoughts & writings</span>
+    <span class="about-txt"><a href="/about/" rel="me">Ihor Kalnytskyi</a>'s<br />
+thoughts & writings</span>
 
     <div class="nav-wrapper">
     <nav>
@@ -94,10 +95,9 @@ your own - it's not a challenge.</p>
 <p>Tests could be run in the container with just a single command, no
 pre-configuration is required, but pull the image. The whole workflow could
 look like:</p>
-<div class="highlight"><pre><span></span><code>$ docker pull ikalnitsky/pythonista
+<pre><code class="language-bash">$ docker pull ikalnitsky/pythonista
 $ docker run -v /path/to/src/:/src -w /src ikalnitsky/pythonista tox
-</code></pre></div>
-
+</code></pre>
 <p>For those who aren't familiar with Docker, the first command retrieves the
 image from the Docker registry and the second one runs a container created
 from it. The arguments are</p>
@@ -112,6 +112,7 @@ into <code>/src</code> inside your container</li>
 because you don't need to compile missed Python interpreters on every
 machine you're working on. Still, this is one of possible Docker use cases,
 so don't hesitate to find your own.</p>
+
     </article>
   </main>
 </body>

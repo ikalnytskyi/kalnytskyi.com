@@ -26,7 +26,7 @@
     <meta property="og:site_name" content="Ihor Kalnytskyi" />
     <meta property="og:type" content="article" />
     <meta property="article:published_time" content="2021-11-24T00:00:00+00:00" />
-    <meta property="article:modified_time" content="2022-02-13T17:07:02.188732+00:00" />
+    <meta property="article:modified_time" content="2022-02-17T23:30:44.435518+00:00" />
     <meta property="article:author" content="Ihor Kalnytskyi" />
 
     <title>Setup PostgreSQL for Linux, Windows and macOS using GitHub Actions</title>
@@ -34,7 +34,8 @@
 <body>
   <aside>
     <img class="about-pic" src="/about/me.jpg" alt="Ihor's photo" />
-    <span class="about-txt"><a href="/about/" rel="me">Ihor Kalnytskyi</a>'s thoughts & writings</span>
+    <span class="about-txt"><a href="/about/" rel="me">Ihor Kalnytskyi</a>'s<br />
+thoughts & writings</span>
 
     <div class="nav-wrapper">
     <nav>
@@ -56,7 +57,7 @@
 setup a PostgreSQL server for Linux, Windows and macOS runners. If you among
 those who want to test their software on all major platforms, you have no
 option but to use <a href="https://github.com/ikalnytskyi/action-setup-postgres">ikalnytskyi/action-setup-postgres</a>.</p>
-<div class="highlight"><pre><span></span><code><span class="nt">steps</span><span class="p">:</span><span class="w"></span>
+<pre><code class="language-yaml"><span class="nt">steps</span><span class="p">:</span><span class="w"></span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Setup PostgreSQL</span><span class="w"></span>
 <span class="w">    </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ikalnytskyi/action-setup-postgres@v1</span><span class="w"></span>
 <span class="w">    </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres</span><span class="w"></span>
@@ -65,13 +66,13 @@ option but to use <a href="https://github.com/ikalnytskyi/action-setup-postgres"
 <span class="w">    </span><span class="nt">env</span><span class="p">:</span><span class="w"></span>
 <span class="w">      </span><span class="nt">CONNECTION_URI</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ steps.postgres.outputs.connection-uri }}</span><span class="w"></span>
 <span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pytest -vv tests/</span><span class="w"></span>
-</code></pre></div>
-
+</code></pre>
 <p>Key features:</p>
 <ul>
 <li>Fast bootstrap (the action uses preinstalled binaries).</li>
 <li>Fast audit (<a href="https://github.com/ikalnytskyi/action-setup-postgres/blob/v1/action.yml">4 steps YAML</a>, no javascript/typescript).</li>
 </ul>
+
     </article>
   </main>
 </body>
