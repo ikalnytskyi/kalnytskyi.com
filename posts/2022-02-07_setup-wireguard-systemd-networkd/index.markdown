@@ -9,6 +9,11 @@ summary: >-
 Setup a WireGuard server using systemd-networkd
 ===============================================
 
+::: note
+Please check out [«Setup a WireGuard client using systemd-networkd»][wg-client]
+to learn about client-side configuration of your Linux machine.
+:::
+
 WireGuard is an extremely simple, fast and modern VPN that is built into Linux
 kernel 5.6 (released on Mar 29, 2020) and above. It mimics the model of SSH and
 requires VPN peers to know each others public keys. I highly recommend to read
@@ -97,6 +102,7 @@ There are couple of things to note:
  * Since `/24` network mask is used, systemd-networkd will automatically add a
    route for the whole network to be routed via the WireGuard tunnel. Without
    that mask, it'd be up to a user to properly configure routing on the system.
+
  * The `IPMasquerade` setting is only needed if the server is expected to be
    used as a gateway to the Internet. Without this option, it'd be up to a user
    to properly configure the firewall.
@@ -104,6 +110,7 @@ There are couple of things to note:
 When both the network device and the network are configured, the only remained
 step is to run `$ networkctl reload` to pipe in and apply latest configuration.
 
+[wg-client]: /posts/setup-wireguard-client-systemd-networkd/
 [systemd-networkd]: https://man.archlinux.org/man/systemd-networkd.8.en
 [systemd.netdev]: https://man.archlinux.org/man/systemd.netdev.5
 [systemd.network]: https://man.archlinux.org/man/systemd.network.5

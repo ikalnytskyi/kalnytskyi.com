@@ -266,6 +266,10 @@ main .index-entry time {
   text-align: right;
 }
 
+main .footnotes-sep {
+  color: var(--main-border-color);
+}
+
 @media (max-width: 812px) {
   :root {
     --screen-padding: 20px;
