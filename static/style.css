@@ -28,7 +28,10 @@ body {
   color: var(--page-foreground-color);
   display: grid;
   grid-template-columns: 2fr 5fr;
-  grid-template-areas: "aside main";
+  grid-template-rows: min-content auto;
+  grid-template-areas:
+    "banner banner"
+    "aside main";
   justify-items: stretch;
   font: 1rem/1.7 var(--page-font-family);
   min-height: 100vh;
@@ -44,6 +47,13 @@ a {
 a:hover {
   color: var(--page-hyperlink-hover-color);
   border-bottom: 1px solid;
+}
+
+.banner {
+  grid-area: banner;
+  text-align: center;
+  line-height: 2em;
+  background-color: #FFD300;
 }
 
 aside {
