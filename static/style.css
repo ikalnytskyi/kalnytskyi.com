@@ -53,7 +53,12 @@ a:hover {
   grid-area: banner;
   text-align: center;
   line-height: 2em;
-  background-color: #FFD300;
+  background-color: var(--page-hyperlink-color);
+  color: var(--page-background-color);
+}
+
+.banner a {
+  color: #fdde6c;
 }
 
 aside {
