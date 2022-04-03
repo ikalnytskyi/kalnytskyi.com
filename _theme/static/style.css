@@ -21,6 +21,9 @@
   --page-mono-font-family:
       "DejaVu Sans Mono",   /* linux */
       monospace;
+  --banner-background-color: #0071CE;
+  --banner-border-color: #FCDF51;
+  --banner-text-color: #FEFEFE;
 }
 
 body {
@@ -53,12 +56,13 @@ a:hover {
   grid-area: banner;
   text-align: center;
   line-height: 2em;
-  background-color: var(--page-hyperlink-color);
-  color: var(--page-background-color);
+  background-color: var(--banner-background-color);
+  color: var(--banner-text-color);
+  border-bottom: 5px solid var(--banner-border-color);
 }
 
 .banner a {
-  color: #fdde6c;
+  color: var(--banner-text-color);
 }
 
 aside {
