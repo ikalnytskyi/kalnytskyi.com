@@ -9,7 +9,7 @@
 # 3. A robot must protect its own existence as long as such protection
 #    does not conflict with the First or Second Law.
 
-User-Agent: *
-Disallow: /static/      # do not expose theme's static
+User-agent: Yandex
+Disallow: /
 
 Sitemap: https://kalnytskyi.com/sitemap.xml
