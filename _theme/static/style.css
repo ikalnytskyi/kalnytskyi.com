@@ -16,7 +16,8 @@
   --screen-padding: 2rem;
   --page-font-family:
       "DejaVu Serif",       /* linux */
-      "Georgia",            /* macos & windows */
+      "Charter",            /* macos */
+      "Georgia",            /* windows */
       serif;
   --page-mono-font-family:
       "DejaVu Sans Mono",   /* linux */
