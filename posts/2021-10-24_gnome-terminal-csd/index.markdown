@@ -18,7 +18,7 @@ Unfortunately, CSD is not used by GNOME Terminal if you launch it outside of
 GNOME. Fortunately, there's a configuration option you can use to explicitly
 enable it. In order to do that just run the following command in your terminal:
 
-```
+```bash
 $ gsettings set org.gnome.Terminal.Legacy.Settings headerbar true
 ```
 

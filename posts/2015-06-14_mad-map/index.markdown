@@ -105,7 +105,7 @@ The most frustrating thing is that it wasn't removed in Python 3, but
 changed! First, you can't use `None` as identity function anymore
 (alleluia). If you try to do that you'll fall with `TypeError` exception:
 
-```bash
+```
 TypeError: 'NoneType' object is not callable
 ```
 
