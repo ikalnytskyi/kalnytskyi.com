@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://kalnytskyi.com</id>
   <title>Ihor Kalnytskyi</title>
-  <updated>2022-04-23T18:30:39.392645+00:00</updated>
+  <updated>2022-04-25T20:26:28.809649+00:00</updated>
   <link href="https://kalnytskyi.com/feed.xml" rel="self" type="application/atom+xml"/>
   <link href="https://kalnytskyi.com" rel="alternate" type="text/html"/>
   <generator uri="https://github.com/ikalnytskyi/holocron" version="0.4.0">Holocron/v0.4.0</generator>
@@ -10,7 +10,7 @@
   <entry>
     <id>https://kalnytskyi.com/posts/setup-wireguard-systemd-networkd/</id>
     <title>Setup a WireGuard server using systemd-networkd</title>
-    <updated>2022-04-23T18:30:39.393447+00:00</updated>
+    <updated>2022-04-25T20:26:28.810381+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -125,7 +125,7 @@ configuration.&lt;/p&gt;
   <entry>
     <id>https://kalnytskyi.com/posts/setup-cors-caddy-2/</id>
     <title>Setup CORS in Caddy 2</title>
-    <updated>2022-04-23T18:30:39.393751+00:00</updated>
+    <updated>2022-04-25T20:26:28.810648+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -177,7 +177,7 @@ sent by &lt;code&gt;curl&lt;/code&gt; or your-programming-language-of-choice.&lt
   <entry>
     <id>https://kalnytskyi.com/posts/setup-postgres-linux-windows-macos-gh-actions/</id>
     <title>Setup PostgreSQL for Linux, Windows and macOS using GitHub Actions</title>
-    <updated>2022-04-23T18:30:39.393934+00:00</updated>
+    <updated>2022-04-25T20:26:28.810787+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -207,7 +207,7 @@ option but to use &lt;a href="https://github.com/ikalnytskyi/action-setup-postgr
   <entry>
     <id>https://kalnytskyi.com/posts/gnome-terminal-csd/</id>
     <title>Enable CSD in GNOME Terminal</title>
-    <updated>2022-04-23T18:30:39.394104+00:00</updated>
+    <updated>2022-04-25T20:26:28.810919+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -218,7 +218,7 @@ client-side decoration (&lt;a href="https://wiki.gnome.org/Initiatives/CSD"&gt;C
 &lt;p&gt;Unfortunately, CSD is not used by GNOME Terminal if you launch it outside of
 GNOME. Fortunately, there's a configuration option you can use to explicitly
 enable it. In order to do that just run the following command in your terminal:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ gsettings set org.gnome.Terminal.Legacy.Settings headerbar true
+&lt;pre&gt;&lt;code class="language-bash"&gt;$ gsettings &lt;span class="nb"&gt;set&lt;/span&gt; org.gnome.Terminal.Legacy.Settings headerbar &lt;span class="nb"&gt;true&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Please note, the setting won't be applied as long as there's a running copy
 of &lt;code&gt;gnome-terminal-server&lt;/code&gt; process. You have to terminate it and restart the
@@ -231,7 +231,7 @@ might or might not work with other versions.&lt;/p&gt;
   <entry>
     <id>https://kalnytskyi.com/posts/assert-str-matches-regex-in-pytest/</id>
     <title>Assert that str matches regex in pytest</title>
-    <updated>2022-04-23T18:30:39.394270+00:00</updated>
+    <updated>2022-04-25T20:26:28.811047+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -295,7 +295,7 @@ in non-test production code, though I found this rather queer.&lt;/p&gt;
   <entry>
     <id>https://kalnytskyi.com/posts/farewell-2015/</id>
     <title>Farewell, 2015!</title>
-    <updated>2022-04-23T18:30:39.394462+00:00</updated>
+    <updated>2022-04-25T20:26:28.811175+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -336,7 +336,7 @@ as 2015 was, but hope it will be even better!&lt;/p&gt;
   <entry>
     <id>https://kalnytskyi.com/posts/mad-map/</id>
     <title>Mad Map: Python Road</title>
-    <updated>2022-04-23T18:30:39.394627+00:00</updated>
+    <updated>2022-04-25T20:26:28.811300+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -408,7 +408,7 @@ no way to do it through &lt;code&gt;None&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;The most frustrating thing is that it wasn't removed in Python 3, but
 changed! First, you can't use &lt;code&gt;None&lt;/code&gt; as identity function anymore
 (alleluia). If you try to do that you'll fall with &lt;code&gt;TypeError&lt;/code&gt; exception:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-bash"&gt;TypeError: &lt;span class="s1"&gt;&amp;#39;NoneType&amp;#39;&lt;/span&gt; object is not callable
+&lt;pre&gt;&lt;code&gt;TypeError: 'NoneType' object is not callable
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Second, iterables are zipped by &lt;code&gt;zip()&lt;/code&gt;, not &lt;code&gt;zip_longest()&lt;/code&gt;. If the
 first change seems rational, the second one is mad. It doesn't provide
@@ -462,7 +462,7 @@ pythonistas will use it and one day it will be removed from the language.&lt;/p&
   <entry>
     <id>https://kalnytskyi.com/posts/docker-for-pythonistas/</id>
     <title>Docker For Pythonistas</title>
-    <updated>2022-04-23T18:30:39.394789+00:00</updated>
+    <updated>2022-04-25T20:26:28.811430+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -532,7 +532,7 @@ so don't hesitate to find your own.&lt;/p&gt;
   <entry>
     <id>https://kalnytskyi.com/posts/c-legacy-is-evil/</id>
     <title>C Legacy Is 😈 Evil</title>
-    <updated>2022-04-23T18:30:39.395681+00:00</updated>
+    <updated>2022-04-25T20:26:28.812109+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>

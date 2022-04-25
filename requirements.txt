@@ -1,1 +1,1 @@
-git+https://github.com/ikalnytskyi/holocron.git@4aee379b8630f85d4101c7eada91b656a789e901
+git+https://github.com/ikalnytskyi/holocron.git@3cc40ba8387a685e61ee3b1301fe4a8ecd210689
