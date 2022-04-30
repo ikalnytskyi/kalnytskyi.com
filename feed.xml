@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://kalnytskyi.com</id>
   <title>Ihor Kalnytskyi</title>
-  <updated>2022-04-30T22:49:24.154824+00:00</updated>
+  <updated>2022-04-30T23:01:00.294250+00:00</updated>
   <link href="https://kalnytskyi.com/feed.xml" rel="self" type="application/atom+xml"/>
   <link href="https://kalnytskyi.com" rel="alternate" type="text/html"/>
   <generator uri="https://github.com/ikalnytskyi/holocron" version="0.4.0">Holocron/v0.4.0</generator>
@@ -10,7 +10,7 @@
   <entry>
     <id>https://kalnytskyi.com/posts/setup-wireguard-systemd-networkd/</id>
     <title>Setup a WireGuard server using systemd-networkd</title>
-    <updated>2022-04-30T22:49:24.155633+00:00</updated>
+    <updated>2022-04-30T23:01:00.295350+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -125,7 +125,7 @@ configuration.&lt;/p&gt;
   <entry>
     <id>https://kalnytskyi.com/posts/setup-cors-caddy-2/</id>
     <title>Setup CORS in Caddy 2</title>
-    <updated>2022-04-30T22:49:24.155923+00:00</updated>
+    <updated>2022-04-30T23:01:00.295708+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -177,7 +177,7 @@ sent by &lt;code&gt;curl&lt;/code&gt; or your-programming-language-of-choice.&lt
   <entry>
     <id>https://kalnytskyi.com/posts/setup-postgres-linux-windows-macos-gh-actions/</id>
     <title>Setup PostgreSQL for Linux, Windows and macOS using GitHub Actions</title>
-    <updated>2022-04-30T22:49:24.156080+00:00</updated>
+    <updated>2022-04-30T23:01:00.295900+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -207,7 +207,7 @@ option but to use &lt;a href="https://github.com/ikalnytskyi/action-setup-postgr
   <entry>
     <id>https://kalnytskyi.com/posts/gnome-terminal-csd/</id>
     <title>Enable CSD in GNOME Terminal</title>
-    <updated>2022-04-30T22:49:24.156230+00:00</updated>
+    <updated>2022-04-30T23:01:00.296122+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -231,7 +231,7 @@ might or might not work with other versions.&lt;/p&gt;
   <entry>
     <id>https://kalnytskyi.com/posts/assert-str-matches-regex-in-pytest/</id>
     <title>Assert that str matches regex in pytest</title>
-    <updated>2022-04-30T22:49:24.156377+00:00</updated>
+    <updated>2022-04-30T23:01:00.296292+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -295,7 +295,7 @@ in non-test production code, though I found this rather queer.&lt;/p&gt;
   <entry>
     <id>https://kalnytskyi.com/posts/farewell-2015/</id>
     <title>Farewell, 2015!</title>
-    <updated>2022-04-30T22:49:24.156523+00:00</updated>
+    <updated>2022-04-30T23:01:00.296478+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -336,7 +336,7 @@ as 2015 was, but hope it will be even better!&lt;/p&gt;
   <entry>
     <id>https://kalnytskyi.com/posts/mad-map/</id>
     <title>Mad Map: Python Road</title>
-    <updated>2022-04-30T22:49:24.156664+00:00</updated>
+    <updated>2022-04-30T23:01:00.296667+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -462,7 +462,7 @@ pythonistas will use it and one day it will be removed from the language.&lt;/p&
   <entry>
     <id>https://kalnytskyi.com/posts/docker-for-pythonistas/</id>
     <title>Docker For Pythonistas</title>
-    <updated>2022-04-30T22:49:24.156810+00:00</updated>
+    <updated>2022-04-30T23:01:00.296887+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -532,7 +532,7 @@ so don't hesitate to find your own.&lt;/p&gt;
   <entry>
     <id>https://kalnytskyi.com/posts/c-legacy-is-evil/</id>
     <title>C Legacy Is 😈 Evil</title>
-    <updated>2022-04-30T22:49:24.156954+00:00</updated>
+    <updated>2022-04-30T23:01:00.297054+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
