@@ -251,6 +251,7 @@ main .index-entry time {
     grid: none;
     grid-template-rows: auto 1fr;
     grid-template-areas:
+      "banner"
       "aside"
       "main";
   }

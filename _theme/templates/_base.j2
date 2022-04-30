@@ -16,9 +16,9 @@
     <title>{% block title %}{{ metadata.title }}{% endblock %}</title>
 </head>
 <body>
-  <div class="banner">
-    <a href="https://www.comebackalive.in.ua/donate">Save lives in Ukraine</a> →
-  </div>
+  {% if theme.banner %}
+  <div class="banner">{{ theme.banner }}</div>
+  {% endif %}
 
   <aside>
   {% if theme.sidebar.photo %}

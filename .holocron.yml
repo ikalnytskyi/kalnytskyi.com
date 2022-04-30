@@ -104,6 +104,9 @@ pipes:
                 <a href="/about/" rel="me">Ihor Kalnytskyi</a>'s<br />
                 thoughts & writings
 
+            banner: |-
+              <a rel="nofollow" href="https://www.comebackalive.in.ua/donate">Save lives in Ukraine</a> →
+
             navigation: !!pairs
               - Archives: /
               - Talks: /talks/
