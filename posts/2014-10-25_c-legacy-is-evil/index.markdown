@@ -1,39 +1,37 @@
 ---
-tags: [c, cpp, thoughts]
 summary: >-
-  A short story about C legacy in C++, and why it's a bad thing to have.
+  In this essay I share my thoughts on C, its legacy and relations with C++.
 aliases: /2014/10/25/c-legacy-is-evil/
 ---
 
 C Legacy Is 😈 Evil
 ===================
 
-When people ask me «What is the first thing I don't like in C++?», I
-always answer that's a C legacy. I know a lot of C++ bottlenecks, but I
-believe that the worst of them is the C legacy.  What do I mean by the
-«C legacy»? I mean all this stuff that doesn't fit into C++ ideology and
-kept in the language for compatibility reason. It was a great advantage
-years ago, and it's a worst drawback today.
+When people ask me what is the most annoying thing in C++ in my opinion, I
+answer without hesitation that it's C legacy. I keep choosing C legacy even
+among dozens other nasty things C++ posses. So what meaning do I put into these
+words? Well, I put everything that doesn't fit into C++ ideology and has been
+kept in the language for backward compatibility reasons. What a great advantage
+it was years ago, and what unpleasant drawback it is today.
 
-I have a story as a good example of what I'm talking about. When I was
-working at [Gameloft], I was involved in [Blitz Brigade] project. In the
-very late 2013, the HQ decided to revive Android port and I was chosen
-to help Android guys to run both server and client sides of the game.
+When I was working at [Gameloft], I was involved into [Blitz Brigade]
+development. At some point the decision had been made to revive the Android
+port and I was helping the Android team to make it happen.
 
-One day an Android guy asked me for help with debugging. His client
-application was rejected by the server and he couldn't figure out why
-it's happened. Diving in the code, I have found a typical mistake often
-occurring in the C world. The interesting thing was that the mistake was
-widespread and should have affected both iOS and Android versions.
-However, there was 100% reproduce rate for Android version, while for
-iOS it haven't been found yet.
+One day I was asked to assist them with troubleshooting a mysterious
+server-client communication issue. The client part, that was running on an
+Android device, has been rejected by the server. The Android port was nothing
+more but a Java shim around the game written in C++, and so the team had no
+experience with C++. PDigging into the code I've discovered a widespread,
+typical mistake often occurred in the C world. What was strange is that the
+issue has never been found on iOS and had nearly 100% repro rate on Android.
 
-Well, let's look at this typical C code that converts a datetime to Unix
-timestamp:
+So what was that? Let's look at the following code snippet that converts a
+datetime object into a Unix timestamp:
 
 ```cpp
-// year, month, day, hour, min and sec are retrieved from
-// network and have valid values
+// year, month, day, hour, min and sec are retrieved via network
+// and have valid values
 
 struct tm tm_struct;
 
@@ -51,54 +49,38 @@ tm_struct.tm_yday = 0;
 time_t time = std::mktime(&tm_struct);
 ```
 
-So what's wrong with this code? In first look - nothing is wrong, but for
-some reason the resulting `time` variable was `0` on Android and a valid
-timestamp on iOS. If you come from C world you probable suspect that the
-issue is that the `tm_struct` variable isn't cleared before usage. In C
-world we have an unspoken rule:
-
-> Always use `memset` onto struct variable before usage, because by
-> default it's filled with garbage.
-
-Example:
+At first glance, there's nothing wrong here, yet `time` was `0` on Android and
+a valid timestamp on iOS. Experienced C programmers know that structures must
+be `memset`-ed before being used, otherwise one or more explicitly
+uninitialized fields may contain garbage. `tm_struct` is no exception, but the
+following lines were missing in the code:
 
 ```cpp
 struct tm tm_struct;
 memset(&tm_struct, 0, sizeof(tm_struct));
 ```
 
-The same rule is also applied in C++ world if we're talking about C
-structs, not C++ ones which might be filled properly by means of
-constructors. But the `tm_struct` is a C struct, thus it knows nothing
-about constructors and we have to clear it manually.
+It turned out that there's one more field in `tm_struct`: `tm_isdst`. It's easy
+to miss because daylight saving time is easy to forget about. According to C
+memory model, uninitialized fields or variables may or may not contain garbage.
+This garbage consequently lead to the fact that `std::mktime` returned `0`. I
+had no time to investigate why there were no garbage in case of iOS build, but
+my gut tells me that the reason lied in compiler's configuration.
 
-Actually, the idea is not *to clear*, but *to initialize* all members.
-It seems like we do initialize all `tm`'s members, but we are actually
-not. Unfortunately, the `tm_struct` has one more field - `tm_isdst` -
-which is still filled with garbage and leads to mistaken result.
+Now why am I blaming C legacy here? Well, first and foremost because in C++
+world we have constructors and it's common for structures and claases to
+initialize its fields upon constructions. No one wants garbage there, pretty
+much everybody would prefer to see zeroes. `tm_struct` is a structure that
+comes from C and has no implemented constructor, and therefore must be
+`memset`-ed manually.
 
-Ok, so why then it works on iOS most of the time and always fails on
-Android? I don't know, it just happened and that's all. I think it's
-happened because of compiler that may add some clearing code for us
-automatically, but I may be wrong.
-
-Why is it so dangerous? Why is there a huge pitfall for C++ in my
-opinion?
-
-I believe that C and C++ are different languages with different
-ideologies, but with similar syntax. If you wrote your own struct in
-C++, you have to define constructor to initialize all members with some
-default values. Thus C++ developers don't expect `memset` right after
-struct definition, they're relying on constructors which do that thing
-for them.
-
-In real world applications built for different platforms using different
-compilers it may be a big challenge to debug because the bug may be
-floating, so you spent a lot of time to catch it.
-
-So you should be mindful writing programs in C++, since you can fall
-into deep hole of C legacy.
-
+The huge problem I see here is that there's no way to differentiate C
+structures from C++ ones. Programmers MUST remember what is what in order to
+prevent such bugs. This is so wrong and confusing, not saying that programmers
+have better things to occupy their minds. Issues such as this should not exist
+in the first place. Even if a backward compatibility with C was very much
+desired, a well designed language should have provided at least some measures
+to prevent programmers falling into a rabbit hole.
 
 [Gameloft]: http://www.gameloft.com/
 [Blitz Brigade]: https://itunes.apple.com/us/app/blitz-brigade-online-multiplayer/id580175049?mt=8

@@ -1,5 +1,4 @@
 ---
-tags: [docker, python, thoughts]
 summary: >-
   Docker, Python and how to use them together in daily routine, like running
   unit tests.

@@ -1,5 +1,8 @@
 ---
-summary: A note about how to setup CORS in Caddy 2.
+summary: >-
+  Caddy 2 is an open source web server with automatic HTTPS which makes it a
+  gread choice to be used as a reverse proxy. This post provides a recipe of
+  how to configure sross-origin resource sharing (CORS) in Caddy.
 aliases: /howto/setup-cors-caddy-2/
 ---
 
@@ -8,17 +11,19 @@ Setup CORS in Caddy 2
 
 [Caddy 2] is an open source web server with automatic HTTPS. It's a wise choice
 for pet projects or self-hosted services, since you are free from managing TLS
-certs on your own and wiring things together can be super annoying.
+certs on your own and wiring things up can be super annoying.
 
-One missing feature in Caddy 2 is [CORS] support. For a "batteries included"
-web server, it's rather surprising. Fortunately, one can use the following
-[Caddy snippet] to augment any site with CORS headers without repeating oneself
-over and over again.
+One missing feature in Caddy 2, however, is cross-origin resource sharing
+([CORS]) support. For a "batteries included" web server, it's rather
+surprising. Fortunately, one can use the following [Caddy snippet] to augment
+any site with CORS headers without repeating oneself over and over again.
 
-**Please note**, you might want to update the list of headers returned by
-`Access-Control-Allow-Headers` and `Access-Control-Expose-Headers` HTTP headers
+::: note
+You might want to update the list of headers returned by
+`Access-Control-Allow-Headers` or `Access-Control-Expose-Headers` HTTP headers
 according to your application needs. Please refer to the CORS documentation to
-learn more what they mean.
+learn more what they are about.
+:::
 
 ```
 (cors) {
@@ -45,20 +50,17 @@ example.com {
 }
 ```
 
-The nice part about this snippet is that CORS headers are only returned for the
-requests with `Origin` HTTP header. That header is normally used by browsers
-only, which means you won't see CORS headers in the responses for the requests
-sent by `curl` or your-programming-language-of-choice.
+The nice part about this snippet is that CORS headers are only returned for
+HTTP requests with the `Origin` HTTP header. That header is normally used by
+browsers only, which means you won't see CORS headers in responses for requests
+sent by `curl` or *your-programming-language-of-choice*.
 
 I've been successfully using this snippet for quite a while now [to protect]
-[xsnippet-api] served at [api.xsnippet.org], so it can be used by
-[xsnippet-web] served at [xsnippet.org].
+[api.xsnippet.org], so it can be accessed by [xsnippet.org].
 
 [Caddy 2]: https://caddyserver.com/
 [CORS]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
 [Caddy snippet]: https://caddyserver.com/docs/caddyfile/concepts#snippets
 [to protect]: https://github.com/xsnippet/xsnippet-infra/blob/1d583a6868597cb71bb2ae08f60bc42ac4364e91/roles/xsnippet_api/templates/caddy.j2#L1-L17
-[xsnippet-api]: https://github.com/xsnippet/xsnippet-api
-[xsnippet-web]: https://github.com/xsnippet/xsnippet-web
 [api.xsnippet.org]: https://api.xsnippet.org
 [xsnippet.org]: https://xsnippet.org

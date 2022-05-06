@@ -5,6 +5,12 @@
   --page-hyperlink-hover-color: #2196F3;
   --page-alt-background-color: #FCFCFC;
   --page-alt-foreground-color: #757575;
+  --page-note-background-color: #1976D211;
+  --page-note-foreground-color: #1976D2;
+  --page-note-border-color: #1976D2;
+  --page-warning-background-color: #E3980011;
+  --page-warning-foreground-color: #E39800;
+  --page-warning-border-color: #E39800;
   --page-separator-shadow-1: rgba(0, 0, 0, 0.1);
   --page-separator-shadow-2: rgba(0, 0, 0, 0.2);
   --side-separator-color: #333333;
@@ -229,6 +235,24 @@ main ul {
 main em {
   border-bottom: 1px dotted;
   font-style: normal;
+}
+
+main .note {
+  background-color: var(--page-note-background-color);
+  color: var(--page-note-foreground-color);
+  border-left: 1px solid var(--page-note-border-color);
+  font-size: 0.95rem;
+  padding: 0.5rem 1rem;
+  margin: 0;
+}
+
+main .warning {
+  background-color: var(--page-warning-background-color);
+  color: var(--page-warning-foreground-color);
+  border-left: 1px solid var(--page-warning-border-color);
+  font-size: 0.95rem;
+  padding: 0.5rem 1rem;
+  margin: 0;
 }
 
 main .index-entry {
