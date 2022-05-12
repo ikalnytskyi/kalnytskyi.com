@@ -13,20 +13,20 @@
     <link rel="alternate" type="application/atom+xml" href="/feed.xml" title="Ihor Kalnytskyi" />
 
     <meta name="author" content="Ihor Kalnytskyi" />
-    <meta name="description" content="A note about how to enable client side decoration for GNOME terminal if you're using a non-GNOME desktop environment." />
+    <meta name="description" content="Client-side decoration (CSD) is the concept of allowing a software to be responsible for drawing its own window decorations. In this post you can learn how to trick GNOME Terminal to use client-side decoration even when non-GNOME desktop environment is used." />
 
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@ikalnytskyi" />
     <meta name="twitter:title" content="Enable CSD in GNOME Terminal" />
-    <meta name="twitter:description" content="A note about how to enable client side decoration for GNOME terminal if you're using a non-GNOME desktop environment." />
+    <meta name="twitter:description" content="Client-side decoration (CSD) is the concept of allowing a software to be responsible for drawing its own window decorations. In this post you can learn how to trick GNOME Terminal to use client-side decoration even when non-GNOME desktop environment is used." />
 
     <meta property="og:title" content="Enable CSD in GNOME Terminal" />
-    <meta property="og:description" content="A note about how to enable client side decoration for GNOME terminal if you're using a non-GNOME desktop environment." />
+    <meta property="og:description" content="Client-side decoration (CSD) is the concept of allowing a software to be responsible for drawing its own window decorations. In this post you can learn how to trick GNOME Terminal to use client-side decoration even when non-GNOME desktop environment is used." />
     <meta property="og:url" content="https://kalnytskyi.com/posts/gnome-terminal-csd/" />
     <meta property="og:site_name" content="Ihor Kalnytskyi" />
     <meta property="og:type" content="article" />
     <meta property="article:published_time" content="2021-10-24T00:00:00+00:00" />
-    <meta property="article:modified_time" content="2022-05-06T21:08:01.776224+00:00" />
+    <meta property="article:modified_time" content="2022-05-12T22:32:08.024165+00:00" />
     <meta property="article:author" content="Ihor Kalnytskyi" />
 
     <title>Enable CSD in GNOME Terminal</title>
@@ -35,7 +35,7 @@
   <div class="banner"><a rel="nofollow" href="https://www.comebackalive.in.ua/donate">Save lives in Ukraine</a> →</div>
 
   <aside>
-    <img class="about-pic" src="/about/me.jpg" alt="Ihor's photo" />
+    <img class="about-pic" src="/about/me.jpg" alt="photo" />
     <span class="about-txt"><a href="/about/" rel="me">Ihor Kalnytskyi</a>'s<br />
 thoughts & writings</span>
 
@@ -55,19 +55,25 @@ thoughts & writings</span>
         <h1>Enable CSD in GNOME Terminal</h1>
       </header>
 
-      <p>If you aren't using GNOME but for some reason want to use GNOME Terminal in
-other desktop environments (e.g. Sway or XFCE), you just might want to embrace
-client-side decoration (<a href="https://wiki.gnome.org/Initiatives/CSD">CSD</a>), so it looks like this:</p>
+      <p>Client-side decoration (<a href="https://wiki.gnome.org/Initiatives/CSD">CSD</a>) is the concept of allowing a graphical
+application software to be responsible for drawing its own window decorations,
+historically the responsibility of the window manager. GNOME applications is
+slowly migrating to client-side decoration. While some applications use CSD by
+default, others draw them only while running in GNOME session.</p>
 <p><img src="headerbar.png" alt="gnome-terminal with csd" /></p>
 <p>Unfortunately, CSD is not used by GNOME Terminal if you launch it outside of
-GNOME. Fortunately, there's a configuration option you can use to explicitly
-enable it. In order to do that just run the following command in your terminal:</p>
+GNOME session. Fortunately, there's a configuration option you can use to
+explicitly enable it. In order to do that just run the following command in
+your terminal:</p>
 <pre><code class="language-bash">$ gsettings <span class="nb">set</span> org.gnome.Terminal.Legacy.Settings headerbar <span class="nb">true</span>
 </code></pre>
-<p>Please note, the setting won't be applied as long as there's a running copy
-of <code>gnome-terminal-server</code> process. You have to terminate it and restart the
-terminal. The configuration option is tested with <code>gnome-terminal 3.40</code>. It
-might or might not work with other versions.</p>
+<div class="note">
+<p>The setting won't be applied as long as there's a running copy of
+<code>gnome-terminal-server</code> process. You have to terminate it and restart the
+terminal.</p>
+</div>
+<p>The configuration option is tested with <code>gnome-terminal 3.40</code>. It might or
+might not work with other versions.</p>
 
     </article>
   </main>
