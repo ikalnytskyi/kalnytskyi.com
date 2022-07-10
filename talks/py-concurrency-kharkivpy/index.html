@@ -1,1247 +1,814 @@
 <!DOCTYPE html>
-<html
-	xmlns="http://www.w3.org/1999/xhtml">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-		<title>Конкурентность и Параллелизм в Python</title>
-		<meta name="generator" content="Hovercraft! 1.0 http://regebro.github.com/hovercraft"></meta>
-		<link rel="stylesheet" href="css/hovercraft.css" media="all"></link>
-		<link rel="stylesheet" href="css/impressConsole.css" media="all"></link>
-		<link rel="stylesheet" href="css/highlight.css" media="all"></link>
-		<link rel="stylesheet" href="css/neat.css" media="screen,projection"></link>
-		<link rel="stylesheet" href="css/highlight.css" media="screen,projection"></link>
-	</head>
-	<body class="impress-not-supported">
-		<div id="impress" data-transition-duration="1000">
-			<div class="step step-level-1" step="0" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="0" data-y="0" data-z="0">
-				<h1 id="id1">Конкурентность и Параллелизм</h1>
-				<p>в Python</p>
-				<img src="images/python.png" width="240px"></img>
-				<p>Игорь Кальницкий</p>
-			</div>
-			<div class="step step-level-1" step="1" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="1600" data-y="0" data-z="0">
-				<h1 id="id2">Конкурентность</h1>
-				<ul>
-					<li>Выполнение задач 
-						<strong>логически</strong> параллельно.
-					</li>
-					<li>Каждая задача получает 
-						<strong>квант времени</strong> на исполнение.
-					</li>
-					<li>Задача 
-						<strong>не обязательно</strong> выполняется до конца.
-					</li>
-				</ul>
-			</div>
-			<div class="step step-level-1" step="2" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="3200" data-y="0" data-z="0">
-				<table cellpadding="0" cellspacing="0">
-					<thead>
-						<tr>
-							<th>
-								<p>Время</p>
-							</th>
-							<th>
-								<p>Задача А</p>
-							</th>
-							<th>
-								<p>Задача Б</p>
-							</th>
-							<th>
-								<p>Задача В</p>
-							</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>
-								<p>t + 0</p>
-							</td>
-							<td>
-								<p>исполняется</p>
-							</td>
-							<td>
-								<p>–</p>
-							</td>
-							<td>
-								<p>–</p>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<p>t + 1</p>
-							</td>
-							<td>
-								<p>–</p>
-							</td>
-							<td>
-								<p>исполняется</p>
-							</td>
-							<td>
-								<p>–</p>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<p>t + 2</p>
-							</td>
-							<td>
-								<p>–</p>
-							</td>
-							<td>
-								<p>–</p>
-							</td>
-							<td>
-								<p>исполняется</p>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<p>t + 3</p>
-							</td>
-							<td>
-								<p>–</p>
-							</td>
-							<td>
-								<p>исполняется</p>
-							</td>
-							<td>
-								<p>–</p>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<p>t + 4</p>
-							</td>
-							<td>
-								<p>–</p>
-							</td>
-							<td>
-								<p>–</p>
-							</td>
-							<td>
-								<p>исполняется</p>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<p>t + 5</p>
-							</td>
-							<td>
-								<p>исполняется</p>
-							</td>
-							<td>
-								<p>–</p>
-							</td>
-							<td>
-								<p>–</p>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div class="step step-level-1" step="3" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="4800" data-y="0" data-z="0">
-				<h1 id="id3">Параллелизм</h1>
-				<ul>
-					<li>Выполнение задач 
-						<strong>физически</strong> параллельно.
-					</li>
-					<li>Необходима 
-						<strong>аппаратная</strong> составляющая:
-						<ul>
-							<li>многоядерные процессоры</li>
-							<li>многопроцессорные системы</li>
-							<li>вычислительные кластера</li>
-						</ul>
-					</li>
-					<li>Частный случай 
-						<strong>конкурентности</strong>.
-					</li>
-				</ul>
-			</div>
-			<div class="step step-level-1" step="4" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="6400" data-y="0" data-z="0">
-				<p>2 вычислителя</p>
-				<table cellpadding="0" cellspacing="0">
-					<thead>
-						<tr>
-							<th>
-								<p>Время</p>
-							</th>
-							<th>
-								<p>Задача А</p>
-							</th>
-							<th>
-								<p>Задача Б</p>
-							</th>
-							<th>
-								<p>Задача В</p>
-							</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>
-								<p>t + 0</p>
-							</td>
-							<td>
-								<p>исполняется</p>
-							</td>
-							<td>
-								<p>исполняется</p>
-							</td>
-							<td>
-								<p>–</p>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<p>t + 1</p>
-							</td>
-							<td>
-								<p>исполняется</p>
-							</td>
-							<td>
-								<p>–</p>
-							</td>
-							<td>
-								<p>исполняется</p>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<p>t + 2</p>
-							</td>
-							<td>
-								<p>–</p>
-							</td>
-							<td>
-								<p>исполняется</p>
-							</td>
-							<td>
-								<p>исполняется</p>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<p>t + 3</p>
-							</td>
-							<td>
-								<p>исполняется</p>
-							</td>
-							<td>
-								<p>исполняется</p>
-							</td>
-							<td>
-								<p>–</p>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<p>t + 4</p>
-							</td>
-							<td>
-								<p>–</p>
-							</td>
-							<td>
-								<p>исполнятеся</p>
-							</td>
-							<td>
-								<p>исполняется</p>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<p>t + 5</p>
-							</td>
-							<td>
-								<p>исполняется</p>
-							</td>
-							<td>
-								<p>–</p>
-							</td>
-							<td>
-								<p>–</p>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div class="step step-level-1" step="5" data-rotate-x="0" data-rotate-y="0" data-rotate-z="90" data-scale="1" data-x="8000" data-y="0" data-z="0">
-				<h1 id="id4">Потоки</h1>
-				<ul>
-					<li>Могут исполняться 
-						<strong>параллельно</strong> на многоядерных системах.
-					</li>
-					<li>На одноядерных системах исполняются 
-						<strong>конкурентно</strong>.
-					</li>
-					<li>В Python имеем 
-						<strong>настоящие</strong> потоки операционной системы.
-					</li>
-				</ul>
-			</div>
-			<div class="step step-level-1" step="6" data-x="8000" data-y="1600" data-rotate-x="0" data-rotate-y="0" data-rotate-z="90" data-scale="1" data-z="0">
-				<pre class="highlight code python">
-					<span class="kn">from</span>
-					<span class="nn">threading</span>
-					<span class="kn">import</span>
-					<span class="n">Thread</span>
-					<span class="k">def</span>
-					<span class="nf">sqr</span>
-					<span class="p">(</span>
-					<span class="n">x</span>
-					<span class="p">):</span>
-					<span class="k">return</span>
-					<span class="n">x</span>
-					<span class="o">*</span>
-					<span class="n">x</span>
-					<span class="n">Thread</span>
-					<span class="p">(</span>
-					<span class="n">target</span>
-					<span class="o">=</span>
-					<span class="n">sqr</span>
-					<span class="p">,</span>
-					<span class="n">args</span>
-					<span class="o">=</span>
-					<span class="p">(</span>
-					<span class="mi">42</span>
-					<span class="p">,</span>
-					<span class="p">))</span>
-					<span class="o">.</span>
-					<span class="n">start</span>
-					<span class="p">()</span>
-				</pre>
-				<div class="notes">
-					<ul>
-						<li>Нельзя получить результат работы sqr(42).</li>
-						<li>Удобно использовать для создания фоновых задач.</li>
-					</ul>
-				</div>
-			</div>
-			<div class="step step-level-1" step="7" data-rotate-x="0" data-rotate-y="0" data-rotate-z="90" data-scale="1" data-x="8000" data-y="3200" data-z="0">
-				<pre class="highlight code python">
-					<span class="kn">from</span>
-					<span class="nn">concurrent.futures</span>
-					<span class="kn">import</span>
-					<span class="n">ThreadPoolExecutor</span>
-					<span class="k">def</span>
-					<span class="nf">sqr</span>
-					<span class="p">(</span>
-					<span class="n">x</span>
-					<span class="p">):</span>
-					<span class="k">return</span>
-					<span class="n">x</span>
-					<span class="o">*</span>
-					<span class="n">x</span>
-					<span class="k">with</span>
-					<span class="n">ThreadPoolExecutor</span>
-					<span class="p">(</span>
-					<span class="n">max_workers</span>
-					<span class="o">=</span>
-					<span class="mi">3</span>
-					<span class="p">)</span>
-					<span class="k">as</span>
-					<span class="n">executor</span>
-					<span class="p">:</span>
-					<span class="n">result</span>
-					<span class="o">=</span>
-					<span class="nb">list</span>
-					<span class="p">(</span>
-					<span class="n">executor</span>
-					<span class="o">.</span>
-					<span class="n">map</span>
-					<span class="p">(</span>
-					<span class="n">sqr</span>
-					<span class="p">,</span>
-					<span class="p">[</span>
-					<span class="mi">1</span>
-					<span class="p">,</span>
-					<span class="mi">2</span>
-					<span class="p">,</span>
-					<span class="mi">3</span>
-					<span class="p">,</span>
-					<span class="mi">4</span>
-					<span class="p">,</span>
-					<span class="mi">5</span>
-					<span class="p">]))</span>
-				</pre>
-				<div class="notes">
-					<ul>
-						<li>Нельзя организовать фоновую работу.</li>
-						<li>Удобно использовать для распределения задач на выполнение и получения
-результата.</li>
-					</ul>
-				</div>
-			</div>
-			<div class="step step-level-1" step="8" data-rotate-x="0" data-rotate-y="0" data-rotate-z="90" data-scale="1" data-x="8000" data-y="4800" data-z="0">
-				<h1 id="gil">А как же GIL?</h1>
-			</div>
-			<div class="step step-level-1" step="9" data-rotate-x="0" data-rotate-y="0" data-rotate-z="90" data-scale="1" data-x="8000" data-y="6400" data-z="0">
-				<h1 id="global-interpreter-lock-gil">Global Interpreter Lock (GIL)</h1>
-				<ul>
-					<li>Для простоты можно считать 
-						<strong>мьютексом</strong>.
-					</li>
-					<li>Ограничивает использование интерпретатора 
-						<strong>одним</strong> потоком.
-					</li>
-					<li>
-						<strong>Не является</strong> частью языка, и существует 
-						<strong>не во всех</strong> реализациях.
-					</li>
-					<li>Отпускается и захватывается по 
-						<strong>I/O</strong>.
-					</li>
-					<li>Отпускается и захватывается 
-						<strong>каждые N</strong> выполненных инструкций байт-кода.
-					</li>
-				</ul>
-			</div>
-			<div class="step step-level-1" step="10" data-rotate-x="0" data-rotate-y="0" data-rotate-z="90" data-scale="1" data-x="8000" data-y="8000" data-z="0">
-				<pre class="highlight code python">
-					<span class="kn">from</span>
-					<span class="nn">concurrent.futures</span>
-					<span class="kn">import</span>
-					<span class="n">ThreadPoolExecutor</span>
-					<span class="k">def</span>
-					<span class="nf">sqr</span>
-					<span class="p">(</span>
-					<span class="n">x</span>
-					<span class="p">):</span>
-					<span class="k">return</span>
-					<span class="n">x</span>
-					<span class="o">*</span>
-					<span class="n">x</span>
-					<span class="k">with</span>
-					<span class="n">ThreadPoolExecutor</span>
-					<span class="p">(</span>
-					<span class="n">max_workers</span>
-					<span class="o">=</span>
-					<span class="mi">3</span>
-					<span class="p">)</span>
-					<span class="k">as</span>
-					<span class="n">executor</span>
-					<span class="p">:</span>
-					<span class="n">result</span>
-					<span class="o">=</span>
-					<span class="nb">list</span>
-					<span class="p">(</span>
-					<span class="n">executor</span>
-					<span class="o">.</span>
-					<span class="n">map</span>
-					<span class="p">(</span>
-					<span class="n">sqr</span>
-					<span class="p">,</span>
-					<span class="p">[</span>
-					<span class="mi">1</span>
-					<span class="p">,</span>
-					<span class="mi">2</span>
-					<span class="p">,</span>
-					<span class="mi">3</span>
-					<span class="p">,</span>
-					<span class="mi">4</span>
-					<span class="p">,</span>
-					<span class="mi">5</span>
-					<span class="p">]))</span>
-				</pre>
-				<div class="notes">
-					<ul>
-						<li>Только один поток будет вычислять квадрат принятого числа в
-единицу времени.</li>
-						<li>Общая производительность будет хуже, чем при последовательных
-вызовах из-за экстра работы по созданию и коммуникации потоков.</li>
-					</ul>
-				</div>
-			</div>
-			<div class="step step-level-1" step="11" data-rotate-x="0" data-rotate-y="0" data-rotate-z="180" data-scale="1" data-x="8000" data-y="9600" data-z="0">
-				<h1 id="id5">Процессы</h1>
-				<ul>
-					<li>(!) Могут исполняться 
-						<strong>параллельно</strong> на многоядерных системах.
-					</li>
-					<li>(!) На одноядерных системах исполняются 
-						<strong>конкурентно</strong>.
-					</li>
-					<li>GIL 
-						<strong>не ограничивает</strong> параллельное выполнение.
-					</li>
-				</ul>
-			</div>
-			<div class="step step-level-1" step="12" data-x="6400" data-y="9600" data-rotate-x="0" data-rotate-y="0" data-rotate-z="180" data-scale="1" data-z="0">
-				<pre class="highlight code python">
-					<span class="kn">import</span>
-					<span class="nn">os</span>
-					<span class="n">os</span>
-					<span class="o">.</span>
-					<span class="n">fork</span>
-					<span class="p">()</span>
-				</pre>
-				<div class="notes">
-					<p>Multiprocessing the Hard Way :)</p>
-				</div>
-			</div>
-			<div class="step step-level-1" step="13" data-rotate-x="0" data-rotate-y="0" data-rotate-z="180" data-scale="1" data-x="4800" data-y="9600" data-z="0">
-				<pre class="highlight code python">
-					<span class="kn">from</span>
-					<span class="nn">multiprocessing</span>
-					<span class="kn">import</span>
-					<span class="n">Process</span>
-					<span class="k">def</span>
-					<span class="nf">sqr</span>
-					<span class="p">(</span>
-					<span class="n">x</span>
-					<span class="p">):</span>
-					<span class="k">return</span>
-					<span class="n">x</span>
-					<span class="o">*</span>
-					<span class="n">x</span>
-					<span class="n">Process</span>
-					<span class="p">(</span>
-					<span class="n">target</span>
-					<span class="o">=</span>
-					<span class="n">sqr</span>
-					<span class="p">,</span>
-					<span class="n">args</span>
-					<span class="o">=</span>
-					<span class="p">(</span>
-					<span class="mi">42</span>
-					<span class="p">,</span>
-					<span class="p">))</span>
-					<span class="o">.</span>
-					<span class="n">start</span>
-					<span class="p">()</span>
-				</pre>
-				<div class="notes">
-					<ul>
-						<li>Нельзя получить результат работы sqr(42).</li>
-						<li>Удобно использовать для создания фоновых задач, неограниченных GIL.</li>
-					</ul>
-				</div>
-			</div>
-			<div class="step step-level-1" step="14" data-rotate-x="0" data-rotate-y="0" data-rotate-z="180" data-scale="1" data-x="3200" data-y="9600" data-z="0">
-				<pre class="highlight code python">
-					<span class="kn">from</span>
-					<span class="nn">concurrent.futures</span>
-					<span class="kn">import</span>
-					<span class="n">ProcessPoolExecutor</span>
-					<span class="k">def</span>
-					<span class="nf">sqr</span>
-					<span class="p">(</span>
-					<span class="n">x</span>
-					<span class="p">):</span>
-					<span class="k">return</span>
-					<span class="n">x</span>
-					<span class="o">*</span>
-					<span class="n">x</span>
-					<span class="k">with</span>
-					<span class="n">ProcessPoolExecutor</span>
-					<span class="p">(</span>
-					<span class="n">max_workers</span>
-					<span class="o">=</span>
-					<span class="mi">3</span>
-					<span class="p">)</span>
-					<span class="k">as</span>
-					<span class="n">executor</span>
-					<span class="p">:</span>
-					<span class="n">result</span>
-					<span class="o">=</span>
-					<span class="nb">list</span>
-					<span class="p">(</span>
-					<span class="n">executor</span>
-					<span class="o">.</span>
-					<span class="n">map</span>
-					<span class="p">(</span>
-					<span class="n">sqr</span>
-					<span class="p">,</span>
-					<span class="p">[</span>
-					<span class="mi">1</span>
-					<span class="p">,</span>
-					<span class="mi">2</span>
-					<span class="p">,</span>
-					<span class="mi">3</span>
-					<span class="p">,</span>
-					<span class="mi">4</span>
-					<span class="p">,</span>
-					<span class="mi">5</span>
-					<span class="p">]))</span>
-				</pre>
-				<div class="notes">
-					<ul>
-						<li>В отличии от версии с потоками, вычисление может выполняться
-параллельно при доступной аппаратной составляющей.</li>
-						<li>Так как создание процесса – дорогостоящая операция, отдавать
-не трудоемкие задачи на выполнение имеет мало смысла.</li>
-					</ul>
-				</div>
-			</div>
-			<div class="step step-level-1" step="15" data-rotate-x="0" data-rotate-y="0" data-rotate-z="180" data-scale="1" data-x="1600" data-y="9600" data-z="0">
-				<h1 id="id6">Процессы или Потоки?</h1>
-				<table cellpadding="0" cellspacing="0">
-					<thead>
-						<tr>
-							<th>
-								<p>Характеристика</p>
-							</th>
-							<th>
-								<p>Потоки</p>
-							</th>
-							<th>
-								<p>Процессы</p>
-							</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>
-								<p>Ограничение GIL</p>
-							</td>
-							<td>
-								<p>
-									<strong>да</strong>
-								</p>
-							</td>
-							<td>
-								<p>нет</p>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<p>Время создания</p>
-							</td>
-							<td>
-								<p>меньше</p>
-							</td>
-							<td>
-								<p>
-									<strong>больше</strong>
-								</p>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<p>Время коммуникации</p>
-							</td>
-							<td>
-								<p>меньше</p>
-							</td>
-							<td>
-								<p>
-									<strong>больше</strong>
-								</p>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<p>Потребление памяти</p>
-							</td>
-							<td>
-								<p>меньше</p>
-							</td>
-							<td>
-								<p>
-									<strong>больше</strong>
-								</p>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div class="step step-level-1" step="16" data-rotate-x="0" data-rotate-y="0" data-rotate-z="90" data-scale="1" data-x="0" data-y="9600" data-z="0">
-				<h1 id="id7">Зеленые потоки</h1>
-				<ul>
-					<li>В основе лежат 
-						<strong>неблокирующие</strong> операции по работе с сокетами.
-					</li>
-					<li>Выполняются 
-						<strong>конкуретно</strong> и работают в контексте 
-						<strong>одного</strong> реального
-потока.
-					</li>
-					<li>Переключение между потоками происходит 
-						<strong>только</strong> по I/O. Потоки без I/O
-захватят управление 
-						<strong>навсегда</strong>.
-					</li>
-					<li>Представлены в виде библиотек 
-						<strong>gevent</strong> и 
-						<strong>eventlet</strong>.
-					</li>
-					<li>Позволяют 
-						<strong>экономить</strong> системные ресурсы.
-					</li>
-				</ul>
-			</div>
-			<div class="step step-level-1" step="17" data-x="0" data-y="11200" data-rotate-x="0" data-rotate-y="0" data-rotate-z="90" data-scale="1" data-z="0">
-				<pre class="highlight code python">
-					<span class="kn">import</span>
-					<span class="nn">eventlet</span>
-					<span class="p">;</span>
-					<span class="n">eventlet</span>
-					<span class="o">.</span>
-					<span class="n">monkey_patch</span>
-					<span class="p">()</span>
-					<span class="kn">from</span>
-					<span class="nn">threading</span>
-					<span class="kn">import</span>
-					<span class="n">Thread</span>
-					<span class="k">def</span>
-					<span class="nf">sqr</span>
-					<span class="p">(</span>
-					<span class="n">x</span>
-					<span class="p">):</span>
-					<span class="k">return</span>
-					<span class="n">x</span>
-					<span class="o">*</span>
-					<span class="n">x</span>
-					<span class="n">Thread</span>
-					<span class="p">(</span>
-					<span class="n">target</span>
-					<span class="o">=</span>
-					<span class="n">sqr</span>
-					<span class="p">,</span>
-					<span class="n">args</span>
-					<span class="o">=</span>
-					<span class="p">(</span>
-					<span class="mi">42</span>
-					<span class="p">,</span>
-					<span class="p">))</span>
-					<span class="o">.</span>
-					<span class="n">start</span>
-					<span class="p">()</span>
-				</pre>
-			</div>
-			<div class="step step-level-1" step="18" data-rotate-x="0" data-rotate-y="0" data-rotate-z="90" data-scale="1" data-x="0" data-y="12800" data-z="0">
-				<img src="images/greens.svg" width="480px"></img>
-				<div class="notes">
-					<ul>
-						<li>Event Loop использует технологии ядра для массовой обработки сокетов.
-Например, под Linux используется 
-							<strong>epoll</strong> для ожидание события на
-одном из сокетов.
-						</li>
-						<li>Когда событие пришло, вызывается зеленый поток, который связан с этим
-сокетом.</li>
-					</ul>
-				</div>
-			</div>
-			<div class="step step-level-1" step="19" data-rotate-x="0" data-rotate-y="0" data-rotate-z="90" data-scale="1" data-x="0" data-y="14400" data-z="0">
-				<h1 id="id8">Зеленые потоки или Потоки?</h1>
-				<table cellpadding="0" cellspacing="0">
-					<thead>
-						<tr>
-							<th>
-								<p>Зеленые потоки</p>
-							</th>
-							<th>
-								<p>Потоки</p>
-							</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>
-								<p>Подходят только для I/O приложений.</p>
-							</td>
-							<td>
-								<p>Подходят для любого рода приложений.</p>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<p>Экономят системные ресурсы.</p>
-							</td>
-							<td>
-								<p>Хотя и не будут исполняться
-параллельно.</p>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div class="step step-level-1" step="20" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="0" data-y="16000" data-z="0">
-				<h1 id="asyncio">asyncio</h1>
-				<ul>
-					<li>В основе лежат 
-						<strong>неблокирующие</strong> операции по работе с сокетами.
-					</li>
-					<li>Развивает идею зеленых потоков, и заставляет разработчика проектировать
-приложение с применением 
-						<strong>явных</strong> асинхронных абстракций.
-					</li>
-					<li>
-						<strong>Корутины</strong> вместо зеленых потоков.
-					</li>
-					<li>Переключение между корутинами осуществляется явно при вызове оператора
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <title>Конкурентность и Параллелизм в Python</title>
+      <meta charset="UTF-8"></meta>
+      <meta name="generator" content="Hovercraft! 1.0 http://regebro.github.com/hovercraft"></meta>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+      <link rel="stylesheet" href="css/hovercraft.css" media="all"></link>
+      <link rel="stylesheet" href="css/highlight.css" media="all"></link>
+      <link rel="stylesheet" href="css/neat.css" media="screen,projection"></link>
+      <link rel="stylesheet" href="css/highlight.css" media="screen,projection"></link>
+      <script type="text/x-mathjax-config">
+         MathJax.Hub.Config({
+           showProcessingMessages: false,
+           messageStyle: "none",
+           TeX : { extensions : ['color.js'] }
+         });
+      </script>
+   </head>
+   <body class="impress-not-supported">
+      <div id="impress" data-transition-duration="1000">
+         <div class="step step-level-1" step="0" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="0" data-y="0" data-z="0">
+            <h1 id="section-1">Конкурентность и Параллелизм</h1>
+            <p>в Python</p>
+            <img src="images/python.png" width="240px" align="center"></img>
+            <p>Игорь Кальницкий</p>
+         </div>
+         <div class="step step-level-1" step="1" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="1600" data-y="0" data-z="0">
+            <h1 id="section-2">Конкурентность</h1>
+            <ul>
+               <li>Выполнение задач <strong>логически</strong> параллельно.</li>
+               <li>Каждая задача получает <strong>квант времени</strong> на исполнение.</li>
+               <li>Задача <strong>не обязательно</strong> выполняется до конца.</li>
+            </ul>
+         </div>
+         <div class="step step-level-1" step="2" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="3200" data-y="0" data-z="0">
+            <table cellpadding="0" cellspacing="0">
+               <thead>
+                  <tr>
+                     <th>
+                        <p>Время</p>
+                     </th>
+                     <th>
+                        <p>Задача А</p>
+                     </th>
+                     <th>
+                        <p>Задача Б</p>
+                     </th>
+                     <th>
+                        <p>Задача В</p>
+                     </th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>
+                        <p>t + 0</p>
+                     </td>
+                     <td>
+                        <p>исполняется</p>
+                     </td>
+                     <td>
+                        <p>–</p>
+                     </td>
+                     <td>
+                        <p>–</p>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>
+                        <p>t + 1</p>
+                     </td>
+                     <td>
+                        <p>–</p>
+                     </td>
+                     <td>
+                        <p>исполняется</p>
+                     </td>
+                     <td>
+                        <p>–</p>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>
+                        <p>t + 2</p>
+                     </td>
+                     <td>
+                        <p>–</p>
+                     </td>
+                     <td>
+                        <p>–</p>
+                     </td>
+                     <td>
+                        <p>исполняется</p>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>
+                        <p>t + 3</p>
+                     </td>
+                     <td>
+                        <p>–</p>
+                     </td>
+                     <td>
+                        <p>исполняется</p>
+                     </td>
+                     <td>
+                        <p>–</p>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>
+                        <p>t + 4</p>
+                     </td>
+                     <td>
+                        <p>–</p>
+                     </td>
+                     <td>
+                        <p>–</p>
+                     </td>
+                     <td>
+                        <p>исполняется</p>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>
+                        <p>t + 5</p>
+                     </td>
+                     <td>
+                        <p>исполняется</p>
+                     </td>
+                     <td>
+                        <p>–</p>
+                     </td>
+                     <td>
+                        <p>–</p>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+         <div class="step step-level-1" step="3" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="4800" data-y="0" data-z="0">
+            <h1 id="section-3">Параллелизм</h1>
+            <ul>
+               <li>Выполнение задач <strong>физически</strong> параллельно.</li>
+               <li>
+                  Необходима <strong>аппаратная</strong> составляющая:
+                  <ul>
+                     <li>многоядерные процессоры</li>
+                     <li>многопроцессорные системы</li>
+                     <li>вычислительные кластера</li>
+                  </ul>
+               </li>
+               <li>Частный случай <strong>конкурентности</strong>.</li>
+            </ul>
+         </div>
+         <div class="step step-level-1" step="4" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="6400" data-y="0" data-z="0">
+            <p>2 вычислителя</p>
+            <table cellpadding="0" cellspacing="0">
+               <thead>
+                  <tr>
+                     <th>
+                        <p>Время</p>
+                     </th>
+                     <th>
+                        <p>Задача А</p>
+                     </th>
+                     <th>
+                        <p>Задача Б</p>
+                     </th>
+                     <th>
+                        <p>Задача В</p>
+                     </th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>
+                        <p>t + 0</p>
+                     </td>
+                     <td>
+                        <p>исполняется</p>
+                     </td>
+                     <td>
+                        <p>исполняется</p>
+                     </td>
+                     <td>
+                        <p>–</p>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>
+                        <p>t + 1</p>
+                     </td>
+                     <td>
+                        <p>исполняется</p>
+                     </td>
+                     <td>
+                        <p>–</p>
+                     </td>
+                     <td>
+                        <p>исполняется</p>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>
+                        <p>t + 2</p>
+                     </td>
+                     <td>
+                        <p>–</p>
+                     </td>
+                     <td>
+                        <p>исполняется</p>
+                     </td>
+                     <td>
+                        <p>исполняется</p>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>
+                        <p>t + 3</p>
+                     </td>
+                     <td>
+                        <p>исполняется</p>
+                     </td>
+                     <td>
+                        <p>исполняется</p>
+                     </td>
+                     <td>
+                        <p>–</p>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>
+                        <p>t + 4</p>
+                     </td>
+                     <td>
+                        <p>–</p>
+                     </td>
+                     <td>
+                        <p>исполнятеся</p>
+                     </td>
+                     <td>
+                        <p>исполняется</p>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>
+                        <p>t + 5</p>
+                     </td>
+                     <td>
+                        <p>исполняется</p>
+                     </td>
+                     <td>
+                        <p>–</p>
+                     </td>
+                     <td>
+                        <p>–</p>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+         <div class="step step-level-1" step="5" data-rotate-x="0" data-rotate-y="0" data-rotate-z="90" data-scale="1" data-x="8000" data-y="0" data-z="0">
+            <h1 id="section-4">Потоки</h1>
+            <ul>
+               <li>Могут исполняться <strong>параллельно</strong> на многоядерных системах.</li>
+               <li>На одноядерных системах исполняются <strong>конкурентно</strong>.</li>
+               <li>В Python имеем <strong>настоящие</strong> потоки операционной системы.</li>
+            </ul>
+         </div>
+         <div class="step step-level-1" step="6" data-x="8000" data-y="1600" data-rotate-x="0" data-rotate-y="0" data-rotate-z="90" data-scale="1" data-z="0">
+            <pre class="highlight code python"><span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span>
 
-						<strong>await</strong>.
-					</li>
-					<li>Требует использование 
-						<strong>специальных</strong> версий драйверов и библиотек.
-					</li>
-				</ul>
-			</div>
-			<div class="step step-level-1" step="21" data-x="1600" data-y="16000" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-z="0">
-				<pre class="highlight code python">
-					<span class="kn">import</span>
-					<span class="nn">asyncio</span>
-					<span class="n">async</span>
-					<span class="k">def</span>
-					<span class="nf">sqr</span>
-					<span class="p">(</span>
-					<span class="n">x</span>
-					<span class="p">):</span>
-					<span class="k">return</span>
-					<span class="n">x</span>
-					<span class="o">*</span>
-					<span class="n">x</span>
-					<span class="n">loop</span>
-					<span class="o">=</span>
-					<span class="n">asyncio</span>
-					<span class="o">.</span>
-					<span class="n">get_event_loop</span>
-					<span class="p">()</span>
-					<span class="n">result</span>
-					<span class="o">=</span>
-					<span class="n">loop</span>
-					<span class="o">.</span>
-					<span class="n">run_until_complete</span>
-					<span class="p">(</span>
-					<span class="n">sqr</span>
-					<span class="p">(</span>
-					<span class="mi">42</span>
-					<span class="p">))</span>
-				</pre>
-			</div>
-			<div class="step step-level-1" step="22" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="3200" data-y="16000" data-z="0">
-				<h1 id="id9">Зеленые потоки или asyncio?</h1>
-				<table cellpadding="0" cellspacing="0">
-					<thead>
-						<tr>
-							<th>
-								<p>Зеленые потоки</p>
-							</th>
-							<th>
-								<p>asyncio</p>
-							</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>
-								<p>Совместимы с обычным многопоточным
-кодом.</p>
-							</td>
-							<td>
-								<p>Требует использование специального
-синтаксиса, несовместимого с
-классическим кодом.</p>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<p>Благодаря костылям, работают со
-многими библиотеками и драйверами
-к БД.</p>
-							</td>
-							<td>
-								<p>Требует специальных версий
-библиотек и драйверов к БД.</p>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div class="step step-level-1" step="23" data-x="3200" data-y="17000" data-scale="0.5" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-z="0">
-				<p>Существует мнение, что асинхронное программирование работает быстрее
-для I/O приложений за счет отсутствия необходимости переходить в kernel
-space для переключения между потоками.</p>
-			</div>
-			<div class="step step-level-1" step="24" data-x="4800" data-y="17000" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="0.5" data-z="0">
-				<h1 id="id10">Эхо-сервер на Потоках</h1>
-				<pre class="highlight code python">
-					<span class="kn">from</span>
-					<span class="nn">socket</span>
-					<span class="kn">import</span>
-					<span class="o">*</span>
-					<span class="kn">from</span>
-					<span class="nn">threading</span>
-					<span class="kn">import</span>
-					<span class="n">Thread</span>
-					<span class="k">def</span>
-					<span class="nf">echo_server</span>
-					<span class="p">(</span>
-					<span class="n">conn</span>
-					<span class="p">):</span>
-					<span class="k">while</span>
-					<span class="bp">True</span>
-					<span class="p">:</span>
-					<span class="n">data</span>
-					<span class="o">=</span>
-					<span class="n">conn</span>
-					<span class="o">.</span>
-					<span class="n">recv</span>
-					<span class="p">(</span>
-					<span class="mi">100</span>
-					<span class="p">)</span>
-					<span class="k">if</span>
-					<span class="ow">not</span>
-					<span class="n">data</span>
-					<span class="p">:</span>
-					<span class="k">break</span>
-					<span class="n">conn</span>
-					<span class="o">.</span>
-					<span class="n">send</span>
-					<span class="p">(</span>
-					<span class="n">data</span>
-					<span class="p">)</span>
-					<span class="n">s</span>
-					<span class="o">=</span>
-					<span class="n">socket</span>
-					<span class="p">(</span>
-					<span class="n">AF_INET</span>
-					<span class="p">,</span>
-					<span class="n">SOCK_STREAM</span>
-					<span class="p">)</span>
-					<span class="n">s</span>
-					<span class="o">.</span>
-					<span class="n">bind</span>
-					<span class="p">((</span>
-					<span class="s1">'127.0.0.1'</span>
-					<span class="p">,</span>
-					<span class="mi">5000</span>
-					<span class="p">))</span>
-					<span class="n">s</span>
-					<span class="o">.</span>
-					<span class="n">listen</span>
-					<span class="p">(</span>
-					<span class="mi">1000</span>
-					<span class="p">)</span>
-					<span class="k">while</span>
-					<span class="bp">True</span>
-					<span class="p">:</span>
-					<span class="n">conn</span>
-					<span class="p">,</span>
-					<span class="n">addr</span>
-					<span class="o">=</span>
-					<span class="n">s</span>
-					<span class="o">.</span>
-					<span class="n">accept</span>
-					<span class="p">()</span>
-					<span class="n">Thread</span>
-					<span class="p">(</span>
-					<span class="n">target</span>
-					<span class="o">=</span>
-					<span class="n">echo_server</span>
-					<span class="p">,</span>
-					<span class="n">args</span>
-					<span class="o">=</span>
-					<span class="p">(</span>
-					<span class="n">conn</span>
-					<span class="p">,</span>
-					<span class="p">))</span>
-					<span class="o">.</span>
-					<span class="n">start</span>
-					<span class="p">()</span>
-				</pre>
-			</div>
-			<div class="step step-level-1" step="25" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="0.5" data-x="6400" data-y="17000" data-z="0">
-				<h1 id="id11">Эхо-сервер на Корутинах</h1>
-				<pre class="highlight code python">
-					<span class="kn">import</span>
-					<span class="nn">asyncio</span>
-					<span class="n">async</span>
-					<span class="k">def</span>
-					<span class="nf">echo_server</span>
-					<span class="p">(</span>
-					<span class="n">reader</span>
-					<span class="p">,</span>
-					<span class="n">writer</span>
-					<span class="p">):</span>
-					<span class="k">while</span>
-					<span class="bp">True</span>
-					<span class="p">:</span>
-					<span class="n">data</span>
-					<span class="o">=</span>
-					<span class="n">await</span>
-					<span class="n">reader</span>
-					<span class="o">.</span>
-					<span class="n">read</span>
-					<span class="p">(</span>
-					<span class="mi">100</span>
-					<span class="p">)</span>
-					<span class="k">if</span>
-					<span class="ow">not</span>
-					<span class="n">data</span>
-					<span class="p">:</span>
-					<span class="k">break</span>
-					<span class="n">writer</span>
-					<span class="o">.</span>
-					<span class="n">write</span>
-					<span class="p">(</span>
-					<span class="n">data</span>
-					<span class="p">)</span>
-					<span class="n">loop</span>
-					<span class="o">=</span>
-					<span class="n">asyncio</span>
-					<span class="o">.</span>
-					<span class="n">get_event_loop</span>
-					<span class="p">()</span>
-					<span class="n">coro</span>
-					<span class="o">=</span>
-					<span class="n">asyncio</span>
-					<span class="o">.</span>
-					<span class="n">start_server</span>
-					<span class="p">(</span>
-					<span class="n">echo_server</span>
-					<span class="p">,</span>
-					<span class="s1">'127.0.0.1'</span>
-					<span class="p">,</span>
-					<span class="mi">5000</span>
-					<span class="p">,</span>
-					<span class="n">loop</span>
-					<span class="o">=</span>
-					<span class="n">loop</span>
-					<span class="p">)</span>
-					<span class="n">server</span>
-					<span class="o">=</span>
-					<span class="n">loop</span>
-					<span class="o">.</span>
-					<span class="n">run_until_complete</span>
-					<span class="p">(</span>
-					<span class="n">coro</span>
-					<span class="p">)</span>
-					<span class="n">loop</span>
-					<span class="o">.</span>
-					<span class="n">run_forever</span>
-					<span class="p">()</span>
-				</pre>
-			</div>
-			<div class="step step-level-1" step="26" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="0.5" data-x="8000" data-y="17000" data-z="0">
-				<h1 id="id12">Результат</h1>
-				<table cellpadding="0" cellspacing="0">
-					<thead>
-						<tr>
-							<th>
-								<p>Эхо-Сервер</p>
-							</th>
-							<th>
-								<p>Кол-во клиентов</p>
-							</th>
-							<th>
-								<p>Пропускная способность</p>
-							</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>
-								<p>на Потоках</p>
-							</td>
-							<td>
-								<p>100</p>
-							</td>
-							<td>
-								<p>~ 130000 запросов/с</p>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<p>на Корутинах</p>
-							</td>
-							<td>
-								<p>100</p>
-							</td>
-							<td>
-								<p>~ 20000 запросов/с</p>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div class="step step-level-1" step="27" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="0.5" data-x="9600" data-y="17000" data-z="0">
-				<h1 id="o-o">o_O</h1>
-			</div>
-			<div class="step step-level-1" step="28" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="0.5" data-x="11200" data-y="17000" data-z="0">
-				<h1 id="id13">Исследование</h1>
-				<table cellpadding="0" cellspacing="0">
-					<thead>
-						<tr>
-							<th>
-								<p>Эхо-Сервер</p>
-							</th>
-							<th>
-								<p>CPU</p>
-							</th>
-							<th>
-								<p>linux perf</p>
-							</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>
-								<p>на Потоках</p>
-							</td>
-							<td>
-								<p>~ 195%</p>
-							</td>
-							<td>
-								<ul>
-									<li>~ 75% времени - linux kernel</li>
-									<li>~ 17% времени - python3.5</li>
-									<li>~ 7% времени - libpthread</li>
-								</ul>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<p>на Корутинах</p>
-							</td>
-							<td>
-								<p>~ 99%</p>
-							</td>
-							<td>
-								<ul>
-									<li>~ 28% времени - linux kernel</li>
-									<li>~ 67% времени - python3.5</li>
-									<li>~ 5% времени - libc</li>
-								</ul>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div class="step step-level-1" step="29" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="0.5" data-x="12800" data-y="17000" data-z="0">
-				<h1 id="python">Python медленный :'(</h1>
-			</div>
-			<div class="step step-level-1" step="30" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="0.5" data-x="14400" data-y="17000" data-z="0">
-				<h1 id="id14">Зато потоки умеют 
-					<strong>параллельно</strong> исполняться :)
-				</h1>
-			</div>
-			<div class="step step-level-1" step="31" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="0.5" data-x="16000" data-y="17000" data-z="0">
-				<h1 id="id15">Хм.. А что в реальном мире?</h1>
-			</div>
-			<div class="step step-level-1" step="32" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="0.5" data-x="17600" data-y="17000" data-z="0">
-				<h1 id="id16">Результат</h1>
-				<table cellpadding="0" cellspacing="0">
-					<thead>
-						<tr>
-							<th>
-								<p>Эхо-Сервер</p>
-							</th>
-							<th>
-								<p>Кол-во
-клиентов</p>
-							</th>
-							<th>
-								<p>Пропускная способность
-на локальном хосте</p>
-							</th>
-							<th>
-								<p>Пропускная способность
-в сети</p>
-							</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>
-								<p>на Потоках</p>
-							</td>
-							<td>
-								<p>100</p>
-							</td>
-							<td>
-								<p>~ 130000 запросов/с</p>
-							</td>
-							<td>
-								<p>~ 2800 запросов/с</p>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<p>на Корутинах</p>
-							</td>
-							<td>
-								<p>100</p>
-							</td>
-							<td>
-								<p>~ 20000 запросов/с</p>
-							</td>
-							<td>
-								<p>~ 2800 запросов/с</p>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div class="step step-level-1" step="33" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="0.5" data-x="19200" data-y="17000" data-z="0">
-				<h1 id="id17">Что надо усвоить?</h1>
-				<ul>
-					<li>Конкурентность 
-						<strong>!=</strong> Параллелизм
-					</li>
-					<li>Потоки 
-						<strong>не могут</strong> исполняться параллельно на уровне интерпретатора.
-					</li>
-					<li>Для параллельного вычисления - используем 
-						<strong>процессы</strong>.
-					</li>
-					<li>Зеленые потоки и Корутины подходят 
-						<strong>только</strong> для I/O приложений.
-					</li>
-					<li>Для сетевых приложений с высокой нагрузкой хорошим решением станет
-комбинация процессов и корутин/зеленых потоков.</li>
-				</ul>
-			</div>
-			<div class="step step-level-1" step="34" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="0.5" data-x="20800" data-y="17000" data-z="0">
-				<h1 id="id18">Материалы по теме</h1>
-				<ul>
-					<li>
-						<a href="http://www.dabeaz.com/python/NewGIL.pdf">David Beazley - Inside the New Python GIL</a>
-					</li>
-					<li>
-						<a href="https://www.youtube.com/watch?v=MCs5OvhV9S4">David Beazley – Python Concurrency From the Ground Up</a>
-					</li>
-					<li>
-						<a href="http://techspot.zzzeek.org/2015/02/15/asynchronous-python-and-databases/">Mike Bayer – Asynchronous Python and Databases</a>
-					</li>
-				</ul>
-			</div>
-			<div class="step step-level-1" step="35" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="0.5" data-x="22400" data-y="17000" data-z="0">
-				<p>
-					<a href="mailto:ihor@kalnytskyi.com">ihor@kalnytskyi.com</a>
-				</p>
-			</div>
-		</div>
-		<div id="hovercraft-help" class="hide">
-			<table>
-				<tr>
-					<th>Space</th>
-					<td>Forward</td>
-				</tr>
-				<tr>
-					<th>Right, Down, Page Down</th>
-					<td>Next slide</td>
-				</tr>
-				<tr>
-					<th>Left, Up, Page Up</th>
-					<td>Previous slide</td>
-				</tr>
-				<tr>
-					<th>P</th>
-					<td>Open presenter console</td>
-				</tr>
-				<tr>
-					<th>H</th>
-					<td>Toggle this help</td>
-				</tr>
-			</table>
-		</div>
-		<script type="text/javascript" src="js/impress.js"></script>
-		<script type="text/javascript" src="js/impressConsole.js"></script>
-		<script type="text/javascript" src="js/hovercraft.js"></script>
-	</body>
+<span class="k">def</span> <span class="nf">sqr</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+
+<span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">sqr</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="mi">42</span><span class="p">,</span> <span class="p">))</span><span class="o">.</span><span class="n">start</span><span class="p">()</span></pre>
+            <div class="notes">
+               <ul>
+                  <li>Нельзя получить результат работы sqr(42).</li>
+                  <li>Удобно использовать для создания фоновых задач.</li>
+               </ul>
+            </div>
+         </div>
+         <div class="step step-level-1" step="7" data-rotate-x="0" data-rotate-y="0" data-rotate-z="90" data-scale="1" data-x="8000" data-y="3200" data-z="0">
+            <pre class="highlight code python"><span class="kn">from</span> <span class="nn">concurrent.futures</span> <span class="kn">import</span> <span class="n">ThreadPoolExecutor</span>
+
+<span class="k">def</span> <span class="nf">sqr</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+
+<span class="k">with</span> <span class="n">ThreadPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">executor</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">sqr</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]))</span></pre>
+            <div class="notes">
+               <ul>
+                  <li>Нельзя организовать фоновую работу.</li>
+                  <li>Удобно использовать для распределения задач на выполнение и получения
+                     результата.
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="step step-level-1" step="8" data-rotate-x="0" data-rotate-y="0" data-rotate-z="90" data-scale="1" data-x="8000" data-y="4800" data-z="0">
+            <h1 id="gil">А как же GIL?</h1>
+         </div>
+         <div class="step step-level-1" step="9" data-rotate-x="0" data-rotate-y="0" data-rotate-z="90" data-scale="1" data-x="8000" data-y="6400" data-z="0">
+            <h1 id="global-interpreter-lock-gil">Global Interpreter Lock (GIL)</h1>
+            <ul>
+               <li>Для простоты можно считать <strong>мьютексом</strong>.</li>
+               <li>Ограничивает использование интерпретатора <strong>одним</strong> потоком.</li>
+               <li><strong>Не является</strong> частью языка, и существует <strong>не во всех</strong> реализациях.</li>
+               <li>Отпускается и захватывается по <strong>I/O</strong>.</li>
+               <li>Отпускается и захватывается <strong>каждые N</strong> выполненных инструкций байт-кода.</li>
+            </ul>
+         </div>
+         <div class="step step-level-1" step="10" data-rotate-x="0" data-rotate-y="0" data-rotate-z="90" data-scale="1" data-x="8000" data-y="8000" data-z="0">
+            <pre class="highlight code python"><span class="kn">from</span> <span class="nn">concurrent.futures</span> <span class="kn">import</span> <span class="n">ThreadPoolExecutor</span>
+
+<span class="k">def</span> <span class="nf">sqr</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+
+<span class="k">with</span> <span class="n">ThreadPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">executor</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">sqr</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]))</span></pre>
+            <div class="notes">
+               <ul>
+                  <li>Только один поток будет вычислять квадрат принятого числа в
+                     единицу времени.
+                  </li>
+                  <li>Общая производительность будет хуже, чем при последовательных
+                     вызовах из-за экстра работы по созданию и коммуникации потоков.
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="step step-level-1" step="11" data-rotate-x="0" data-rotate-y="0" data-rotate-z="180" data-scale="1" data-x="8000" data-y="9600" data-z="0">
+            <h1 id="section-5">Процессы</h1>
+            <ul>
+               <li>(!) Могут исполняться <strong>параллельно</strong> на многоядерных системах.</li>
+               <li>(!) На одноядерных системах исполняются <strong>конкурентно</strong>.</li>
+               <li>GIL <strong>не ограничивает</strong> параллельное выполнение.</li>
+            </ul>
+         </div>
+         <div class="step step-level-1" step="12" data-x="6400" data-y="9600" data-rotate-x="0" data-rotate-y="0" data-rotate-z="180" data-scale="1" data-z="0">
+            <pre class="highlight code python"><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">fork</span><span class="p">()</span></pre>
+            <div class="notes">
+               <p>Multiprocessing the Hard Way :)</p>
+            </div>
+         </div>
+         <div class="step step-level-1" step="13" data-rotate-x="0" data-rotate-y="0" data-rotate-z="180" data-scale="1" data-x="4800" data-y="9600" data-z="0">
+            <pre class="highlight code python"><span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Process</span>
+
+<span class="k">def</span> <span class="nf">sqr</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+
+<span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">sqr</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="mi">42</span><span class="p">,</span> <span class="p">))</span><span class="o">.</span><span class="n">start</span><span class="p">()</span></pre>
+            <div class="notes">
+               <ul>
+                  <li>Нельзя получить результат работы sqr(42).</li>
+                  <li>Удобно использовать для создания фоновых задач, неограниченных GIL.</li>
+               </ul>
+            </div>
+         </div>
+         <div class="step step-level-1" step="14" data-rotate-x="0" data-rotate-y="0" data-rotate-z="180" data-scale="1" data-x="3200" data-y="9600" data-z="0">
+            <pre class="highlight code python"><span class="kn">from</span> <span class="nn">concurrent.futures</span> <span class="kn">import</span> <span class="n">ProcessPoolExecutor</span>
+
+<span class="k">def</span> <span class="nf">sqr</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+
+<span class="k">with</span> <span class="n">ProcessPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">executor</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">sqr</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]))</span></pre>
+            <div class="notes">
+               <ul>
+                  <li>В отличии от версии с потоками, вычисление может выполняться
+                     параллельно при доступной аппаратной составляющей.
+                  </li>
+                  <li>Так как создание процесса – дорогостоящая операция, отдавать
+                     не трудоемкие задачи на выполнение имеет мало смысла.
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="step step-level-1" step="15" data-rotate-x="0" data-rotate-y="0" data-rotate-z="180" data-scale="1" data-x="1600" data-y="9600" data-z="0">
+            <h1 id="section-6">Процессы или Потоки?</h1>
+            <table cellpadding="0" cellspacing="0">
+               <thead>
+                  <tr>
+                     <th>
+                        <p>Характеристика</p>
+                     </th>
+                     <th>
+                        <p>Потоки</p>
+                     </th>
+                     <th>
+                        <p>Процессы</p>
+                     </th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>
+                        <p>Ограничение GIL</p>
+                     </td>
+                     <td>
+                        <p><strong>да</strong></p>
+                     </td>
+                     <td>
+                        <p>нет</p>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>
+                        <p>Время создания</p>
+                     </td>
+                     <td>
+                        <p>меньше</p>
+                     </td>
+                     <td>
+                        <p><strong>больше</strong></p>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>
+                        <p>Время коммуникации</p>
+                     </td>
+                     <td>
+                        <p>меньше</p>
+                     </td>
+                     <td>
+                        <p><strong>больше</strong></p>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>
+                        <p>Потребление памяти</p>
+                     </td>
+                     <td>
+                        <p>меньше</p>
+                     </td>
+                     <td>
+                        <p><strong>больше</strong></p>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+         <div class="step step-level-1" step="16" data-rotate-x="0" data-rotate-y="0" data-rotate-z="90" data-scale="1" data-x="0" data-y="9600" data-z="0">
+            <h1 id="section-7">Зеленые потоки</h1>
+            <ul>
+               <li>В основе лежат <strong>неблокирующие</strong> операции по работе с сокетами.</li>
+               <li>Выполняются <strong>конкуретно</strong> и работают в контексте <strong>одного</strong> реального
+                  потока.
+               </li>
+               <li>Переключение между потоками происходит <strong>только</strong> по I/O. Потоки без I/O
+                  захватят управление <strong>навсегда</strong>.
+               </li>
+               <li>Представлены в виде библиотек <strong>gevent</strong> и <strong>eventlet</strong>.</li>
+               <li>Позволяют <strong>экономить</strong> системные ресурсы.</li>
+            </ul>
+         </div>
+         <div class="step step-level-1" step="17" data-x="0" data-y="11200" data-rotate-x="0" data-rotate-y="0" data-rotate-z="90" data-scale="1" data-z="0">
+            <pre class="highlight code python"><span class="kn">import</span> <span class="nn">eventlet</span><span class="p">;</span> <span class="n">eventlet</span><span class="o">.</span><span class="n">monkey_patch</span><span class="p">()</span>
+
+<span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span>
+
+<span class="k">def</span> <span class="nf">sqr</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+
+<span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">sqr</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="mi">42</span><span class="p">,</span> <span class="p">))</span><span class="o">.</span><span class="n">start</span><span class="p">()</span></pre>
+         </div>
+         <div class="step step-level-1" step="18" data-rotate-x="0" data-rotate-y="0" data-rotate-z="90" data-scale="1" data-x="0" data-y="12800" data-z="0">
+            <img src="images/greens.svg" width="480px" align="center"></img>
+            <div class="notes">
+               <ul>
+                  <li>Event Loop использует технологии ядра для массовой обработки сокетов.
+                     Например, под Linux используется <strong>epoll</strong> для ожидание события на
+                     одном из сокетов.
+                  </li>
+                  <li>Когда событие пришло, вызывается зеленый поток, который связан с этим
+                     сокетом.
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="step step-level-1" step="19" data-rotate-x="0" data-rotate-y="0" data-rotate-z="90" data-scale="1" data-x="0" data-y="14400" data-z="0">
+            <h1 id="section-8">Зеленые потоки или Потоки?</h1>
+            <table cellpadding="0" cellspacing="0">
+               <thead>
+                  <tr>
+                     <th>
+                        <p>Зеленые потоки</p>
+                     </th>
+                     <th>
+                        <p>Потоки</p>
+                     </th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>
+                        <p>Подходят только для I/O приложений.</p>
+                     </td>
+                     <td>
+                        <p>Подходят для любого рода приложений.</p>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>
+                        <p>Экономят системные ресурсы.</p>
+                     </td>
+                     <td>
+                        <p>Хотя и не будут исполняться
+                           параллельно.
+                        </p>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+         <div class="step step-level-1" step="20" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="0" data-y="16000" data-z="0">
+            <h1 id="asyncio">asyncio</h1>
+            <ul>
+               <li>В основе лежат <strong>неблокирующие</strong> операции по работе с сокетами.</li>
+               <li>Развивает идею зеленых потоков, и заставляет разработчика проектировать
+                  приложение с применением <strong>явных</strong> асинхронных абстракций.
+               </li>
+               <li><strong>Корутины</strong> вместо зеленых потоков.</li>
+               <li>Переключение между корутинами осуществляется явно при вызове оператора
+                  <strong>await</strong>.
+               </li>
+               <li>Требует использование <strong>специальных</strong> версий драйверов и библиотек.</li>
+            </ul>
+         </div>
+         <div class="step step-level-1" step="21" data-x="1600" data-y="16000" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-z="0">
+            <pre class="highlight code python"><span class="kn">import</span> <span class="nn">asyncio</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">sqr</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+
+<span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">sqr</span><span class="p">(</span><span class="mi">42</span><span class="p">))</span></pre>
+         </div>
+         <div class="step step-level-1" step="22" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="3200" data-y="16000" data-z="0">
+            <h1 id="asyncio-1">Зеленые потоки или asyncio?</h1>
+            <table cellpadding="0" cellspacing="0">
+               <thead>
+                  <tr>
+                     <th>
+                        <p>Зеленые потоки</p>
+                     </th>
+                     <th>
+                        <p>asyncio</p>
+                     </th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>
+                        <p>Совместимы с обычным многопоточным
+                           кодом.
+                        </p>
+                     </td>
+                     <td>
+                        <p>Требует использование специального
+                           синтаксиса, несовместимого с
+                           классическим кодом.
+                        </p>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>
+                        <p>Благодаря костылям, работают со
+                           многими библиотеками и драйверами
+                           к БД.
+                        </p>
+                     </td>
+                     <td>
+                        <p>Требует специальных версий
+                           библиотек и драйверов к БД.
+                        </p>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+         <div class="step step-level-1" step="23" data-x="3200" data-y="17000" data-scale="0.5" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-z="0">
+            <p>Существует мнение, что асинхронное программирование работает быстрее
+               для I/O приложений за счет отсутствия необходимости переходить в kernel
+               space для переключения между потоками.
+            </p>
+         </div>
+         <div class="step step-level-1" step="24" data-x="4800" data-y="17000" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="0.5" data-z="0">
+            <h1 id="section-9">Эхо-сервер на Потоках</h1>
+            <pre class="highlight code python"><span class="kn">from</span> <span class="nn">socket</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span>
+
+<span class="k">def</span> <span class="nf">echo_server</span><span class="p">(</span><span class="n">conn</span><span class="p">):</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="p">:</span> <span class="k">break</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="n">s</span> <span class="o">=</span> <span class="n">socket</span><span class="p">(</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">SOCK_STREAM</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">bind</span><span class="p">((</span><span class="s1">'127.0.0.1'</span><span class="p">,</span> <span class="mi">5000</span><span class="p">))</span>
+<span class="n">s</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="n">conn</span><span class="p">,</span> <span class="n">addr</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
+    <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">echo_server</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="p">))</span><span class="o">.</span><span class="n">start</span><span class="p">()</span></pre>
+         </div>
+         <div class="step step-level-1" step="25" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="0.5" data-x="6400" data-y="17000" data-z="0">
+            <h1 id="section-10">Эхо-сервер на Корутинах</h1>
+            <pre class="highlight code python"><span class="kn">import</span> <span class="nn">asyncio</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">echo_server</span><span class="p">(</span><span class="n">reader</span><span class="p">,</span> <span class="n">writer</span><span class="p">):</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="k">await</span> <span class="n">reader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="p">:</span> <span class="k">break</span>
+        <span class="n">writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+<span class="n">coro</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">start_server</span><span class="p">(</span><span class="n">echo_server</span><span class="p">,</span> <span class="s1">'127.0.0.1'</span><span class="p">,</span> <span class="mi">5000</span><span class="p">,</span> <span class="n">loop</span><span class="o">=</span><span class="n">loop</span><span class="p">)</span>
+<span class="n">server</span> <span class="o">=</span> <span class="n">loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">coro</span><span class="p">)</span>
+
+<span class="n">loop</span><span class="o">.</span><span class="n">run_forever</span><span class="p">()</span></pre>
+         </div>
+         <div class="step step-level-1" step="26" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="0.5" data-x="8000" data-y="17000" data-z="0">
+            <h1 id="section-11">Результат</h1>
+            <table cellpadding="0" cellspacing="0">
+               <thead>
+                  <tr>
+                     <th>
+                        <p>Эхо-Сервер</p>
+                     </th>
+                     <th>
+                        <p>Кол-во клиентов</p>
+                     </th>
+                     <th>
+                        <p>Пропускная способность</p>
+                     </th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>
+                        <p>на Потоках</p>
+                     </td>
+                     <td>
+                        <p>100</p>
+                     </td>
+                     <td>
+                        <p>~ 130000 запросов/с</p>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>
+                        <p>на Корутинах</p>
+                     </td>
+                     <td>
+                        <p>100</p>
+                     </td>
+                     <td>
+                        <p>~ 20000 запросов/с</p>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+         <div class="step step-level-1" step="27" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="0.5" data-x="9600" data-y="17000" data-z="0">
+            <h1 id="o-o">o_O</h1>
+         </div>
+         <div class="step step-level-1" step="28" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="0.5" data-x="11200" data-y="17000" data-z="0">
+            <h1 id="section-12">Исследование</h1>
+            <table cellpadding="0" cellspacing="0">
+               <thead>
+                  <tr>
+                     <th>
+                        <p>Эхо-Сервер</p>
+                     </th>
+                     <th>
+                        <p>CPU</p>
+                     </th>
+                     <th>
+                        <p>linux perf</p>
+                     </th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>
+                        <p>на Потоках</p>
+                     </td>
+                     <td>
+                        <p>~ 195%</p>
+                     </td>
+                     <td>
+                        <ul>
+                           <li>~ 75% времени - linux kernel</li>
+                           <li>~ 17% времени - python3.5</li>
+                           <li>~ 7% времени - libpthread</li>
+                        </ul>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>
+                        <p>на Корутинах</p>
+                     </td>
+                     <td>
+                        <p>~ 99%</p>
+                     </td>
+                     <td>
+                        <ul>
+                           <li>~ 28% времени - linux kernel</li>
+                           <li>~ 67% времени - python3.5</li>
+                           <li>~ 5% времени - libc</li>
+                        </ul>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+         <div class="step step-level-1" step="29" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="0.5" data-x="12800" data-y="17000" data-z="0">
+            <h1 id="python">Python медленный :'(</h1>
+         </div>
+         <div class="step step-level-1" step="30" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="0.5" data-x="14400" data-y="17000" data-z="0">
+            <h1 id="section-13">Зато потоки умеют <strong>параллельно</strong> исполняться :)</h1>
+         </div>
+         <div class="step step-level-1" step="31" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="0.5" data-x="16000" data-y="17000" data-z="0">
+            <h1 id="section-14">Хм.. А что в реальном мире?</h1>
+         </div>
+         <div class="step step-level-1" step="32" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="0.5" data-x="17600" data-y="17000" data-z="0">
+            <h1 id="section-15">Результат</h1>
+            <table cellpadding="0" cellspacing="0">
+               <thead>
+                  <tr>
+                     <th>
+                        <p>Эхо-Сервер</p>
+                     </th>
+                     <th>
+                        <p>Кол-во
+                           клиентов
+                        </p>
+                     </th>
+                     <th>
+                        <p>Пропускная способность
+                           на локальном хосте
+                        </p>
+                     </th>
+                     <th>
+                        <p>Пропускная способность
+                           в сети
+                        </p>
+                     </th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>
+                        <p>на Потоках</p>
+                     </td>
+                     <td>
+                        <p>100</p>
+                     </td>
+                     <td>
+                        <p>~ 130000 запросов/с</p>
+                     </td>
+                     <td>
+                        <p>~ 2800 запросов/с</p>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>
+                        <p>на Корутинах</p>
+                     </td>
+                     <td>
+                        <p>100</p>
+                     </td>
+                     <td>
+                        <p>~ 20000 запросов/с</p>
+                     </td>
+                     <td>
+                        <p>~ 2800 запросов/с</p>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+         <div class="step step-level-1" step="33" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="0.5" data-x="19200" data-y="17000" data-z="0">
+            <h1 id="section-16">Что надо усвоить?</h1>
+            <ul>
+               <li>Конкурентность <strong>!=</strong> Параллелизм</li>
+               <li>Потоки <strong>не могут</strong> исполняться параллельно на уровне интерпретатора.</li>
+               <li>Для параллельного вычисления - используем <strong>процессы</strong>.</li>
+               <li>Зеленые потоки и Корутины подходят <strong>только</strong> для I/O приложений.</li>
+               <li>Для сетевых приложений с высокой нагрузкой хорошим решением станет
+                  комбинация процессов и корутин/зеленых потоков.
+               </li>
+            </ul>
+         </div>
+         <div class="step step-level-1" step="34" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="0.5" data-x="20800" data-y="17000" data-z="0">
+            <h1 id="section-17">Материалы по теме</h1>
+            <ul>
+               <li><a href="http://www.dabeaz.com/python/NewGIL.pdf">David Beazley - Inside the New Python GIL</a></li>
+               <li><a href="https://www.youtube.com/watch?v=MCs5OvhV9S4">David Beazley – Python Concurrency From the Ground Up</a></li>
+               <li><a href="http://techspot.zzzeek.org/2015/02/15/asynchronous-python-and-databases/">Mike Bayer – Asynchronous Python and Databases</a></li>
+            </ul>
+         </div>
+         <div class="step step-level-1" step="35" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="0.5" data-x="22400" data-y="17000" data-z="0">
+            <p><a href="mailto:ihor@kalnytskyi.com">ihor@kalnytskyi.com</a></p>
+         </div>
+      </div>
+      <script type="text/javascript" src="js/impress.js"></script><script type="text/javascript" src="js/gotoSlide.js"></script><script type="text/javascript" src="js/hovercraft.js"></script>
+   </body>
 </html>
-
