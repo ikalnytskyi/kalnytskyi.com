@@ -89,18 +89,17 @@ Name=wg0
 
 [Network]
 Address=10.0.0.1/24
-IPForward=yes
-IPMasquerade=yes
+IPMasquerade=both
 ```
 
 There are couple of things to note:
 
  * Since `/24` network mask is used, systemd-networkd will automatically add a
    route for the whole network to be routed via the WireGuard tunnel. Without
-   that mask, it'd be up to a user to configure proper routing.
- * Both `IPForward` and `IPMasquerade` are only needed if the server is
-   expected to be used as a gateway to the Internet. Without these options,
-   it'd be up to a user to configure the firewall.
+   that mask, it'd be up to a user to properly configure routing on the system.
+ * The `IPMasquerade` setting is only needed if the server is expected to be
+   used as a gateway to the Internet. Without this option, it'd be up to a user
+   to properly configure the firewall.
 
 When both the network device and the network are configured, the only remained
 step is to run `$ networkctl reload` to pipe in and apply latest configuration.
