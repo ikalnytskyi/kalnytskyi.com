@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://kalnytskyi.com</id>
   <title>Ihor Kalnytskyi</title>
-  <updated>2022-07-10T12:23:30.751066+00:00</updated>
+  <updated>2022-08-13T18:56:24.878575+00:00</updated>
   <link href="https://kalnytskyi.com/feed.xml" rel="self" type="application/atom+xml"/>
   <link href="https://kalnytskyi.com" rel="alternate" type="text/html"/>
   <generator uri="https://github.com/ikalnytskyi/holocron" version="0.4.0">Holocron/v0.4.0</generator>
@@ -10,7 +10,7 @@
   <entry>
     <id>https://kalnytskyi.com/posts/setup-wireguard-systemd-networkd/</id>
     <title>Setup a WireGuard server using systemd-networkd</title>
-    <updated>2022-07-10T12:23:30.751851+00:00</updated>
+    <updated>2022-08-13T18:56:24.879326+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -103,17 +103,16 @@ the network device, set proper routes and so on.&lt;/p&gt;
 
 &lt;span class="k"&gt;[Network]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 &lt;span class="na"&gt;Address&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;10.0.0.1/24&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="na"&gt;IPForward&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;yes&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="na"&gt;IPMasquerade&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;yes&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="na"&gt;IPMasquerade&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;both&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;There are couple of things to note:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Since &lt;code&gt;/24&lt;/code&gt; network mask is used, systemd-networkd will automatically add a
 route for the whole network to be routed via the WireGuard tunnel. Without
-that mask, it'd be up to a user to configure proper routing.&lt;/li&gt;
-&lt;li&gt;Both &lt;code&gt;IPForward&lt;/code&gt; and &lt;code&gt;IPMasquerade&lt;/code&gt; are only needed if the server is
-expected to be used as a gateway to the Internet. Without these options,
-it'd be up to a user to configure the firewall.&lt;/li&gt;
+that mask, it'd be up to a user to properly configure routing on the system.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;IPMasquerade&lt;/code&gt; setting is only needed if the server is expected to be
+used as a gateway to the Internet. Without this option, it'd be up to a user
+to properly configure the firewall.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;When both the network device and the network are configured, the only remained
 step is to run &lt;code&gt;$ networkctl reload&lt;/code&gt; to pipe in and apply latest configuration.&lt;/p&gt;
@@ -124,7 +123,7 @@ step is to run &lt;code&gt;$ networkctl reload&lt;/code&gt; to pipe in and apply
   <entry>
     <id>https://kalnytskyi.com/posts/setup-cors-caddy-2/</id>
     <title>Setup CORS in Caddy 2</title>
-    <updated>2022-07-10T12:23:30.752135+00:00</updated>
+    <updated>2022-08-13T18:56:24.879593+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -177,7 +176,7 @@ sent by &lt;code&gt;curl&lt;/code&gt; or &lt;em&gt;your-programming-language-of-
   <entry>
     <id>https://kalnytskyi.com/posts/setup-postgres-linux-windows-macos-gh-actions/</id>
     <title>Setup PostgreSQL for Linux, Windows and macOS using GitHub Actions</title>
-    <updated>2022-07-10T12:23:30.752288+00:00</updated>
+    <updated>2022-08-13T18:56:24.879736+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -213,7 +212,7 @@ usage example:&lt;/p&gt;
   <entry>
     <id>https://kalnytskyi.com/posts/gnome-terminal-csd/</id>
     <title>Enable CSD in GNOME Terminal</title>
-    <updated>2022-07-10T12:23:30.752435+00:00</updated>
+    <updated>2022-08-13T18:56:24.879869+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -243,7 +242,7 @@ might not work with other versions.&lt;/p&gt;
   <entry>
     <id>https://kalnytskyi.com/posts/assert-str-matches-regex-in-pytest/</id>
     <title>Assert that str matches regex in pytest</title>
-    <updated>2022-07-10T12:23:30.752581+00:00</updated>
+    <updated>2022-08-13T18:56:24.879999+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -313,7 +312,7 @@ in non-test production code, though I found this rather queer.&lt;/p&gt;
   <entry>
     <id>https://kalnytskyi.com/posts/farewell-2015/</id>
     <title>Farewell, 2015!</title>
-    <updated>2022-07-10T12:23:30.752728+00:00</updated>
+    <updated>2022-08-13T18:56:24.880131+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -354,7 +353,7 @@ as 2015 was, but hope it will be even better!&lt;/p&gt;
   <entry>
     <id>https://kalnytskyi.com/posts/mad-map/</id>
     <title>Mad Map: Python Road</title>
-    <updated>2022-07-10T12:23:30.752871+00:00</updated>
+    <updated>2022-08-13T18:56:24.880275+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -480,7 +479,7 @@ use it and one day it will be removed from the language.&lt;/p&gt;
   <entry>
     <id>https://kalnytskyi.com/posts/docker-for-pythonistas/</id>
     <title>Docker For Pythonistas</title>
-    <updated>2022-07-10T12:23:30.753014+00:00</updated>
+    <updated>2022-08-13T18:56:24.880402+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -550,7 +549,7 @@ so don't hesitate to find your own.&lt;/p&gt;
   <entry>
     <id>https://kalnytskyi.com/posts/c-legacy-is-evil/</id>
     <title>C Legacy Is 😈 Evil</title>
-    <updated>2022-07-10T12:23:30.753163+00:00</updated>
+    <updated>2022-08-13T18:56:24.880625+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
