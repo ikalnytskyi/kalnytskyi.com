@@ -26,7 +26,7 @@
     <meta property="og:site_name" content="Ihor Kalnytskyi" />
     <meta property="og:type" content="article" />
     <meta property="article:published_time" content="2022-02-07T00:00:00+00:00" />
-    <meta property="article:modified_time" content="2022-08-13T18:56:09.301892+00:00" />
+    <meta property="article:modified_time" content="2022-09-03T18:34:44.946549+00:00" />
     <meta property="article:author" content="Ihor Kalnytskyi" />
 
     <title>Setup a WireGuard server using systemd-networkd</title>
@@ -55,7 +55,11 @@ thoughts & writings</span>
         <h1>Setup a WireGuard server using systemd-networkd</h1>
       </header>
 
-      <p>WireGuard is an extremely simple, fast and modern VPN that is built into Linux
+      <div class="note">
+<p>Please check out <a href="/posts/setup-wireguard-client-systemd-networkd/">«Setup a WireGuard client using systemd-networkd»</a>
+to learn about client-side configuration of your Linux machine.</p>
+</div>
+<p>WireGuard is an extremely simple, fast and modern VPN that is built into Linux
 kernel 5.6 (released on Mar 29, 2020) and above. It mimics the model of SSH and
 requires VPN peers to know each others public keys. I highly recommend to read
 <a href="https://www.wireguard.com">https://www.wireguard.com</a> regardless of this post.</p>
@@ -148,12 +152,16 @@ the network device, set proper routes and so on.</p>
 </code></pre>
 <p>There are couple of things to note:</p>
 <ul>
-<li>Since <code>/24</code> network mask is used, systemd-networkd will automatically add a
+<li>
+<p>Since <code>/24</code> network mask is used, systemd-networkd will automatically add a
 route for the whole network to be routed via the WireGuard tunnel. Without
-that mask, it'd be up to a user to properly configure routing on the system.</li>
-<li>The <code>IPMasquerade</code> setting is only needed if the server is expected to be
+that mask, it'd be up to a user to properly configure routing on the system.</p>
+</li>
+<li>
+<p>The <code>IPMasquerade</code> setting is only needed if the server is expected to be
 used as a gateway to the Internet. Without this option, it'd be up to a user
-to properly configure the firewall.</li>
+to properly configure the firewall.</p>
+</li>
 </ul>
 <p>When both the network device and the network are configured, the only remained
 step is to run <code>$ networkctl reload</code> to pipe in and apply latest configuration.</p>

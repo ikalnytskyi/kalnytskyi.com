@@ -2,19 +2,164 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://kalnytskyi.com</id>
   <title>Ihor Kalnytskyi</title>
-  <updated>2022-08-13T18:56:24.878575+00:00</updated>
+  <updated>2022-09-03T18:35:01.477960+00:00</updated>
   <link href="https://kalnytskyi.com/feed.xml" rel="self" type="application/atom+xml"/>
   <link href="https://kalnytskyi.com" rel="alternate" type="text/html"/>
   <generator uri="https://github.com/ikalnytskyi/holocron" version="0.4.0">Holocron/v0.4.0</generator>
   <subtitle>Ihor Kalnytskyi's thoughts &amp; writings</subtitle>
   <entry>
-    <id>https://kalnytskyi.com/posts/setup-wireguard-systemd-networkd/</id>
-    <title>Setup a WireGuard server using systemd-networkd</title>
-    <updated>2022-08-13T18:56:24.879326+00:00</updated>
+    <id>https://kalnytskyi.com/posts/setup-wireguard-client-systemd-networkd/</id>
+    <title>Setup a WireGuard client using systemd-networkd</title>
+    <updated>2022-09-03T18:35:01.478714+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
-    <content type="html">&lt;p&gt;WireGuard is an extremely simple, fast and modern VPN that is built into Linux
+    <content type="html">&lt;div class="note"&gt;
+&lt;p&gt;Please check out &lt;a href="/posts/setup-wireguard-systemd-networkd/"&gt;«Setup a WireGuard server using systemd-networkd»&lt;/a&gt;
+to learn more about WireGuard in general and network topology outlined in this
+post.&lt;/p&gt;
+&lt;p&gt;On Feb 24, 2022, Russia began a full scale invasion of Ukraine. The terror they
+brought to my country is devastating, and so publication of this post has been
+postponed till better times. Only now I finally found some strength inside to
+finish and publish this writing.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;WireGuard is a great VPN choice for your home, and maybe even for your company.
+It's simple, fast, built into Linux kernel 5.6 and above, and can be configured
+via &lt;a href="https://man.archlinux.org/man/systemd-networkd.8.en"&gt;systemd-networkd&lt;/a&gt; in no time. The systemd suite supports WireGuard
+starting with v237 and is most likely installed on your Linux machine.&lt;/p&gt;
+&lt;p&gt;Let us try to setup a wireguard 'client' for the following VPN network:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style="text-align:left"&gt;Option&lt;/th&gt;
+&lt;th style="text-align:left"&gt;Value&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style="text-align:left"&gt;Network&lt;/td&gt;
+&lt;td style="text-align:left"&gt;&lt;code&gt;10.0.0.0/24&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align:left"&gt;Server&lt;/td&gt;
+&lt;td style="text-align:left"&gt;&lt;code&gt;10.0.0.1&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align:left"&gt;Client&lt;/td&gt;
+&lt;td style="text-align:left"&gt;&lt;code&gt;10.0.0.20&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;First thing to do is to set up a virtual network device for a WireGuard tunnel.
+This can be achieved by means of a &lt;a href="https://man.archlinux.org/man/systemd.netdev.5"&gt;systemd.netdev(5)&lt;/a&gt; unit
+that must be created in &lt;code&gt;/etc/systemd/network/&lt;/code&gt; directory. The WireGuard
+network device must know about number of things:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The private key of the peer.&lt;/li&gt;
+&lt;li&gt;The endpoint of the 'server' peer and its public key.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Unlike 'server', a 'client' peer doesn't require port configuration because
+it's the 'client' that initiates connection not the other way round. This is
+how some &lt;code&gt;/etc/systemd/network/wg0.netdev&lt;/code&gt; could look like:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-ini"&gt;&lt;span class="k"&gt;[NetDev]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="na"&gt;Name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;wg0&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="na"&gt;Kind&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;wireguard&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="na"&gt;Description&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;wg0 - wireguard tunnel&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+&lt;span class="k"&gt;[WireGuard]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="na"&gt;PrivateKeyFile&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;/etc/systemd/network/wireguard-keys/wg0&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="na"&gt;FirewallMark&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;0x8888&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+&lt;span class="k"&gt;[WireGuardPeer]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="na"&gt;PublicKey&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;TPouHhVqvgAMfa9mNwZOh59kifUAsdn9Vtgsj2IsKVU=&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="na"&gt;AllowedIPs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;0.0.0.0/0&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="na"&gt;Endpoint&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;vpn.example.com:51820&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The content of &lt;code&gt;/etc/systemd/network/wg0.key&lt;/code&gt; can be generated by invoking
+&lt;code&gt;$ wg genkey&lt;/code&gt; command and must be readable by the &lt;code&gt;systemd-network&lt;/code&gt; user.&lt;/p&gt;
+&lt;p&gt;There are couple of things to note:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;code&gt;FirewallMark&lt;/code&gt; option takes a number and is used to mark outgoing
+WireGuard packets. Please remember that mark, it will be later used for
+network configuration.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;code&gt;AllowedIPs&lt;/code&gt; option is set to &lt;code&gt;0.0.0.0/0&lt;/code&gt; because we're interested to
+route all the traffic via the tunnel, i.e. surfing the Internet via VPN.
+If your plans for the VPN is to connect multiple devices into a single
+network, you should go with the network address only, e.g. &lt;code&gt;10.0.0.0/24&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;code&gt;Endpoint&lt;/code&gt; option takes a wireguard 'server' IP address or hostname,
+followed by a colon, and then a port the 'server' accepts connection on. The
+endpoint must be reachable from 'client' peers even when VPN is down.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Next thing to do is to use a &lt;a href="https://man.archlinux.org/man/systemd.network.5"&gt;systemd.network(5)&lt;/a&gt; unit to
+setup a network. The purpose of the network is to assign a proper IP address on
+the network device, set proper routes and so on.&lt;/p&gt;
+&lt;p&gt;This how some &lt;code&gt;/etc/systemd/network/wg0.network&lt;/code&gt; could look like:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-ini"&gt;&lt;span class="k"&gt;[Match]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="na"&gt;Name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;wg0&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+&lt;span class="k"&gt;[Network]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="na"&gt;Address&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;10.0.0.20/24&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+&lt;span class="k"&gt;[Link]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="na"&gt;ActivationPolicy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;manual&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+&lt;span class="k"&gt;[RoutingPolicyRule]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="na"&gt;FirewallMark&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;0x8888&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="na"&gt;InvertRule&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;true&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="na"&gt;Table&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;1000&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="na"&gt;Priority&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;10&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+&lt;span class="k"&gt;[Route]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="na"&gt;Gateway&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;10.0.0.1&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="na"&gt;GatewayOnLink&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;true&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="na"&gt;Table&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;1000&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;There are a bunch of important stuff going on:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Since &lt;code&gt;/24&lt;/code&gt; network mask is used, systemd-networkd will automatically add a
+route for the whole network to be routed via the WireGuard tunnel. Without
+that mask, it'd be up to a user to properly configure routing on the system.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;With &lt;code&gt;ActivationPolicy&lt;/code&gt; set to &lt;code&gt;manual&lt;/code&gt;, the VPN is not brought up on system
+boot, and requires manual activation via &lt;code&gt;$ networkctl up wg0&lt;/code&gt;. One case use
+the &lt;code&gt;up&lt;/code&gt; value to always activate VPN on system boot.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Both &lt;code&gt;RoutingPolicyRule&lt;/code&gt; and &lt;code&gt;Route&lt;/code&gt; come together and are only required if
+you want to route all the traffic over the tunnel. The &lt;code&gt;Route&lt;/code&gt; section
+essentially creates a default route that routes packets to the wireguard
+server. The &lt;code&gt;RoutingPolicyRule&lt;/code&gt; section, on the other hand, says that this
+new default route should be applied only for the packets not coming from the
+wireguard network device (i.e. not being marked with a firewall mark).&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;When both the network device and the network are configured, the only remained
+step is to run &lt;code&gt;$ networkctl reload&lt;/code&gt; to pipe in and apply latest configuration
+followed by &lt;code&gt;$networkctl up wg0&lt;/code&gt; to bring the VPN up.&lt;/p&gt;
+</content>
+    <link href="https://kalnytskyi.com/posts/setup-wireguard-client-systemd-networkd/" rel="alternate"/>
+    <published>2022-09-03T00:00:00+00:00</published>
+  </entry>
+  <entry>
+    <id>https://kalnytskyi.com/posts/setup-wireguard-systemd-networkd/</id>
+    <title>Setup a WireGuard server using systemd-networkd</title>
+    <updated>2022-09-03T18:35:01.478994+00:00</updated>
+    <author>
+      <name>Ihor Kalnytskyi</name>
+    </author>
+    <content type="html">&lt;div class="note"&gt;
+&lt;p&gt;Please check out &lt;a href="/posts/setup-wireguard-client-systemd-networkd/"&gt;«Setup a WireGuard client using systemd-networkd»&lt;/a&gt;
+to learn about client-side configuration of your Linux machine.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;WireGuard is an extremely simple, fast and modern VPN that is built into Linux
 kernel 5.6 (released on Mar 29, 2020) and above. It mimics the model of SSH and
 requires VPN peers to know each others public keys. I highly recommend to read
 &lt;a href="https://www.wireguard.com"&gt;https://www.wireguard.com&lt;/a&gt; regardless of this post.&lt;/p&gt;
@@ -107,12 +252,16 @@ the network device, set proper routes and so on.&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;There are couple of things to note:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Since &lt;code&gt;/24&lt;/code&gt; network mask is used, systemd-networkd will automatically add a
+&lt;li&gt;
+&lt;p&gt;Since &lt;code&gt;/24&lt;/code&gt; network mask is used, systemd-networkd will automatically add a
 route for the whole network to be routed via the WireGuard tunnel. Without
-that mask, it'd be up to a user to properly configure routing on the system.&lt;/li&gt;
-&lt;li&gt;The &lt;code&gt;IPMasquerade&lt;/code&gt; setting is only needed if the server is expected to be
+that mask, it'd be up to a user to properly configure routing on the system.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;code&gt;IPMasquerade&lt;/code&gt; setting is only needed if the server is expected to be
 used as a gateway to the Internet. Without this option, it'd be up to a user
-to properly configure the firewall.&lt;/li&gt;
+to properly configure the firewall.&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;When both the network device and the network are configured, the only remained
 step is to run &lt;code&gt;$ networkctl reload&lt;/code&gt; to pipe in and apply latest configuration.&lt;/p&gt;
@@ -123,7 +272,7 @@ step is to run &lt;code&gt;$ networkctl reload&lt;/code&gt; to pipe in and apply
   <entry>
     <id>https://kalnytskyi.com/posts/setup-cors-caddy-2/</id>
     <title>Setup CORS in Caddy 2</title>
-    <updated>2022-08-13T18:56:24.879593+00:00</updated>
+    <updated>2022-09-03T18:35:01.479133+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -176,7 +325,7 @@ sent by &lt;code&gt;curl&lt;/code&gt; or &lt;em&gt;your-programming-language-of-
   <entry>
     <id>https://kalnytskyi.com/posts/setup-postgres-linux-windows-macos-gh-actions/</id>
     <title>Setup PostgreSQL for Linux, Windows and macOS using GitHub Actions</title>
-    <updated>2022-08-13T18:56:24.879736+00:00</updated>
+    <updated>2022-09-03T18:35:01.479264+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -212,7 +361,7 @@ usage example:&lt;/p&gt;
   <entry>
     <id>https://kalnytskyi.com/posts/gnome-terminal-csd/</id>
     <title>Enable CSD in GNOME Terminal</title>
-    <updated>2022-08-13T18:56:24.879869+00:00</updated>
+    <updated>2022-09-03T18:35:01.479394+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -242,7 +391,7 @@ might not work with other versions.&lt;/p&gt;
   <entry>
     <id>https://kalnytskyi.com/posts/assert-str-matches-regex-in-pytest/</id>
     <title>Assert that str matches regex in pytest</title>
-    <updated>2022-08-13T18:56:24.879999+00:00</updated>
+    <updated>2022-09-03T18:35:01.479524+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -312,7 +461,7 @@ in non-test production code, though I found this rather queer.&lt;/p&gt;
   <entry>
     <id>https://kalnytskyi.com/posts/farewell-2015/</id>
     <title>Farewell, 2015!</title>
-    <updated>2022-08-13T18:56:24.880131+00:00</updated>
+    <updated>2022-09-03T18:35:01.479654+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -353,7 +502,7 @@ as 2015 was, but hope it will be even better!&lt;/p&gt;
   <entry>
     <id>https://kalnytskyi.com/posts/mad-map/</id>
     <title>Mad Map: Python Road</title>
-    <updated>2022-08-13T18:56:24.880275+00:00</updated>
+    <updated>2022-09-03T18:35:01.479904+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -479,7 +628,7 @@ use it and one day it will be removed from the language.&lt;/p&gt;
   <entry>
     <id>https://kalnytskyi.com/posts/docker-for-pythonistas/</id>
     <title>Docker For Pythonistas</title>
-    <updated>2022-08-13T18:56:24.880402+00:00</updated>
+    <updated>2022-09-03T18:35:01.480060+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -549,7 +698,7 @@ so don't hesitate to find your own.&lt;/p&gt;
   <entry>
     <id>https://kalnytskyi.com/posts/c-legacy-is-evil/</id>
     <title>C Legacy Is 😈 Evil</title>
-    <updated>2022-08-13T18:56:24.880625+00:00</updated>
+    <updated>2022-09-03T18:35:01.480186+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
