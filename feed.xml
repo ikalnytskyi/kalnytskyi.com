@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://kalnytskyi.com</id>
   <title>Ihor Kalnytskyi</title>
-  <updated>2022-09-03T22:35:01.466357+00:00</updated>
+  <updated>2022-09-03T23:08:27.894189+00:00</updated>
   <link href="https://kalnytskyi.com/feed.xml" rel="self" type="application/atom+xml"/>
   <link href="https://kalnytskyi.com" rel="alternate" type="text/html"/>
   <generator uri="https://github.com/ikalnytskyi/holocron" version="0.4.0">Holocron/v0.4.0</generator>
@@ -10,7 +10,7 @@
   <entry>
     <id>https://kalnytskyi.com/posts/setup-wireguard-client-systemd-networkd/</id>
     <title>Setup a WireGuard client using systemd-networkd</title>
-    <updated>2022-09-03T22:35:01.467232+00:00</updated>
+    <updated>2022-09-03T23:08:27.895035+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -151,7 +151,7 @@ followed by &lt;code&gt;$networkctl up wg0&lt;/code&gt; to bring the VPN up.&lt;
   <entry>
     <id>https://kalnytskyi.com/posts/setup-wireguard-systemd-networkd/</id>
     <title>Setup a WireGuard server using systemd-networkd</title>
-    <updated>2022-09-03T22:35:01.467580+00:00</updated>
+    <updated>2022-09-03T23:08:27.895382+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -272,7 +272,7 @@ step is to run &lt;code&gt;$ networkctl reload&lt;/code&gt; to pipe in and apply
   <entry>
     <id>https://kalnytskyi.com/posts/setup-cors-caddy-2/</id>
     <title>Setup CORS in Caddy 2</title>
-    <updated>2022-09-03T22:35:01.467740+00:00</updated>
+    <updated>2022-09-03T23:08:27.895587+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -325,7 +325,7 @@ sent by &lt;code&gt;curl&lt;/code&gt; or &lt;em&gt;your-programming-language-of-
   <entry>
     <id>https://kalnytskyi.com/posts/setup-postgres-linux-windows-macos-gh-actions/</id>
     <title>Setup PostgreSQL for Linux, Windows and macOS using GitHub Actions</title>
-    <updated>2022-09-03T22:35:01.467891+00:00</updated>
+    <updated>2022-09-03T23:08:27.895761+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -361,7 +361,7 @@ usage example:&lt;/p&gt;
   <entry>
     <id>https://kalnytskyi.com/posts/gnome-terminal-csd/</id>
     <title>Enable CSD in GNOME Terminal</title>
-    <updated>2022-09-03T22:35:01.468044+00:00</updated>
+    <updated>2022-09-03T23:08:27.896050+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -391,7 +391,7 @@ might not work with other versions.&lt;/p&gt;
   <entry>
     <id>https://kalnytskyi.com/posts/assert-str-matches-regex-in-pytest/</id>
     <title>Assert that str matches regex in pytest</title>
-    <updated>2022-09-03T22:35:01.468196+00:00</updated>
+    <updated>2022-09-03T23:08:27.896274+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -461,7 +461,7 @@ in non-test production code, though I found this rather queer.&lt;/p&gt;
   <entry>
     <id>https://kalnytskyi.com/posts/farewell-2015/</id>
     <title>Farewell, 2015!</title>
-    <updated>2022-09-03T22:35:01.468346+00:00</updated>
+    <updated>2022-09-03T23:08:27.896485+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -502,7 +502,7 @@ as 2015 was, but hope it will be even better!&lt;/p&gt;
   <entry>
     <id>https://kalnytskyi.com/posts/mad-map/</id>
     <title>Mad Map: Python Road</title>
-    <updated>2022-09-03T22:35:01.468630+00:00</updated>
+    <updated>2022-09-03T23:08:27.896845+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -628,7 +628,7 @@ use it and one day it will be removed from the language.&lt;/p&gt;
   <entry>
     <id>https://kalnytskyi.com/posts/docker-for-pythonistas/</id>
     <title>Docker For Pythonistas</title>
-    <updated>2022-09-03T22:35:01.468782+00:00</updated>
+    <updated>2022-09-03T23:08:27.897045+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -698,7 +698,7 @@ so don't hesitate to find your own.&lt;/p&gt;
   <entry>
     <id>https://kalnytskyi.com/posts/c-legacy-is-evil/</id>
     <title>C Legacy Is 😈 Evil</title>
-    <updated>2022-09-03T22:35:01.468926+00:00</updated>
+    <updated>2022-09-03T23:08:27.897206+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
