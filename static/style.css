@@ -1,3 +1,46 @@
+@font-face {
+  font-family: "Merriweather";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/Merriweather-Regular.woff2) format("woff2");
+}
+@font-face {
+  font-family: "Merriweather";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/Merriweather-Italic.woff2) format("woff2");
+}
+@font-face {
+  font-family: "Merriweather";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/Merriweather-Bold.woff2) format("woff2");
+}
+@font-face {
+  font-family: "Merriweather";
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/Merriweather-BoldItalic.woff2) format("woff2");
+}
+@font-face {
+  font-family: "Overpass Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/OverpassMono-Regular.woff2) format("woff2");
+}
+@font-face {
+  font-family: "Overpass Mono";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/OverpassMono-Bold.woff2) format("woff2");
+}
+
 :root {
   --page-background-color: #FEFEFE;
   --page-foreground-color: #2E3440;
@@ -20,14 +63,8 @@
   --main-width: 750px;
   --main-border-color: rgba(0, 0, 0, 0.14);
   --screen-padding: 2rem;
-  --page-font-family:
-      "DejaVu Serif",       /* linux */
-      "Charter",            /* macos */
-      "Georgia",            /* windows */
-      serif;
-  --page-mono-font-family:
-      "DejaVu Sans Mono",   /* linux */
-      monospace;
+  --page-font-family: "Merriweather", serif;
+  --page-mono-font-family: "Overpass Mono", monospace;
   --banner-background-color: #0071CE;
   --banner-border-color: #FCDF51;
   --banner-text-color: #FEFEFE;
@@ -43,7 +80,7 @@ body {
     "banner banner"
     "aside main";
   justify-items: stretch;
-  font: 1rem/1.7 var(--page-font-family);
+  font: 1rem/1.75 var(--page-font-family);
   min-height: 100vh;
   margin: 0;
 }
