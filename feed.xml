@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://kalnytskyi.com</id>
   <title>Ihor Kalnytskyi</title>
-  <updated>2022-09-03T23:08:27.894189+00:00</updated>
+  <updated>2022-09-17T19:16:15.365238+00:00</updated>
   <link href="https://kalnytskyi.com/feed.xml" rel="self" type="application/atom+xml"/>
   <link href="https://kalnytskyi.com" rel="alternate" type="text/html"/>
   <generator uri="https://github.com/ikalnytskyi/holocron" version="0.4.0">Holocron/v0.4.0</generator>
@@ -10,7 +10,7 @@
   <entry>
     <id>https://kalnytskyi.com/posts/setup-wireguard-client-systemd-networkd/</id>
     <title>Setup a WireGuard client using systemd-networkd</title>
-    <updated>2022-09-03T23:08:27.895035+00:00</updated>
+    <updated>2022-09-17T19:16:15.366123+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -67,7 +67,7 @@ how some &lt;code&gt;/etc/systemd/network/wg0.netdev&lt;/code&gt; could look lik
 &lt;span class="na"&gt;Description&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;wg0 - wireguard tunnel&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
 &lt;span class="k"&gt;[WireGuard]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="na"&gt;PrivateKeyFile&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;/etc/systemd/network/wireguard-keys/wg0&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="na"&gt;PrivateKeyFile&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;/etc/systemd/network/wg0.key&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 &lt;span class="na"&gt;FirewallMark&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;0x8888&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
 &lt;span class="k"&gt;[WireGuardPeer]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
@@ -105,6 +105,8 @@ the network device, set proper routes and so on.&lt;/p&gt;
 
 &lt;span class="k"&gt;[Network]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 &lt;span class="na"&gt;Address&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;10.0.0.20/24&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="na"&gt;DNSDefaultRoute&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;true&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="na"&gt;DNS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;1.1.1.1&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
 &lt;span class="k"&gt;[Link]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 &lt;span class="na"&gt;ActivationPolicy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;manual&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
@@ -129,7 +131,7 @@ that mask, it'd be up to a user to properly configure routing on the system.&lt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;With &lt;code&gt;ActivationPolicy&lt;/code&gt; set to &lt;code&gt;manual&lt;/code&gt;, the VPN is not brought up on system
-boot, and requires manual activation via &lt;code&gt;$ networkctl up wg0&lt;/code&gt;. One case use
+boot, and requires manual activation via &lt;code&gt;$ networkctl up wg0&lt;/code&gt;. One can use
 the &lt;code&gt;up&lt;/code&gt; value to always activate VPN on system boot.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
@@ -139,6 +141,14 @@ essentially creates a default route that routes packets to the wireguard
 server. The &lt;code&gt;RoutingPolicyRule&lt;/code&gt; section, on the other hand, says that this
 new default route should be applied only for the packets not coming from the
 wireguard network device (i.e. not being marked with a firewall mark).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;When VPN is used as a gateway for the Internet, it's quite common to set
+some non default DNS servers to resolve domain names. It could be your own
+VPN server, or some third-party provider such as Cloudflare. In order to set
+custom DNS servers when VPN connection is up, one can use &lt;code&gt;DNSDefaultRoute&lt;/code&gt;
+and &lt;code&gt;DNS&lt;/code&gt; options. The former tells the system to use the latter to resolve
+all domain names.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;When both the network device and the network are configured, the only remained
@@ -151,7 +161,7 @@ followed by &lt;code&gt;$networkctl up wg0&lt;/code&gt; to bring the VPN up.&lt;
   <entry>
     <id>https://kalnytskyi.com/posts/setup-wireguard-systemd-networkd/</id>
     <title>Setup a WireGuard server using systemd-networkd</title>
-    <updated>2022-09-03T23:08:27.895382+00:00</updated>
+    <updated>2022-09-17T19:16:15.366442+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -272,7 +282,7 @@ step is to run &lt;code&gt;$ networkctl reload&lt;/code&gt; to pipe in and apply
   <entry>
     <id>https://kalnytskyi.com/posts/setup-cors-caddy-2/</id>
     <title>Setup CORS in Caddy 2</title>
-    <updated>2022-09-03T23:08:27.895587+00:00</updated>
+    <updated>2022-09-17T19:16:15.366603+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -325,7 +335,7 @@ sent by &lt;code&gt;curl&lt;/code&gt; or &lt;em&gt;your-programming-language-of-
   <entry>
     <id>https://kalnytskyi.com/posts/setup-postgres-linux-windows-macos-gh-actions/</id>
     <title>Setup PostgreSQL for Linux, Windows and macOS using GitHub Actions</title>
-    <updated>2022-09-03T23:08:27.895761+00:00</updated>
+    <updated>2022-09-17T19:16:15.366754+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -361,7 +371,7 @@ usage example:&lt;/p&gt;
   <entry>
     <id>https://kalnytskyi.com/posts/gnome-terminal-csd/</id>
     <title>Enable CSD in GNOME Terminal</title>
-    <updated>2022-09-03T23:08:27.896050+00:00</updated>
+    <updated>2022-09-17T19:16:15.366905+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -391,7 +401,7 @@ might not work with other versions.&lt;/p&gt;
   <entry>
     <id>https://kalnytskyi.com/posts/assert-str-matches-regex-in-pytest/</id>
     <title>Assert that str matches regex in pytest</title>
-    <updated>2022-09-03T23:08:27.896274+00:00</updated>
+    <updated>2022-09-17T19:16:15.367053+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -461,7 +471,7 @@ in non-test production code, though I found this rather queer.&lt;/p&gt;
   <entry>
     <id>https://kalnytskyi.com/posts/farewell-2015/</id>
     <title>Farewell, 2015!</title>
-    <updated>2022-09-03T23:08:27.896485+00:00</updated>
+    <updated>2022-09-17T19:16:15.367196+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -502,7 +512,7 @@ as 2015 was, but hope it will be even better!&lt;/p&gt;
   <entry>
     <id>https://kalnytskyi.com/posts/mad-map/</id>
     <title>Mad Map: Python Road</title>
-    <updated>2022-09-03T23:08:27.896845+00:00</updated>
+    <updated>2022-09-17T19:16:15.367461+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -628,7 +638,7 @@ use it and one day it will be removed from the language.&lt;/p&gt;
   <entry>
     <id>https://kalnytskyi.com/posts/docker-for-pythonistas/</id>
     <title>Docker For Pythonistas</title>
-    <updated>2022-09-03T23:08:27.897045+00:00</updated>
+    <updated>2022-09-17T19:16:15.367606+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -698,7 +708,7 @@ so don't hesitate to find your own.&lt;/p&gt;
   <entry>
     <id>https://kalnytskyi.com/posts/c-legacy-is-evil/</id>
     <title>C Legacy Is 😈 Evil</title>
-    <updated>2022-09-03T23:08:27.897206+00:00</updated>
+    <updated>2022-09-17T19:16:15.367747+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
