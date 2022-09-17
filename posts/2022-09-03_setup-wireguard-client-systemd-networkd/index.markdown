@@ -52,7 +52,7 @@ Kind=wireguard
 Description=wg0 - wireguard tunnel
 
 [WireGuard]
-PrivateKeyFile=/etc/systemd/network/wireguard-keys/wg0
+PrivateKeyFile=/etc/systemd/network/wg0.key
 FirewallMark=0x8888
 
 [WireGuardPeer]
@@ -91,6 +91,8 @@ Name=wg0
 
 [Network]
 Address=10.0.0.20/24
+DNSDefaultRoute=true
+DNS=1.1.1.1
 
 [Link]
 ActivationPolicy=manual
@@ -114,7 +116,7 @@ There are a bunch of important stuff going on:
    that mask, it'd be up to a user to properly configure routing on the system.
 
  * With `ActivationPolicy` set to `manual`, the VPN is not brought up on system
-   boot, and requires manual activation via `$ networkctl up wg0`. One case use
+   boot, and requires manual activation via `$ networkctl up wg0`. One can use
    the `up` value to always activate VPN on system boot.
 
  * Both `RoutingPolicyRule` and `Route` come together and are only required if
@@ -123,6 +125,13 @@ There are a bunch of important stuff going on:
    server. The `RoutingPolicyRule` section, on the other hand, says that this
    new default route should be applied only for the packets not coming from the
    wireguard network device (i.e. not being marked with a firewall mark).
+
+ * When VPN is used as a gateway for the Internet, it's quite common to set
+   some non default DNS servers to resolve domain names. It could be your own
+   VPN server, or some third-party provider such as Cloudflare. In order to set
+   custom DNS servers when VPN connection is up, one can use `DNSDefaultRoute`
+   and `DNS` options. The former tells the system to use the latter to resolve
+   all domain names.
 
 When both the network device and the network are configured, the only remained
 step is to run `$ networkctl reload` to pipe in and apply latest configuration
