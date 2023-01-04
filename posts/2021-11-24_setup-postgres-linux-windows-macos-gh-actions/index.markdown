@@ -23,21 +23,29 @@ usage example:
 ```yaml
 steps:
   - name: Setup PostgreSQL
-    uses: ikalnytskyi/action-setup-postgres@v1
+    uses: ikalnytskyi/action-setup-postgres@v4
     id: postgres
 
-  - name: Run tests
+  - name: Run tests using connection URI
     env:
-      CONNECTION_URI: ${{ steps.postgres.outputs.connection-uri }}
+      CONNECTION_STR: ${{ steps.postgres.outputs.connection-uri }}
+    run: pytest -vv tests/
+
+  - name: Run tests using connection kv-string
+    env:
+      CONNECTION_STR: service=${{ steps.postgres.outputs.service-name }}
     run: pytest -vv tests/
 ```
 
 So why use that exact action and no other?
 
 * Runs on Linux, macOS and Windows action runners.
-* Fast! Preinstalled binaries are used.
-* Easy to audit, just [4 steps YAML][2]!
+* Adds PostgreSQL [client applications][2] to `PATH`.
+* Uses PostgreSQL binaries baked into [GitHub Actions Runner Images][3].
+* Easy [to prove][4] that it DOES NOT contain malicious code.
 
 [0]: https://github.com/marketplace/actions/setup-postgresql-for-linux-macos-windows
 [1]: https://github.com/ikalnytskyi/action-setup-postgres
-[2]: https://github.com/ikalnytskyi/action-setup-postgres/blob/v1/action.yml
+[2]: https://www.postgresql.org/docs/current/reference-client.html
+[3]: https://github.com/actions/runner-images
+[4]: https://github.com/ikalnytskyi/action-setup-postgres/blob/v4/action.yml
