@@ -2,50 +2,50 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://kalnytskyi.com/about/</loc>
-    <lastmod>2023-01-04T15:35:55.928868+00:00</lastmod>
+    <lastmod>2023-01-04T15:37:57.327960+00:00</lastmod>
   </url>
   <url>
     <loc>https://kalnytskyi.com/talks/</loc>
-    <lastmod>2023-01-04T15:35:55.936868+00:00</lastmod>
+    <lastmod>2023-01-04T15:37:57.339962+00:00</lastmod>
   </url>
   <url>
     <loc>https://kalnytskyi.com/posts/docker-for-pythonistas/</loc>
-    <lastmod>2023-01-04T15:35:55.928868+00:00</lastmod>
+    <lastmod>2023-01-04T15:37:57.331961+00:00</lastmod>
   </url>
   <url>
     <loc>https://kalnytskyi.com/posts/setup-wireguard-client-systemd-networkd/</loc>
-    <lastmod>2023-01-04T15:35:55.932868+00:00</lastmod>
+    <lastmod>2023-01-04T15:37:57.331961+00:00</lastmod>
   </url>
   <url>
     <loc>https://kalnytskyi.com/posts/c-legacy-is-evil/</loc>
-    <lastmod>2023-01-04T15:35:55.928868+00:00</lastmod>
+    <lastmod>2023-01-04T15:37:57.331961+00:00</lastmod>
   </url>
   <url>
     <loc>https://kalnytskyi.com/posts/setup-wireguard-systemd-networkd/</loc>
-    <lastmod>2023-01-04T15:35:55.932868+00:00</lastmod>
+    <lastmod>2023-01-04T15:37:57.331961+00:00</lastmod>
   </url>
   <url>
     <loc>https://kalnytskyi.com/posts/farewell-2015/</loc>
-    <lastmod>2023-01-04T15:35:55.928868+00:00</lastmod>
+    <lastmod>2023-01-04T15:37:57.331961+00:00</lastmod>
   </url>
   <url>
     <loc>https://kalnytskyi.com/posts/mad-map/</loc>
-    <lastmod>2023-01-04T15:35:55.928868+00:00</lastmod>
+    <lastmod>2023-01-04T15:37:57.331961+00:00</lastmod>
   </url>
   <url>
     <loc>https://kalnytskyi.com/posts/assert-str-matches-regex-in-pytest/</loc>
-    <lastmod>2023-01-04T15:35:55.932868+00:00</lastmod>
+    <lastmod>2023-01-04T15:37:57.331961+00:00</lastmod>
   </url>
   <url>
     <loc>https://kalnytskyi.com/posts/gnome-terminal-csd/</loc>
-    <lastmod>2023-01-04T15:35:55.932868+00:00</lastmod>
+    <lastmod>2023-01-04T15:37:57.331961+00:00</lastmod>
   </url>
   <url>
     <loc>https://kalnytskyi.com/posts/setup-cors-caddy-2/</loc>
-    <lastmod>2023-01-04T15:35:55.932868+00:00</lastmod>
+    <lastmod>2023-01-04T15:37:57.331961+00:00</lastmod>
   </url>
   <url>
     <loc>https://kalnytskyi.com/posts/setup-postgres-linux-windows-macos-gh-actions/</loc>
-    <lastmod>2023-01-04T15:35:55.932868+00:00</lastmod>
+    <lastmod>2023-01-04T15:37:57.331961+00:00</lastmod>
   </url>
 </urlset>
