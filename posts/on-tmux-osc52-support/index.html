@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/static/apple-touch-icon.png">
+    <link rel="manifest" href="/static/manifest.webmanifest">
+    <link rel="stylesheet" href="/static/style.css" />
+    <link rel="stylesheet" href="/static/pygments.css" />
+    <link rel="canonical" href="https://kalnytskyi.com/posts/on-tmux-osc52-support/" />
+    <link rel="alternate" type="application/atom+xml" href="/feed.xml" title="Ihor Kalnytskyi" />
+
+    <meta name="author" content="Ihor Kalnytskyi" />
+    <meta name="description" content="OSC-52, NeoVim and surprising behavior when running under tmux." />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@ikalnytskyi" />
+    <meta name="twitter:title" content="On tmux OSC-52 support" />
+    <meta name="twitter:description" content="OSC-52, NeoVim and surprising behavior when running under tmux." />
+
+    <meta property="og:title" content="On tmux OSC-52 support" />
+    <meta property="og:description" content="OSC-52, NeoVim and surprising behavior when running under tmux." />
+    <meta property="og:url" content="https://kalnytskyi.com/posts/on-tmux-osc52-support/" />
+    <meta property="og:site_name" content="Ihor Kalnytskyi" />
+    <meta property="og:type" content="article" />
+    <meta property="article:published_time" content="2023-11-14T00:00:00+00:00" />
+    <meta property="article:modified_time" content="2023-11-13T22:37:40.320109+00:00" />
+    <meta property="article:author" content="Ihor Kalnytskyi" />
+
+    <title>On tmux OSC-52 support</title>
+</head>
+<body>
+  <div class="banner"><a rel="nofollow" href="https://savelife.in.ua/en/donate-en/">Save lives in Ukraine</a> →</div>
+
+  <aside>
+    <img class="about-pic" src="/about/me.jpg" alt="photo" />
+    <span class="about-txt"><a href="/about/" rel="me">Ihor Kalnytskyi</a>'s<br />
+thoughts & writings</span>
+
+    <div class="nav-wrapper">
+    <nav>
+      <span><a href="/">Archives</a></span>
+      <span><a href="/talks/">Talks</a></span>
+      <span><a href="/feed.xml">Feed</a></span>
+    </nav>
+    </div>
+  </aside>
+
+  <main>
+    <article>
+      <header>
+        <time datetime="2023-11-14T00:00:00+00:00">November 14, 2023</time>
+        <h1>On tmux OSC-52 support</h1>
+      </header>
+
+      <p>Several days ago, OSC-52 support was <a href="https://github.com/neovim/neovim/pull/25872">merged</a> into NeoVim, and this sparkled
+my interest. It was just natural, given that both NeoVim and OSC-52 are
+essential part of my daily workflow.</p>
+<p>For those unfamiliar, OSC stands for <em>Operating System Command</em>, and it's a set
+of <a href="https://en.wikipedia.org/wiki/ANSI_escape_code">escape sequences</a> originally <a href="https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h3-Operating-System-Commands">defined by Xterm</a>, but now adopted by
+various modern terminal emulators<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>. OSC-52, in particular, is an escape
+sequence that allows <em>copying to</em> and <em>pasting from</em> the system clipboard.</p>
+<p>I have a few development environments running in virtual machines or
+systemd-nspawn containers, and I typically SSH into them and run NeoVim from
+within. Needless to say that a NeoVim instance running inside container has no
+access to the system clipboard<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup>, and this is where OSC-52 comes to the
+rescue!</p>
+<p>If your terminal emulator supports it, NeoVim's built-in OSC-52 clipboard
+provider just works! Here's the thing though: if you're a blessed user of tmux,
+things might not go the way you expect them to go. I quickly noticed a peculiar
+behavior that I initially mistook for a bug: OSC-52 pasting didn't paste the
+content of the system clipboard, but rather the content of tmux top buffer.</p>
+<p>Despite being called a multiplexer, tmux acts as a terminal emulator, which
+means it implements many OSC sequences itself, including OSC-52. When it comes
+to copying, tmux saves captured text to its buffer and passes the escape
+sequence up to the parent terminal to set the system clipboard. Pasting, on the
+other hand, always retrieves a content from a tmux buffer, forms a response and
+passes it up to the parent terminal for pasting. The content of the buffer may
+be a text you previously copied (and hence implicitly saved) or a text you
+explicitly saved to a buffer.</p>
+<p>What does this mean practically? It means that a text you copy in NeoVim can be
+pasted in a browser. However, a text that you copied in a browser cannot be
+pasted to NeoVim. Lame, huh?</p>
+<p>Unfortunately, this is intentional behavior because tmux supports multiple
+clients that may be attached from multiple hosts<sup class="footnote-ref"><a href="#fn3" id="fnref3">[3]</a></sup>. It's a no-brainer with
+copying: we just send a text we want to copy to all clients and let their
+terminal emulators to set the system clipboard. But what should we do with
+pasting? What attached client should be used as a clipboard source?</p>
+<p>Fortunately, tmux gives us a command, <code>refresh-client -l</code>, that can be executed
+by any client to sync the content of the system clipboard to a tmux buffer,
+that can subsequently be used to paste the content via OSC-52.</p>
+<p>I decided to share this information, as I spent at least an hour running tmux
+under gdb, chasing a ghost that doesn't exist. I don't want anyone to repeat my
+experience.</p>
+<hr class="footnotes-sep" />
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>OSC-52 is at least supported by alacritty, contour, foot, hterm, iterm2,
+kitty, rxvt, st, tmux, wezterm, windows terminal and zelij. <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn2" class="footnote-item"><p>In my case, VMs and containers have no access to the wayland socket, and
+I don't want them to. <a href="#fnref2" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn3" class="footnote-item"><p><a href="https://github.com/tmux/tmux/issues/1477#issuecomment-421344891">https://github.com/tmux/tmux/issues/1477#issuecomment-421344891</a> <a href="#fnref3" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+
+    </article>
+  </main>
+</body>
