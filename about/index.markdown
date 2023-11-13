@@ -16,7 +16,7 @@ eight years I’ve been mastering this profession, and throughout the years I
 realized it’s a never ending study. That’s why I decided to focus around
 distributed computing and system design, two areas I’m the most interested in.
 
-Nowadays, I mostly use Python as a programming language of choice. However I
+Nowadays, I mostly use Python as a programming language of choice. However, I
 keep an eye on Rust since I found it promising.
 
 The best way to contact me is by sending an email to <ihor@kalnytskyi.com>. If

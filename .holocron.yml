@@ -39,7 +39,8 @@ pipes:
 
           - name: archive
             when:
-              - '"published" in item'
+              - item.published
+              - not item.draft
       when:
         - item.source.match("*.markdown")
         - item.source.parts[0] != "talks" or item.source.parts[1] == "index.markdown"
@@ -86,10 +87,11 @@ pipes:
                 published:
                   $ref: item://#/published
             when:
-              - '"published" in item'
+              - item.published
       when:
         - item.source.match("*.markdown")
         - item.source.parts[0] != "talks" or item.source.parts[1] == "index.markdown"
+        - not item.draft
 
     - name: alias
 
