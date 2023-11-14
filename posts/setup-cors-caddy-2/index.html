@@ -26,7 +26,7 @@
     <meta property="og:site_name" content="Ihor Kalnytskyi" />
     <meta property="og:type" content="article" />
     <meta property="article:published_time" content="2022-01-12T00:00:00+00:00" />
-    <meta property="article:modified_time" content="2023-11-13T22:37:40.320109+00:00" />
+    <meta property="article:modified_time" content="2023-11-14T21:19:30.211364+00:00" />
     <meta property="article:author" content="Ihor Kalnytskyi" />
 
     <title>Setup CORS in Caddy 2</title>
@@ -73,16 +73,16 @@ learn more what they are about.</p>
   @cors header Origin {args.0}
 
   handle @cors_preflight {
-    header Access-Control-Allow-Origin &quot;{args.0}&quot;
-    header Access-Control-Allow-Methods &quot;GET, POST, PUT, PATCH, DELETE&quot;
-    header Access-Control-Allow-Headers &quot;Content-Type&quot;
-    header Access-Control-Max-Age &quot;3600&quot;
-    respond &quot;&quot; 204
+    header Access-Control-Allow-Origin "{args.0}"
+    header Access-Control-Allow-Methods "GET, POST, PUT, PATCH, DELETE"
+    header Access-Control-Allow-Headers "Content-Type"
+    header Access-Control-Max-Age "3600"
+    respond "" 204
   }
 
   handle @cors {
-    header Access-Control-Allow-Origin &quot;{args.0}&quot;
-    header Access-Control-Expose-Headers &quot;Link&quot;
+    header Access-Control-Allow-Origin "{args.0}"
+    header Access-Control-Expose-Headers "Link"
   }
 }
 

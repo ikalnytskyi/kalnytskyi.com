@@ -274,6 +274,13 @@ main em {
   font-style: normal;
 }
 
+main svg {
+  display: block;
+  height: auto;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
 main .note {
   background-color: var(--page-note-background-color);
   color: var(--page-note-foreground-color);
