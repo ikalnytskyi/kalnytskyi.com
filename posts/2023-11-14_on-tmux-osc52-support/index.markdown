@@ -12,7 +12,7 @@ essential part of my daily workflow.
 
 For those unfamiliar, OSC stands for _Operating System Command_, and it's a set
 of [escape sequences][2] originally [defined by Xterm][3], but now adopted by
-various modern terminal emulators[^1]. OSC-52, in particular, is an escape
+various modern terminal emulators[^1]. _OSC-52_, in particular, is an escape
 sequence that allows _copying to_ and _pasting from_ the system clipboard.
 
 I have a few development environments running in virtual machines or
@@ -54,7 +54,7 @@ digraph G {
 ```
 
 If your terminal emulator supports it, NeoVim's built-in OSC-52 clipboard
-provider just works! Here's the thing though: if you're a blessed user of tmux,
+provider just works! Here's the thing though: if you're a happy tmux user,
 things might not go the way you expect them to go. I quickly noticed a peculiar
 behavior that I initially mistook for a bug: OSC-52 pasting didn't paste the
 content of the system clipboard, but rather the content of tmux top buffer.
@@ -89,19 +89,22 @@ digraph G {
     subgraph cluster_Host1 {
         label = "Host A"
 
-        tmux_server [label="tmux server"]
-        tmux_client1 [label="tmux client"]
+        clipboard1 [label = "clipboard"]
+        tmux_server [label = "tmux server"]
+        tmux_client1 [label = "tmux client"]
     }
 
     subgraph cluster_Host2 {
         label = "Host B"
 
-        tmux_client2 [label="tmux client"]
+        clipboard2 [label = "clipboard"]
+        tmux_client2 [label ="tmux client"]
     }
 
-
-    tmux_server -> tmux_client1 [dir=back]
-    tmux_server -> tmux_client2 [dir=back]
+    clipboard1 -> tmux_server [style = invis]
+    clipboard2 -> tmux_client2 [style = invis, minlen=2]
+    tmux_server -> tmux_client1 [dir = back]
+    tmux_server -> tmux_client2 [dir = back]
 }
 ```
 
@@ -120,8 +123,9 @@ experience.
 [^2]: In my case, VMs and containers have no access to the wayland socket, and
       I don't want them to.
 
-[^3]: <https://github.com/tmux/tmux/issues/1477#issuecomment-421344891>
+[^3]: If I understand maintainer's [comment][4] correctly.
 
 [1]: https://github.com/neovim/neovim/pull/25872
 [2]: https://en.wikipedia.org/wiki/ANSI_escape_code
 [3]: https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h3-Operating-System-Commands
+[4]: https://github.com/tmux/tmux/issues/1477#issuecomment-421344891
