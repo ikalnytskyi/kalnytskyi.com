@@ -21,7 +21,7 @@ within. Needless to say that a NeoVim instance running inside container has no
 access to the system clipboard[^2], and this is where OSC-52 comes to the
 rescue!
 
-```dot { "exec": ["dot", "-Tsvg"] }
+```dot { "exec": ["dot", "-Tsvg_inline"] }
 digraph G {
     pencolor = "#2E3440"
     style = dashed
@@ -78,7 +78,7 @@ copying: we just send a text we want to copy to all clients and let their
 terminal emulators to set the system clipboard. But what should we do with
 pasting? What attached client should be used as a clipboard source?
 
-```dot { "exec": ["dot", "-Tsvg"] }
+```dot { "exec": ["dot", "-Tsvg_inline"] }
 digraph G {
     pencolor = "#2E3440"
     style = dashed
