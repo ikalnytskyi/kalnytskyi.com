@@ -7,6 +7,15 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+
+    services:
+      graphviz:
+        image: ghcr.io/ikalnytskyi/dot:latest
+        options: --name graphviz --interactive
+        credentials:
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
     steps:
     - uses: actions/checkout@v2
 
@@ -17,7 +26,13 @@ jobs:
 
     - name: Set up dependencies
       run: |
-        sudo apt install inkscape graphviz
+        sudo apt install inkscape
+
+        cat << EOF > /usr/local/bin/dot
+        #!/bin/sh
+        exec /usr/bin/docker exec --interactive graphviz /usr/bin/dot \$@
+        EOF
+        chmod +x /usr/local/bin/dot
 
         python -m pip install --upgrade pip
         python -m pip install --requirement requirements.txt
