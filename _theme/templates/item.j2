@@ -16,11 +16,13 @@
     <meta name="description" content="{{ summary }}" />
   {% endif %}
 
-  {% if theme.twitter_cards.username and item.summary %}
+  {% if item.summary %}
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:site" content="@{{ theme.twitter_cards.username }}" />
-    <meta name="twitter:title" content="{{ item.title }}" />
     <meta name="twitter:description" content="{{ summary }}" />
+    <meta name="twitter:title" content="{{ item.title }}" />
+  {% if theme.twitter_cards and theme.twitter_cards.username %}
+    <meta name="twitter:site" content="@{{ theme.twitter_cards.username }}" />
+  {% endif %}
   {% endif %}
 
     <meta property="og:title" content="{{ item.title }}" />
@@ -36,6 +38,10 @@
     <meta property="article:author" content="{{ author }}" />
   {% else %}
     <meta property="og:type" content="website" />
+  {% endif %}
+
+  {% if theme.fediverse and theme.fediverse.creator %}
+    <meta name="fediverse:creator" content="{{ theme.fediverse.creator }}" />
   {% endif %}
 {% endblock %}
 
