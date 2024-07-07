@@ -114,8 +114,8 @@ pipes:
               - Talks: /talks/
               - Feed: /feed.xml
 
-            twitter_cards:
-              username: ikalnytskyi
+            fediverse:
+              creator: "@ihor@fosstodon.org"
       when:
         - |
           "template" in item or (
