@@ -38,7 +38,7 @@ def test_something_even_more_useful():
     assert re.match("\d+", value)
 
     # rest assertion
-    assert mapping = {
+    assert mapping == {
         "foo": 1,
         "bar": 2,
     }
@@ -50,7 +50,7 @@ string against some pattern when comparing complex data structures.
 ```python
 def test_something_even_more_useful():
     mapping = get_some_structure()
-    assert mapping = {
+    assert mapping == {
         "foo": 1,
         "bar": 2,
         "value": pytest_regex("\d+"),
