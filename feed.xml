@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://kalnytskyi.com</id>
   <title>Ihor Kalnytskyi</title>
-  <updated>2024-07-07T13:54:38.289719+00:00</updated>
+  <updated>2024-09-07T15:53:29.381546+00:00</updated>
   <link href="https://kalnytskyi.com/feed.xml" rel="self" type="application/atom+xml"/>
   <link href="https://kalnytskyi.com" rel="alternate" type="text/html"/>
   <generator uri="https://github.com/ikalnytskyi/holocron" version="0.3.1.dev274+g284d21c">Holocron/v0.3.1.dev274+g284d21c</generator>
@@ -10,7 +10,7 @@
   <entry>
     <id>https://kalnytskyi.com/posts/on-tmux-osc52-support/</id>
     <title>On tmux OSC-52 support</title>
-    <updated>2024-07-07T13:54:38.290488+00:00</updated>
+    <updated>2024-09-07T15:53:29.382268+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -185,7 +185,7 @@ I don't want them to. &lt;a href="#fnref2" class="footnote-backref"&gt;↩︎&lt
   <entry>
     <id>https://kalnytskyi.com/posts/setup-wireguard-client-systemd-networkd/</id>
     <title>Setup a WireGuard client using systemd-networkd</title>
-    <updated>2024-07-07T13:54:38.290713+00:00</updated>
+    <updated>2024-09-07T15:53:29.382483+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -336,7 +336,7 @@ followed by &lt;code&gt;$networkctl up wg0&lt;/code&gt; to bring the VPN up.&lt;
   <entry>
     <id>https://kalnytskyi.com/posts/setup-wireguard-systemd-networkd/</id>
     <title>Setup a WireGuard server using systemd-networkd</title>
-    <updated>2024-07-07T13:54:38.290849+00:00</updated>
+    <updated>2024-09-07T15:53:29.382619+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -457,7 +457,7 @@ step is to run &lt;code&gt;$ networkctl reload&lt;/code&gt; to pipe in and apply
   <entry>
     <id>https://kalnytskyi.com/posts/setup-cors-caddy-2/</id>
     <title>Setup CORS in Caddy 2</title>
-    <updated>2024-07-07T13:54:38.290978+00:00</updated>
+    <updated>2024-09-07T15:53:29.382798+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -510,7 +510,7 @@ sent by &lt;code&gt;curl&lt;/code&gt; or &lt;em&gt;your-programming-language-of-
   <entry>
     <id>https://kalnytskyi.com/posts/setup-postgres-linux-windows-macos-gh-actions/</id>
     <title>Setup PostgreSQL for Linux, Windows and macOS using GitHub Actions</title>
-    <updated>2024-07-07T13:54:38.291113+00:00</updated>
+    <updated>2024-09-07T15:53:29.383029+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -552,7 +552,7 @@ usage example:&lt;/p&gt;
   <entry>
     <id>https://kalnytskyi.com/posts/gnome-terminal-csd/</id>
     <title>Enable CSD in GNOME Terminal</title>
-    <updated>2024-07-07T13:54:38.291242+00:00</updated>
+    <updated>2024-09-07T15:53:29.383161+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -582,7 +582,7 @@ might not work with other versions.&lt;/p&gt;
   <entry>
     <id>https://kalnytskyi.com/posts/assert-str-matches-regex-in-pytest/</id>
     <title>Assert that str matches regex in pytest</title>
-    <updated>2024-07-07T13:54:38.291365+00:00</updated>
+    <updated>2024-09-07T15:53:29.383281+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -652,7 +652,7 @@ in non-test production code, though I found this rather queer.&lt;/p&gt;
   <entry>
     <id>https://kalnytskyi.com/posts/farewell-2015/</id>
     <title>Farewell, 2015!</title>
-    <updated>2024-07-07T13:54:38.291576+00:00</updated>
+    <updated>2024-09-07T15:53:29.383401+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -693,7 +693,7 @@ as 2015 was, but hope it will be even better!&lt;/p&gt;
   <entry>
     <id>https://kalnytskyi.com/posts/mad-map/</id>
     <title>Mad Map: Python Road</title>
-    <updated>2024-07-07T13:54:38.291698+00:00</updated>
+    <updated>2024-09-07T15:53:29.383523+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>
@@ -819,7 +819,7 @@ use it and one day it will be removed from the language.&lt;/p&gt;
   <entry>
     <id>https://kalnytskyi.com/posts/docker-for-pythonistas/</id>
     <title>Docker For Pythonistas</title>
-    <updated>2024-07-07T13:54:38.291822+00:00</updated>
+    <updated>2024-09-07T15:53:29.383645+00:00</updated>
     <author>
       <name>Ihor Kalnytskyi</name>
     </author>

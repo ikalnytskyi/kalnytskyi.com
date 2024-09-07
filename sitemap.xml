@@ -2,54 +2,54 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://kalnytskyi.com/talks/</loc>
-    <lastmod>2024-07-07T13:54:13.779049+00:00</lastmod>
+    <lastmod>2024-09-07T15:52:58.092381+00:00</lastmod>
   </url>
   <url>
     <loc>https://kalnytskyi.com/about/</loc>
-    <lastmod>2024-07-07T13:54:13.771049+00:00</lastmod>
-  </url>
-  <url>
-    <loc>https://kalnytskyi.com/posts/setup-wireguard-systemd-networkd/</loc>
-    <lastmod>2024-07-07T13:54:13.775049+00:00</lastmod>
-  </url>
-  <url>
-    <loc>https://kalnytskyi.com/posts/mad-map/</loc>
-    <lastmod>2024-07-07T13:54:13.775049+00:00</lastmod>
-  </url>
-  <url>
-    <loc>https://kalnytskyi.com/posts/gnome-terminal-csd/</loc>
-    <lastmod>2024-07-07T13:54:13.775049+00:00</lastmod>
-  </url>
-  <url>
-    <loc>https://kalnytskyi.com/posts/docker-for-pythonistas/</loc>
-    <lastmod>2024-07-07T13:54:13.775049+00:00</lastmod>
-  </url>
-  <url>
-    <loc>https://kalnytskyi.com/posts/setup-cors-caddy-2/</loc>
-    <lastmod>2024-07-07T13:54:13.775049+00:00</lastmod>
+    <lastmod>2024-09-07T15:52:58.084381+00:00</lastmod>
   </url>
   <url>
     <loc>https://kalnytskyi.com/posts/farewell-2015/</loc>
-    <lastmod>2024-07-07T13:54:13.775049+00:00</lastmod>
-  </url>
-  <url>
-    <loc>https://kalnytskyi.com/posts/on-tmux-osc52-support/</loc>
-    <lastmod>2024-07-07T13:54:13.775049+00:00</lastmod>
-  </url>
-  <url>
-    <loc>https://kalnytskyi.com/posts/c-legacy-is-evil/</loc>
-    <lastmod>2024-07-07T13:54:13.775049+00:00</lastmod>
-  </url>
-  <url>
-    <loc>https://kalnytskyi.com/posts/assert-str-matches-regex-in-pytest/</loc>
-    <lastmod>2024-07-07T13:54:13.775049+00:00</lastmod>
+    <lastmod>2024-09-07T15:52:58.088381+00:00</lastmod>
   </url>
   <url>
     <loc>https://kalnytskyi.com/posts/setup-postgres-linux-windows-macos-gh-actions/</loc>
-    <lastmod>2024-07-07T13:54:13.775049+00:00</lastmod>
+    <lastmod>2024-09-07T15:52:58.088381+00:00</lastmod>
+  </url>
+  <url>
+    <loc>https://kalnytskyi.com/posts/assert-str-matches-regex-in-pytest/</loc>
+    <lastmod>2024-09-07T15:52:58.088381+00:00</lastmod>
+  </url>
+  <url>
+    <loc>https://kalnytskyi.com/posts/setup-wireguard-systemd-networkd/</loc>
+    <lastmod>2024-09-07T15:52:58.088381+00:00</lastmod>
+  </url>
+  <url>
+    <loc>https://kalnytskyi.com/posts/c-legacy-is-evil/</loc>
+    <lastmod>2024-09-07T15:52:58.088381+00:00</lastmod>
+  </url>
+  <url>
+    <loc>https://kalnytskyi.com/posts/setup-cors-caddy-2/</loc>
+    <lastmod>2024-09-07T15:52:58.088381+00:00</lastmod>
+  </url>
+  <url>
+    <loc>https://kalnytskyi.com/posts/mad-map/</loc>
+    <lastmod>2024-09-07T15:52:58.088381+00:00</lastmod>
+  </url>
+  <url>
+    <loc>https://kalnytskyi.com/posts/gnome-terminal-csd/</loc>
+    <lastmod>2024-09-07T15:52:58.088381+00:00</lastmod>
+  </url>
+  <url>
+    <loc>https://kalnytskyi.com/posts/docker-for-pythonistas/</loc>
+    <lastmod>2024-09-07T15:52:58.088381+00:00</lastmod>
   </url>
   <url>
     <loc>https://kalnytskyi.com/posts/setup-wireguard-client-systemd-networkd/</loc>
-    <lastmod>2024-07-07T13:54:13.775049+00:00</lastmod>
+    <lastmod>2024-09-07T15:52:58.088381+00:00</lastmod>
+  </url>
+  <url>
+    <loc>https://kalnytskyi.com/posts/on-tmux-osc52-support/</loc>
+    <lastmod>2024-09-07T15:52:58.088381+00:00</lastmod>
   </url>
 </urlset>
