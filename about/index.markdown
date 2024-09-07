@@ -30,9 +30,9 @@ Elsewhere
 
 I'm __@ikalnytskyi__ almost everywhere around the Internet, including:
 
-* [GitHub](https://github.com/ikalnytskyi)
-* [Mastodon](https://fosstodon.org/@ihor)
-* [Ko-fi](https://ko-fi.com/ikalnytskyi)
+* <a rel="me" href="https://github.com/ikalnytskyi">GitHub</a>
+* <a rel="me" href="https://fosstodon.org/@ihor">Mastodon</a>
+* <a rel="me" href="https://ko-fi.com/ikalnytskyi">Ko-fi</a>
 
 
 Website
