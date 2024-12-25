@@ -10,34 +10,31 @@ jobs:
   Test:
     runs-on: ubuntu-latest
 
-    services:
-      graphviz:
-        image: ghcr.io/ikalnytskyi/dot:latest
-        options: --name graphviz --interactive
-        credentials:
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
     steps:
     - uses: actions/checkout@v4
 
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
-        python-version: "3.10"
+        python-version: "3.13"
 
-    - name: Set up dependencies
+    - name: Install uv
+      uses: astral-sh/setup-uv@v4
+
+    - name: Set up Inkscape
+      run: sudo apt install inkscape
+
+    - name: Set up Graphviz
       run: |
-        sudo apt install inkscape
+        curl -L -o "${{ runner.temp }}/graphviz.deb" "$GRAPHVIZ_DEB_URL"
+        sudo apt install "${{ runner.temp }}/graphviz.deb"
+      env:
+        GRAPHVIZ_DEB_URL: https://gitlab.com/api/v4/projects/4207231/packages/generic/graphviz-releases/12.2.1/ubuntu_24.04_graphviz-12.2.1-cmake.deb
 
-        cat << EOF > /usr/local/bin/dot
-        #!/bin/sh
-        exec /usr/bin/docker exec --interactive graphviz /usr/bin/dot \$@
-        EOF
-        chmod +x /usr/local/bin/dot
-
-        python -m pip install --upgrade pip
-        python -m pip install --requirement requirements.txt
+    - name: Set up Holocron
+      run: uv tool install "$HOLOCRON_PYTHON_PACKAGE"
+      env:
+        HOLOCRON_PYTHON_PACKAGE: git+https://github.com/ikalnytskyi/holocron.git@284d21c96a6b9fda689c7f3828d9d531c0865a9b
 
     - name: Run Holocron
       run: holocron run compile
