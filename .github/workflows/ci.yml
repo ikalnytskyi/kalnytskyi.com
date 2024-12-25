@@ -1,4 +1,4 @@
-name: CI
+name: ci
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [master]
 
 jobs:
-  Test:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -34,7 +34,7 @@ jobs:
     - name: Set up Holocron
       run: uv tool install "$HOLOCRON_PYTHON_PACKAGE"
       env:
-        HOLOCRON_PYTHON_PACKAGE: git+https://github.com/ikalnytskyi/holocron.git@284d21c96a6b9fda689c7f3828d9d531c0865a9b
+        HOLOCRON_PYTHON_PACKAGE: git+https://github.com/ikalnytskyi/holocron.git@master
 
     - name: Run Holocron
       run: holocron run compile
