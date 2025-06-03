@@ -32,6 +32,7 @@ I'm __@ikalnytskyi__ almost everywhere around the Internet, including:
 
 * <a rel="me" href="https://github.com/ikalnytskyi">GitHub</a>
 * <a rel="me" href="https://fosstodon.org/@ihor">Mastodon</a>
+* <a rel="me" href="https://bsky.app/profile/kalnytskyi.com">Bluesky</a>
 * <a rel="me" href="https://ko-fi.com/ikalnytskyi">Ko-fi</a>
 
 
