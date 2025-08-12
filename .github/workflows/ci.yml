@@ -10,26 +10,14 @@ jobs:
   test:
     runs-on: ubuntu-24.04
 
+    container:
+      image: archlinux:latest
+
     steps:
     - uses: actions/checkout@v4
 
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: "3.13"
-
-    - name: Install uv
-      uses: astral-sh/setup-uv@v6
-
-    - name: Set up Inkscape
-      run: sudo apt-get update && sudo apt-get install inkscape
-
-    - name: Set up Graphviz
-      run: |
-        curl -L -o "${{ runner.temp }}/graphviz.deb" "$GRAPHVIZ_DEB_URL"
-        sudo apt-get install "${{ runner.temp }}/graphviz.deb"
-      env:
-        GRAPHVIZ_DEB_URL: https://gitlab.com/api/v4/projects/4207231/packages/generic/graphviz-releases/12.2.1/ubuntu_24.04_graphviz-12.2.1-cmake.deb
+    - name: Set up dependencies
+      run: pacman --noconfirm -Sy inkscape graphviz uv python git
 
     - name: Set up Holocron
       run: uv tool install "$HOLOCRON_PYTHON_PACKAGE"
@@ -37,4 +25,4 @@ jobs:
         HOLOCRON_PYTHON_PACKAGE: git+https://github.com/ikalnytskyi/holocron.git@master
 
     - name: Run Holocron
-      run: holocron run compile
+      run: uv tool run -- holocron run compile
